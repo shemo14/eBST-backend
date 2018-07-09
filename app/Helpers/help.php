@@ -12,7 +12,7 @@ use App\Models\Report;
 function Home()
 {
 	
-    $colors = ['#FC600A','#0247FE','#FCCB1A','#EA202C','#448D76','#AE0D7A','#7FBD32','#FD4D0C','#66B032','#091534','#8601AF','#C21460'];
+    $colors = ['#8cc759','#8c6daf','#ef5d74','#f9a74b','#60beeb','#fbef5a','#FC600A','#0247FE','#FCCB1A','#EA202C','#448D76','#AE0D7A','#7FBD32','#FD4D0C','#66B032','#091534','#8601AF','#C21460'];
     $home =[
         [
         'name'=>'الاعضاء',

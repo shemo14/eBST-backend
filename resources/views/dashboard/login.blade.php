@@ -7,7 +7,7 @@
     <meta name="author" content="Coderthemes">
 
     <!-- App Favicon -->
-    <link rel="shortcut icon" href="{{url('/design/admin')}}/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('images/site/logo.png')}}">
 
     <!-- App title -->
     <title>تسجبل الدخول</title>
@@ -52,10 +52,10 @@
 
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" name="email" type="text" required="required" placeholder="البريد الإلكتروني">
+                        <input class="form-control" name="email" value="{{old('email')}}" type="text" required="required" placeholder="البريد الإلكتروني">
                     </div>
                     @if(session()->has('error_email'))
-                        <div class="invalid-feedback" style="color: red">
+                        <div class="invalid-feedback text-center" style="color: red">
                             {{session()->get('error_email')}}
                         </div>
                     @endif
@@ -66,7 +66,7 @@
                         <input class="form-control" name="password" type="password" required="required" placeholder="كلمة السر">
                     </div>
                     @if(session()->has('error_password'))
-                        <div class="invalid-feedback" style="color: red">
+                        <div class="invalid-feedback text-center" style="color: red">
                             {{session()->get('error_password')}}
                         </div>
                     @endif
