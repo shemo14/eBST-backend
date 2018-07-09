@@ -25,7 +25,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
         Route::get('/',[
             'uses'  =>'AdminController@dashboard',
             'as'    =>'dashboard',
-            'icon'  =>'<i class="fa fa-dashboard"></i>',
+            'icon'  =>'<i class="fa fa-home"></i>',
             'title' =>'الرئيسيه'
         ]);
 
@@ -212,7 +212,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             'uses' =>'PagesController@index',
             'as'   =>'pages',
             'title'=>'الصفحات',
-            'icon' =>'<i class="fa fa-file"></i>',
+            'icon' =>'<i class="zmdi zmdi-file-text"></i>',
             'child'=>[
                 'showPage',
                 'showCreatePage',
