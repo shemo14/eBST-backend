@@ -1,0 +1,18 @@
+.red-color {
+    color: #ff8b86 !important;
+}
+.red-color:hover {
+    color: #fc6060 !important;
+}
+
+.blue-color {
+    color: #188ae2;
+}
+
+.blue-color:hover {
+    color: #1881d9;
+}
+
+.green-color {
+    color: #10c469;
+}

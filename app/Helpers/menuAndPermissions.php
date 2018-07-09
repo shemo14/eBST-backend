@@ -1,0 +1,320 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Models\Permission;
+use Illuminate\Support\Facades\Auth;
+
+function menu()
+{
+	$routes = Route::getRoutes();
+    $arr = [];
+    $permission = Permission::where('role_id',Auth::user()->role)->select('permissions')->get();
+    foreach($permission as $key=>$per)
+    {
+        $arr[$key] = $per->permissions;
+    }
+
+    foreach ($routes as $value)
+	{
+		if($value->getName() !== null)
+		{
+            if(isset($value->getAction()['title']) && !isset($value->getAction()['front']) && isset($value->getAction()['icon']))
+            {
+                if(isset($value->getAction()['child']) && isset($value->getAction()['subTitle']) && isset($value->getAction()['subIcon']))
+                {
+                    if(in_array($value->getName(),$arr))
+                    {
+                        echo '<li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect">' . $value->getAction()['icon'] . '<span> ' .$value->getAction()['title']. ' </span> <span class="menu-arrow"></span></a>
+                                <ul class="list-unstyled">
+                             ';
+                        foreach ($value->getAction()['child'] as $child)
+                        {
+                            #foreach for sub links
+                            $routes = Route::getRoutes();
+                            foreach ($routes as $value)
+                            {
+                                if($value->getName() !== null && isset($value->getAction()['icon']))
+                                {
+                                    if($value->getName() == $child)
+                                    {
+                                        if(in_array($value->getName(),$arr))
+                                        {
+                                            echo '<li><a href="'.route($value->getName()).'" class="waves-effect">' . $value->getAction()['icon'] . '</i> <span style="font-weight: bolder"> ' . $value->getAction()['title'] .' </span> </a></li>';
+//                                            echo '<li><a href="'.route($value->getName()).'">'.$value->getAction()['title'].$value->getAction()['icon'].'</a></li>';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+//                        echo '<li>';
+//                        echo '<a class="drop-down-btn">'.$value->getAction()['icon'].$value->getAction()['title']. '<i class="fa fa-angle-down"></i></a>';
+//                        echo '<ul class="drop-down-menu">';
+//                        echo '<li><a class="drop-down-btn" href="'.route($value->getName()).'">'.$value->getAction()['subTitle']. $value->getAction()['subIcon'].'</a></li>';
+                        echo '</ul>';
+                        echo '</li>';
+                    }
+
+                }else if(isset($value->getAction()['child']) && isset($value->getAction()['icon']))
+                {
+                    if(in_array($value->getName(),$arr))
+                    {
+                        echo '<li><a href="'.route($value->getName()).'" class="waves-effect">' . $value->getAction()['icon'] . '</i> <span style="font-weight: bolder"> ' . $value->getAction()['title'] .' </span> </a></li>';
+
+//                        echo '<li><a href="'.route($value->getName()).'">'.$value->getAction()['title'].$value->getAction()['icon'].'</a></li>';
+                    }
+                }else if(!isset($value->getAction()['child']) && isset($value->getAction()['icon']) && !isset($value->getAction()['hasFather']))
+                {
+                    $arr = [];
+                    $permission = Permission::where('role_id',Auth::user()->role)->select('permissions')->get();
+                    foreach($permission as $key=>$per)
+                    {
+                        $arr[$key] = $per->permissions;
+                    }
+                    if(in_array($value->getName(),$arr))
+                    {
+                        echo '<li><a href="'.route($value->getName()).'" class="waves-effect">' . $value->getAction()['icon'] . '</i> <span style="font-weight: bolder"> ' . $value->getAction()['title'] .' </span> </a></li>';
+                    }
+                }
+            }
+		}
+	}
+}
+
+function Permissions()
+{
+    echo '<div class="row">';
+	$routes = Route::getRoutes();
+	foreach ($routes as $value)
+	{
+		if($value->getName() !== null)
+		{
+            if(isset($value->getAction()['title']) && !isset($value->getAction()['front']) && isset($value->getAction()['child'])) {
+                echo ' <div class="col-sm-4">
+                            <div class="panel panel-color panel-info">';
+
+                foreach ($value->getAction()['child'] as $child)
+                {
+                    if(isset($value->getAction()['title']))
+                    {
+                        echo '<div class="panel-heading">
+                                 <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
+                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
+                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                 </div>
+                             </div>
+                             <div class="panel-body" style="background-color: rgba(211,224,255,0.16);">';
+                    }
+
+                    #????
+//                    if(isset($value->getAction()['subTitle']))
+//                    {
+//                        echo '<div class="row">
+//                                       <div class="col-sm-12">
+//                                            <div class="panel-heading">
+//                                                 <h3 class="panel-title" style="display: inline-block; color: #4ab8e1"> ' . $value->getAction()['subTitle'] . '</h3>
+//                                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
+//                                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+//                                                 </div>
+//                                            </div>
+//                                       </div>
+//                                  </div>';
+//                    }
+
+                    $routes = Route::getRoutes();
+                    foreach ($routes as $value)
+                    {
+//                        && !isset($value->getAction()['icon']) || isset($value->getAction()['hasFather'])
+                        if($value->getName() !== null)
+                        {
+                            if($value->getName() == $child)
+                            {
+                                echo '<div class="row">
+                                            <div class="col-sm-12">
+                                                <h5 style="display: inline-block">  ' . $value->getAction()['title'] . ' </h5>
+                                                <div style="display: inline-block; position: absolute; left: 15px !important; top: 8px !important;">
+                                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                </div>
+                                            </div>
+                                        </div>';
+                            }
+                        }
+                    }
+                }
+                echo '</div></div></div>';
+            }
+            if(!isset($value->getAction()['child']) && isset($value->getAction()['icon']) && !isset($value->getAction()['front']) && isset($value->getAction()['title']) && !isset($value->getAction()['hasFather']))
+            {
+                echo '<div class="col-sm-4">
+                            <div class="panel panel-color panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
+                                    <div style="display: inline-block; position: absolute; left: 20px !important;">
+                                        <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+            }
+        }
+	}
+    echo '</div>';
+}
+
+
+function EditPermissions($id)
+{
+    echo '<div class="row">';
+    $routes = Route::getRoutes();
+    foreach ($routes as $value)
+    {
+        if($value->getName() !== null)
+        {
+            if(isset($value->getAction()['title']) && !isset($value->getAction()['front']) && isset($value->getAction()['child']))
+            {
+
+                $arr = [];
+                $permission = Permission::where('role_id',$id)->select('permissions')->get();
+                foreach($permission as $key=>$per)
+                {
+                    $arr[$key] = $per->permissions;
+                }
+
+                echo ' <div class="col-sm-4">
+                            <div class="panel panel-color panel-info">';
+                foreach ($value->getAction()['child'] as $child)
+                {
+
+                    if(isset($value->getAction()['title']))
+                    {
+                        if(in_array($value->getName(),$arr))
+                        {
+                            echo '<div class="panel-heading">
+                                 <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
+                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
+                                    <input type="checkbox" class="pull-right check-permission" checked data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                 </div>
+                             </div>
+                             <div class="panel-body" style="background-color: rgba(211,224,255,0.16);">';
+                        }else
+                        {
+                            echo '<div class="panel-heading">
+                                 <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
+                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
+                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                 </div>
+                             </div>
+                             <div class="panel-body" style="background-color: rgba(211,224,255,0.16);">';
+                        }
+                    }
+
+                    #????
+//                    if(isset($value->getAction()['subTitle']))
+//                    {
+//                        if(in_array($value->getName(),$arr))
+//                        {
+//                            echo '<div class="row">
+//                                       <div class="col-sm-12">
+//                                            <div class="panel-heading">
+//                                                 <h3 class="panel-title" style="display: inline-block; color: #4ab8e1"> ' . $value->getAction()['subTitle'] . '</h3>
+//                                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
+//                                                    <input type="checkbox" class="pull-right check-permission" checked data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+//                                                 </div>
+//                                            </div>
+//                                       </div>
+//                                  </div>';
+//                        }else
+//                        {
+//                            echo '<div class="row">
+//                                       <div class="col-sm-12">
+//                                            <div class="panel-heading">
+//                                                 <h3 class="panel-title" style="display: inline-block; color: #4ab8e1"> ' . $value->getAction()['subTitle'] . '</h3>
+//                                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
+//                                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+//                                                 </div>
+//                                            </div>
+//                                       </div>
+//                                  </div>';
+//                        }
+//                    }
+
+                    #foreach for sub links
+                    $routes = Route::getRoutes();
+                    foreach ($routes as $value)
+                    {
+                        if($value->getName() !== null && !isset($value->getAction()['icon']) || isset($value->getAction()['hasFather']))
+
+                        {
+                            if($value->getName() == $child)
+                            {
+                                if(in_array($value->getName(),$arr))
+                                {
+                                    echo '<div class="row">
+                                            <div class="col-sm-12">
+                                                <h5 style="display: inline-block">  ' . $value->getAction()['title'] . ' </h5>
+                                                <div style="display: inline-block; position: absolute; left: 15px !important; top: 8px !important;">
+                                                    <input type="checkbox" class="pull-right check-permission" checked data-plugin="switchery" name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                </div>
+                                            </div>
+                                        </div>';
+                                }else
+                                {
+                                    echo '<div class="row">
+                                            <div class="col-sm-12">
+                                                <h5 style="display: inline-block">  ' . $value->getAction()['title'] . ' </h5>
+                                                <div style="display: inline-block; position: absolute; left: 15px !important; top: 8px !important;">
+                                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                </div>
+                                            </div>
+                                        </div>';
+                                }
+                            }
+                        }
+                    }
+
+                }
+                echo '</div></div></div>';
+            }
+            if(!isset($value->getAction()['child']) && isset($value->getAction()['icon']) && !isset($value->getAction()['front']) && isset($value->getAction()['title']) && !isset($value->getAction()['hasFather']))
+            {
+                $arr = [];
+                $permission = Permission::where('role_id',$id)->select('permissions')->get();
+                foreach($permission as $key=>$per)
+                {
+                    $arr[$key] = $per->permissions;
+                }
+
+                //echo '<div class="col-sm-2" style="border: 1px solid #000;margin-right:10px;margin-bottom:5px;padding:0;background:#eee">';
+                if(in_array($value->getName(),$arr))
+                {
+                    echo '<div class="col-sm-4">
+                            <div class="panel panel-color panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
+                                    <div style="display: inline-block; position: absolute; left: 20px !important;">
+                                        <input type="checkbox" class="pull-right check-permission" checked data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+                }else
+                {
+                    echo '<div class="col-sm-4">
+                            <div class="panel panel-color panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
+                                    <div style="display: inline-block; position: absolute; left: 20px !important;">
+                                        <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+                }
+
+            }
+        }
+    }
+    echo '</div>';
+}
+
+
