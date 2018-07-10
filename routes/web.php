@@ -23,7 +23,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
         Route::get('/',[
             'uses'  =>'AdminController@dashboard',
             'as'    =>'dashboard',
-            'icon'  =>'<i class="fa fa-home"></i>',
+            'icon'  =>'<i class="fa fa-dashboard"></i>',
             'title' =>'الرئيسيه'
         ]);
 

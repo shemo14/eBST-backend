@@ -173,6 +173,11 @@
 {{--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Xz9rMq52xAtXTjm6v_cMeppcxWnm0-M&callback=myMap"></script>--}}
 
 <script>
+    function hideImg() {
+        $(".user-img img").toggle();
+        $(".user-img .user-status").toggle();
+        $('.user-box .zmdi-power').css('margin-left', '-6px');
+    }
     var myVar;
 
     function myFunction() {

@@ -8,7 +8,7 @@
 
         <!-- LOGO -->
         <div class="topbar-left">
-            <a href="{{url('admin/')}}" style="font-family: JF-Flat;" class="logo"><img class="site-logo" src="{{asset('images/site/logo.png')}}" width="100%"><i class="zmdi zmdi-layers"></i></a>
+            <a href="{{url('admin/')}}" style="font-family: JF-Flat;" class="logo"><img class="site-logo" src="{{asset('images/site/logo.png')}}" width="100%"><i style="color: #fff !important;" class="fa fa-home"></i></a>
         </div>
 
         <!-- Button mobile view to collapse sidebar menu -->
@@ -18,7 +18,7 @@
                 <!-- Page title -->
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <button class="button-menu-mobile open-left">
+                        <button onclick="hideImg()" class="button-menu-mobile open-left">
                             <i class="zmdi zmdi-menu"></i>
                         </button>
                     </li>
