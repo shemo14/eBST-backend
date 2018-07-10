@@ -9,7 +9,11 @@
 
     <link rel="shortcut icon" href="{{asset('images/site/logo.png')}}">
 
-    <title>اوامر الشبكه</title>
+    <title>
+        {{$siteName}}
+        |
+        @yield('title')
+    </title>
 
     @yield('styles')
 
