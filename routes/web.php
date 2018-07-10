@@ -10,10 +10,6 @@ Route::get('/test', function () {
     echo \Faker\Factory::create()->longitude . "<br>";
 });
 
-Route::get('/update-ss', function () {
-    return view('dashboard.users.update_users');
-});
-
 // Dashboard
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
