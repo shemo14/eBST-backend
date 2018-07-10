@@ -257,10 +257,20 @@
                     </div>
                 </div>
             </div>
+            <div class="row" style="margin-top: 15px">
+                <div>
+                    <span class="col-sm-4 control-label" style="margin-bottom: 10px">تحديد الموقع</span>
+                    <div class="col-sm-12">
+                        <div class="col-md-12">
+                            <div class="map" style="height: 400px; margin-top: 20px" id="editMap"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <input type="hidden" name="edit_lat">
             <input type="hidden" name="edit_long">
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success waves-effect waves-light">اضافة</button>
+                <button type="submit" class="btn btn-success waves-effect waves-light">تعديل</button>
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" onclick="Custombox.close();">رجوع</button>
             </div>
         </form>
@@ -324,8 +334,6 @@
         </div><!-- /.modal-content -->
     </div>
 
-
-
     <div id="delete" class="modal-demo" style="position:relative; right: 32%">
         <button type="button" class="close" onclick="Custombox.close();" style="opacity: 1">
             <span>&times</span><span class="sr-only" style="color: #f7f7f7">Close</span>
@@ -380,7 +388,10 @@
     {{-- Maps --}}
     <script>
         var map;
+        var editMap;
+        var currentLocation;
         var markers = [];
+        var editMarkers = [];
         function initMap() {
             var haightAshbury = {lat: 31.043956282336183, lng: 31.38311851319736};
 
@@ -388,6 +399,21 @@
                 zoom: 4,
                 center: haightAshbury,
                 mapTypeId: 'terrain'
+            });
+
+            editMap = new google.maps.Map(document.getElementById('editMap'), {
+                zoom: 4,
+                center: haightAshbury,
+                mapTypeId: 'terrain'
+            });
+
+            editMap.addListener('click', function(event) {
+                deleteEditMarkers();
+                var lat = event.latLng.lat();
+                var lng = event.latLng.lng();
+                $("input[name='edit_lat']").val(lat);
+                $("input[name='edit_long']").val(lng);
+                addEditMarker(event.latLng);
             });
 
             // This event listener will call addMarker() when the map is clicked.
@@ -400,6 +426,31 @@
                 addMarker(event.latLng);
             });
 
+        }
+
+        function addEditMarker(location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: editMap
+            });
+            editMarkers.push(marker);
+        }
+
+        function setEditMapOnAll(map) {
+            for (var i = 0; i < editMarkers.length; i++) {
+                editMarkers[i].setMap(map);
+            }
+        }
+
+        // Removes the markers from the map, but keeps them in the array.
+        function clearEditMarkers() {
+            setEditMapOnAll(null);
+        }
+
+        // Deletes all markers in the array by removing references to them.
+        function deleteEditMarkers() {
+            clearEditMarkers();
+            editMarkers = [];
         }
 
         function addMarker(location) {
@@ -446,6 +497,8 @@
             let email = $(this).data('email');
             let lat = $(this).data('lat');
             let long = $(this).data('long');
+            currentLocation = {lat: lat, lng: long};
+            addEditMarker(currentLocation);
 
             $("input[name='id']").val(id);
             $("input[name='edit_name']").val(name);

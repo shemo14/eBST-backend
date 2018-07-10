@@ -146,10 +146,33 @@ File: Menu
 .logo span span {
   color: #10c469;
 }
+/* ******** */
+.user-profile {
+  text-align: center;
+  padding: 30px 0px 20px 0px;
+}
+
+.user-profile .profile-img{
+  position: relative;
+  height: 180px;
+  width: 180px;
+  margin: 0px auto;
+}
+
+.user-profile .profile-img img {
+  height: 175px;
+  width: 175px;
+  border: 2px solid #3c8cbc;
+  padding: 2px;
+  border-radius: 50%;
+  box-shadow: 0 0 7px 3px rgba(60, 140, 188, 0.28);
+}
+/* ******************* */
 .user-box {
   text-align: center;
   padding: 30px 0px 20px 0px;
 }
+
 .user-box .user-img {
   position: relative;
   height: 110px;
