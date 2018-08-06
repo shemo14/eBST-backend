@@ -80,8 +80,19 @@ function save_img($base64_img, $img_name, $path)
 	    return false;
 	}  
 }
-	
 
+function reports () {
+    $reports = Report::orderBy('id', 'desc')->take(8)->get();
+
+    return $reports;
+}
+
+function appName () {
+    $setting = \App\Models\AppSetting::find( 1);
+    $siteName = $setting->site_name;
+
+    return $siteName;
+}
 
 #report
 function addReport($user_id,$event, $ip)

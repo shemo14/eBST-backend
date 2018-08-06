@@ -15,11 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $reports = Report::latest()->paginate(8);
-        $setting = AppSetting::find( 1);
-        $siteName = $setting->site_name;
-        \View::share('reports', $reports);
-        \View::share('siteName', $siteName);
+
     }
 
     /**

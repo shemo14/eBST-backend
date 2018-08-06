@@ -7,7 +7,7 @@
     <h4 class="">التقارير</h4>
     <div class="notification-list nicescroll">
         <ul class="list-group list-no-border user-list">
-            @foreach($reports as $r)
+            @foreach(reports() as $r)
                 <li class="list-group-item">
                     <a href="{{route('allreports')}}" class="user-list-item">
                         <div class="avatar">

@@ -6,8 +6,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    echo \Faker\Factory::create()->latitude . "<br>";
-    echo \Faker\Factory::create()->longitude . "<br>";
+    echo bcrypt(123456);
 });
 
 // Dashboard

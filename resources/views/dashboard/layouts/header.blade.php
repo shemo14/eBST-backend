@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{asset('images/site/logo.png')}}">
 
     <title>
-        {{$siteName}}
+        {{appName()}}
         |
         @yield('title')
     </title>

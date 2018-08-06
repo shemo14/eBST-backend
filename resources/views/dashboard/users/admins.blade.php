@@ -342,8 +342,6 @@
         </div><!-- /.modal-content -->
     </div>
 
-
-
     <div id="delete" class="modal-demo" style="position:relative; right: 32%">
         <button type="button" class="close" onclick="Custombox.close();" style="opacity: 1">
             <span>&times</span><span class="sr-only" style="color: #f7f7f7">Close</span>

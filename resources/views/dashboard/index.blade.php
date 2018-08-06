@@ -109,15 +109,9 @@
 
         </div> <!-- content -->
 
-        <?php
-        $link = mysqli_connect('localhost', 'root', 'masoud');
-
-        ?>
         <footer class="footer text-center">
             <div class="row">
-                <div class="col-sm-4">{{'Hostname: '. gethostname()}}</div>
-                <div class="col-sm-4">{{'Current PHP Version: ' . phpversion()}}</div>
-                <div class="col-sm-4">Awamer ElShabaka &copy; {{date("Y")}}</div>
+                <div class="col-sm-12">Awamer ElShabaka &copy; {{date("Y")}}</div>
             </div>
         </footer>
 
