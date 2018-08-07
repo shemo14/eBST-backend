@@ -179,6 +179,7 @@ return [
 
         Stevebauman\Location\LocationServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
+        Berkayk\OneSignal\OneSignalServiceProvider::class,
 
     ],
 
@@ -231,6 +232,7 @@ return [
         'Location' => Stevebauman\Location\Facades\Location::class,
         'FCM'      => LaravelFCM\Facades\FCM::class,
         'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
+        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
     ],
 
 ];
