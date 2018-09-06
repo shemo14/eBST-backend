@@ -26,6 +26,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             'title' =>'الرئيسيه'
         ]);
 
+        Route::get('/countries',[
+            'uses'  =>'CountryController@index',
+            'as'    =>'countries',
+            'icon'  =>'<i class="fa fa-globe"></i>',
+            'title' =>'البلاد'
+        ]);
+
         // ============= Permission ==============
         Route::get('permissions-list',[
             'uses' =>'PermissionController@index',
