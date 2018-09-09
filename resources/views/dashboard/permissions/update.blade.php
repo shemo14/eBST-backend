@@ -12,8 +12,13 @@
         <div class="col-sm-12">
             <div class="card-box">
                 <div class="pull-right">
-                    <label for="checkAll" id="check">الفاء تحديد الكل</label>
-                    <input type="checkbox" id="checkAll" checked class="pull-right" data-plugin="switchery" data-color="rgb(12, 105, 140)" data-size="small"/>
+                    <label class="custom-control material-checkbox">
+                        <span class="material-control-description">تحديد الكل</span>
+                        <input type="checkbox" class="material-control-input" id="checkedAll">
+                        <span class="material-control-indicator"></span>
+                    </label>
+                    {{--<label for="checkAll" id="check">الفاء تحديد الكل</label>--}}
+                    {{--<input type="checkbox" id="checkAll" checked class="pull-right" data-plugin="switchery" data-color="rgb(12, 105, 140)" data-size="small"/>--}}
                 </div>
 
                 <h4 class="header-title m-t-0 m-b-30 text-purple">قائمة الصلاحيات</h4>
@@ -46,15 +51,29 @@
 @section('script')
     <script>
 
-        $(document).ready(function() {
-            $("#checkAll").on('change', function () {
-                if ($(this).prop('checked') == true) {
-                    $("#check").html('الفاء تحديد الكل');
-                } else {
-                    $("#check").html('تحديد الكل');
-                }
-                $('.check-permission').trigger('click');
-            });
+        $("#checkedAll").change(function(){
+            if(this.checked){
+                $(".checkSingle").each(function(){
+                    this.checked=true
+                })
+            }else{
+                $(".checkSingle").each(function(){
+                    this.checked=false;
+                })
+            }
+        });
+
+        $(".checkSingle").click(function () {
+            if ($(this).is(":checked")){
+                var isAllChecked = 0;
+                $(".checkSingle").each(function(){
+                    if(!this.checked)
+                        isAllChecked = 1;
+                })
+                if(isAllChecked == 0){ $("#checkedAll").prop("checked", true); }
+            }else {
+                $("#checkedAll").prop("checked", false);
+            }
         });
     </script>
 @endsection

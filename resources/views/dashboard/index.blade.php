@@ -8,7 +8,7 @@
 
         <!-- LOGO -->
         <div class="topbar-left">
-            <a href="{{url('admin/')}}" style="font-family: JF-Flat;" class="logo"><img class="site-logo" src="{{asset('images/site/logo.png')}}" width="100%"><i style="color: #fff !important;" class="fa fa-home"></i></a>
+            <a href="{{url('admin/')}}" style="font-family: JF-Flat;" class="logo"><img class="site-logo" src="{{asset('public/images/site/logo.png')}}" width="100%"><i style="color: #fff !important;" class="fa fa-home"></i></a>
         </div>
 
         <!-- Button mobile view to collapse sidebar menu -->

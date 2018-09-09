@@ -6,7 +6,7 @@
         <!-- User -->
         <div class="user-box">
             <div class="user-img">
-                <img src="{{asset('images/admins/'.auth()->user()->avatar)}}" alt="user-img" title="Mat Helme" class="img-responsive">
+                <img src="{{asset('public/images/admins/'.auth()->user()->avatar)}}" alt="user-img" title="Mat Helme" class="img-responsive">
                 <div class="user-status online"><i class="zmdi zmdi-dot-circle"></i></div>
             </div>
             <h5><a href="#">{{auth()->user()->name}}</a> </h5>

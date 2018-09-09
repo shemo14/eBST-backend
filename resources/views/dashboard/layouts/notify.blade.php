@@ -11,7 +11,7 @@
                 <li class="list-group-item">
                     <a href="{{route('allreports')}}" class="user-list-item">
                         <div class="avatar">
-                            <img src="{{asset('images/admins/'.$r->User->avatar)}}">
+                            <img src="{{asset('public/images/admins/'.$r->User->avatar)}}">
                         </div>
                         <div class="user-desc">
                             <span class="name">{{$r->User->name}}</span>

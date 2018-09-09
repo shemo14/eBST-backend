@@ -17,11 +17,9 @@ class SettingController extends Controller
     public function index() {
         $setting = AppSetting::first();
         $socials = Social::all();
-        $contacts = StmpSmsNotifaction::first();
         return view('dashboard.settings.index', [
             'setting'  => $setting,
             'socials'  => $socials,
-            'contacts' => $contacts,
         ]);
     }
 
@@ -155,19 +153,8 @@ class SettingController extends Controller
     }
 
     public function updateSmtp(Request $request) {
-        $rules = [
-            'smtp_type' => 'required',
-        ];
-        $messages = [
-            'smtp_type.required'    => 'النوع مطلوب',
-        ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
-        }
-
-        $stmp = StmpSmsNotifaction::findOrFail(1);
+        $stmp = AppSetting::findOrFail(1);
         $stmp->smtp_type = $request->smtp_type;
         $stmp->smtp_username = $request->smtp_username;
         $stmp->smtp_password = $request->smtp_password;
@@ -186,7 +173,7 @@ class SettingController extends Controller
     }
 
     public function updateSms (Request $request) {
-        $sms = StmpSmsNotifaction::findOrFail(1);
+        $sms = AppSetting::findOrFail(1);
         $sms->sms_number = $request->sms_number;
         $sms->sms_password = $request->sms_password;
         $sms->sms_sender_name = $request->sms_sender_name;
@@ -200,7 +187,7 @@ class SettingController extends Controller
     }
 
     public function updateOneSignal (Request $request) {
-        $oneSignal = StmpSmsNotifaction::findOrFail(1);
+        $oneSignal = AppSetting::findOrFail(1);
         $oneSignal->oneSignal_application_id = $request->oneSignal_application_id;
         $oneSignal->oneSignal_authorization = $request->oneSignal_authorization;
         $oneSignal->save();
@@ -212,7 +199,7 @@ class SettingController extends Controller
     }
 
     public function updateFcm(Request $request) {
-        $fcm =  StmpSmsNotifaction::findOrFail(1);
+        $fcm =  AppSetting::findOrFail(1);
         $fcm->fcm_server_key = $request->fcm_server_key;
         $fcm->fcm_sender_id = $request->fcm_sender_id;
         $fcm->save();

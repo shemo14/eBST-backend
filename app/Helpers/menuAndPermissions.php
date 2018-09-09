@@ -84,14 +84,14 @@ function menu()
 function Permissions()
 {
     echo '<div class="row">';
-	$routes = Route::getRoutes();
-	foreach ($routes as $value)
-	{
-		if($value->getName() !== null)
-		{
+    $routes = Route::getRoutes();
+    foreach ($routes as $value)
+    {
+        if($value->getName() !== null)
+        {
             if(isset($value->getAction()['title']) && !isset($value->getAction()['front']) && isset($value->getAction()['child'])) {
-                echo ' <div class="col-sm-4">
-                            <div class="panel panel-color panel-info">';
+                echo ' <div class="col-sm-6">
+                            <div class="panel panel-color panel-purple">';
 
                 foreach ($value->getAction()['child'] as $child)
                 {
@@ -100,31 +100,18 @@ function Permissions()
                         echo '<div class="panel-heading">
                                  <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
                                  <div style="display: inline-block; position: absolute; left: 20px !important;">
-                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                    <label class="custom-control material-checkbox">
+                                        <input type="checkbox" class="pull-right material-control-input check-child checkSingle" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)" data-child="'.$value->getName().'"/>
+                                        <span class="material-control-indicator header-check"></span>
+                                    </label>
                                  </div>
                              </div>
                              <div class="panel-body" style="background-color: rgba(211,224,255,0.16);">';
                     }
 
-                    #????
-//                    if(isset($value->getAction()['subTitle']))
-//                    {
-//                        echo '<div class="row">
-//                                       <div class="col-sm-12">
-//                                            <div class="panel-heading">
-//                                                 <h3 class="panel-title" style="display: inline-block; color: #4ab8e1"> ' . $value->getAction()['subTitle'] . '</h3>
-//                                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
-//                                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
-//                                                 </div>
-//                                            </div>
-//                                       </div>
-//                                  </div>';
-//                    }
-
                     $routes = Route::getRoutes();
                     foreach ($routes as $value)
                     {
-//                        && !isset($value->getAction()['icon']) || isset($value->getAction()['hasFather'])
                         if($value->getName() !== null)
                         {
                             if($value->getName() == $child)
@@ -133,7 +120,10 @@ function Permissions()
                                             <div class="col-sm-12">
                                                 <h5 style="display: inline-block">  ' . $value->getAction()['title'] . ' </h5>
                                                 <div style="display: inline-block; position: absolute; left: 15px !important; top: 8px !important;">
-                                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                    <label class="custom-control material-checkbox">
+                                                        <input type="checkbox" class="pull-right material-control-input checkSingle" name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                        <span class="material-control-indicator"></span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>';
@@ -145,22 +135,24 @@ function Permissions()
             }
             if(!isset($value->getAction()['child']) && isset($value->getAction()['icon']) && !isset($value->getAction()['front']) && isset($value->getAction()['title']) && !isset($value->getAction()['hasFather']))
             {
-                echo '<div class="col-sm-4">
-                            <div class="panel panel-color panel-info">
+                echo '<div class="col-sm-6">
+                            <div class="panel panel-color panel-purple">
                                 <div class="panel-heading">
                                     <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
                                     <div style="display: inline-block; position: absolute; left: 20px !important;">
-                                        <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                    <label class="custom-control material-checkbox">
+                                        <input type="checkbox" class="pull-right material-control-input check-child checkSingle" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                        <span class="material-control-indicator header-check"></span>
+                                    </label>
                                     </div>
                                 </div>
                             </div>
                         </div>';
             }
         }
-	}
+    }
     echo '</div>';
 }
-
 
 function EditPermissions($id)
 {
@@ -180,8 +172,8 @@ function EditPermissions($id)
                     $arr[$key] = $per->permissions;
                 }
 
-                echo ' <div class="col-sm-4">
-                            <div class="panel panel-color panel-info">';
+                echo ' <div class="col-sm-6">
+                            <div class="panel panel-color panel-purple">';
                 foreach ($value->getAction()['child'] as $child)
                 {
 
@@ -192,7 +184,10 @@ function EditPermissions($id)
                             echo '<div class="panel-heading">
                                  <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
                                  <div style="display: inline-block; position: absolute; left: 20px !important;">
-                                    <input type="checkbox" class="pull-right check-permission" checked data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                        <label class="custom-control material-checkbox">
+                                            <input type="checkbox" class="pull-right material-control-input checkSingle" checked name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                            <span class="material-control-indicator header-check"></span>
+                                        </label>
                                  </div>
                              </div>
                              <div class="panel-body" style="background-color: rgba(211,224,255,0.16);">';
@@ -201,43 +196,15 @@ function EditPermissions($id)
                             echo '<div class="panel-heading">
                                  <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
                                  <div style="display: inline-block; position: absolute; left: 20px !important;">
-                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                    <label class="custom-control material-checkbox">
+                                        <input type="checkbox" class="pull-right material-control-input checkSingle" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                        <span class="material-control-indicator header-check"></span>
+                                    </label>
                                  </div>
                              </div>
                              <div class="panel-body" style="background-color: rgba(211,224,255,0.16);">';
                         }
                     }
-
-                    #????
-//                    if(isset($value->getAction()['subTitle']))
-//                    {
-//                        if(in_array($value->getName(),$arr))
-//                        {
-//                            echo '<div class="row">
-//                                       <div class="col-sm-12">
-//                                            <div class="panel-heading">
-//                                                 <h3 class="panel-title" style="display: inline-block; color: #4ab8e1"> ' . $value->getAction()['subTitle'] . '</h3>
-//                                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
-//                                                    <input type="checkbox" class="pull-right check-permission" checked data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
-//                                                 </div>
-//                                            </div>
-//                                       </div>
-//                                  </div>';
-//                        }else
-//                        {
-//                            echo '<div class="row">
-//                                       <div class="col-sm-12">
-//                                            <div class="panel-heading">
-//                                                 <h3 class="panel-title" style="display: inline-block; color: #4ab8e1"> ' . $value->getAction()['subTitle'] . '</h3>
-//                                                 <div style="display: inline-block; position: absolute; left: 20px !important;">
-//                                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
-//                                                 </div>
-//                                            </div>
-//                                       </div>
-//                                  </div>';
-//                        }
-//                    }
-
                     #foreach for sub links
                     $routes = Route::getRoutes();
                     foreach ($routes as $value)
@@ -253,7 +220,10 @@ function EditPermissions($id)
                                             <div class="col-sm-12">
                                                 <h5 style="display: inline-block">  ' . $value->getAction()['title'] . ' </h5>
                                                 <div style="display: inline-block; position: absolute; left: 15px !important; top: 8px !important;">
-                                                    <input type="checkbox" class="pull-right check-permission" checked data-plugin="switchery" name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                <label class="custom-control material-checkbox">
+                                                    <input type="checkbox" class="pull-right material-control-input checkSingle" checked name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                    <span class="material-control-indicator "></span>
+                                                </label>
                                                 </div>
                                             </div>
                                         </div>';
@@ -263,7 +233,10 @@ function EditPermissions($id)
                                             <div class="col-sm-12">
                                                 <h5 style="display: inline-block">  ' . $value->getAction()['title'] . ' </h5>
                                                 <div style="display: inline-block; position: absolute; left: 15px !important; top: 8px !important;">
-                                                    <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                    <label class="custom-control material-checkbox">
+                                                        <input type="checkbox" class="pull-right material-control-input checkSingle" name="permissions[]" value="'.$value->getName().'" data-size="small" data-color="rgb(12, 105, 140)"/>
+                                                        <span class="material-control-indicator "></span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>';
@@ -287,24 +260,30 @@ function EditPermissions($id)
                 //echo '<div class="col-sm-2" style="border: 1px solid #000;margin-right:10px;margin-bottom:5px;padding:0;background:#eee">';
                 if(in_array($value->getName(),$arr))
                 {
-                    echo '<div class="col-sm-4">
-                            <div class="panel panel-color panel-info">
+                    echo '<div class="col-sm-6">
+                            <div class="panel panel-color panel-purple">
                                 <div class="panel-heading">
                                     <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
                                     <div style="display: inline-block; position: absolute; left: 20px !important;">
-                                        <input type="checkbox" class="pull-right check-permission" checked data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                    <label class="custom-control material-checkbox">
+                                        <input type="checkbox" class="pull-right material-control-input checkSingle" checked name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                        <span class="material-control-indicator header-check"></span>
+                                    </label>
                                     </div>
                                 </div>
                             </div>
                         </div>';
                 }else
                 {
-                    echo '<div class="col-sm-4">
-                            <div class="panel panel-color panel-info">
+                    echo '<div class="col-sm-6">
+                            <div class="panel panel-color panel-purple">
                                 <div class="panel-heading">
                                     <h3 class="panel-title" style="display: inline-block"> ' . $value->getAction()['title'] . '</h3>
                                     <div style="display: inline-block; position: absolute; left: 20px !important;">
-                                        <input type="checkbox" class="pull-right check-permission" data-plugin="switchery" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                    <label class="custom-control material-checkbox">
+                                        <input type="checkbox" class="pull-right material-control-input checkSingle" name="permissions[]" value="'.$value->getName().'"  data-color="rgb(12, 105, 140)"/>
+                                        <span class="material-control-indicator header-check"></span>
+                                    </label>
                                     </div>
                                 </div>
                             </div>
@@ -316,5 +295,4 @@ function EditPermissions($id)
     }
     echo '</div>';
 }
-
 
