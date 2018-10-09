@@ -2,7 +2,7 @@
 <!-- END wrapper -->
 
 
-
+{{--@yield('vue')--}}
 <script>
     var resizefunc = [];
 </script>
@@ -24,13 +24,6 @@
 <![endif]-->
 <script src="{{url('public/design/admin')}}/assets/plugins/jquery-knob/jquery.knob.js"></script>
 
-<!--Morris Chart-->
-<script src="{{url('public/design/admin')}}/assets/plugins/morris/morris.min.js"></script>
-<script src="{{url('public/design/admin')}}/assets/plugins/raphael/raphael-min.js"></script>
-
-<!-- Dashboard init -->
-<script src="{{url('public/design/admin')}}/assets/pages/jquery.dashboard.js"></script>
-
 <script src="{{url('/public/design/admin')}}/assets/plugins/fileuploads/js/dropify.min.js"></script>
 
 <!-- file uploads js -->
@@ -49,6 +42,18 @@
 <script src="{{url('/public/design/admin')}}/assets/plugins/datatables/dataTables.responsive.min.js"></script>
 <script src="{{url('/public/design/admin')}}/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
 <script src="{{url('/public/design/admin')}}/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+<script type="text/javascript" src="{{ asset('public/design/admin') }}/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="{{ asset('public/design/admin') }}/assets/plugins/jquery-quicksearch/jquery.quicksearch.js"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/select2/dist/js/select2.min.js" type="text/javascript"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js" type="text/javascript"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/moment/moment.js"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="{{ asset('public/design/admin') }}/assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
 
 <!-- Datatable init js -->
 <script src="{{url('/public/design/admin')}}/assets/pages/datatables.init.js"></script>
@@ -141,7 +146,9 @@
             'fileSize': 'حجم الصورة كير جدا'
         }
     });
+</script>
 
+<script>
     jQuery(document).ready(function() {
 
         //advance multiselect start
@@ -252,7 +259,7 @@
     });
 
     // Time Picker
-    jQuery('#timepicker').timepicker({
+    jQuery('.timepicker').timepicker({
         defaultTIme : false
     });
     jQuery('#timepicker2').timepicker({
@@ -390,29 +397,8 @@
         alwaysShow: true,
         placement: 'top-left'
     });
-
-    function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    function changeColor() {
-        $("#map-header").css("background-color", getRandomColor());
-    }
-
-    function myMap() {
-        var mapProp= {
-            center:new google.maps.LatLng(51.508742,-0.120850),
-            zoom:5,
-        };
-        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
-
 </script>
+
 @yield('script')
 
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\AppSetting;
-use App\Social;
+use App\Models\Social;
 use App\StmpSmsNotifaction;
 use Faker\Factory;
 use Illuminate\Http\Request;

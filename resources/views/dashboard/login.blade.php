@@ -7,20 +7,20 @@
     <meta name="author" content="Coderthemes">
 
     <!-- App Favicon -->
-    <link rel="shortcut icon" href="{{asset('images/site/logo.png')}}">
+    <link rel="shortcut icon" href="{{asset('public/images/site/logo.png')}}">
 
     <!-- App title -->
     <title>تسجبل الدخول</title>
 
     <!-- App CSS -->
-    <link href="{{url('/design/admin')}}/assets/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/design/admin')}}/assets/css/core.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/design/admin')}}/assets/css/components.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/design/admin')}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/design/admin')}}/assets/css/pages.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/design/admin')}}/assets/css/menu.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/design/admin')}}/assets/css/responsive.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('/design/admin')}}/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
+    <link href="{{url('public/design/admin')}}/assets/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/design/admin')}}/assets/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/design/admin')}}/assets/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/design/admin')}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/design/admin')}}/assets/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/design/admin')}}/assets/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/design/admin')}}/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('public/design/admin')}}/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
 
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,7 +29,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <script src="{{url('/design/admin')}}/assets/js/modernizr.min.js"></script>
+    <script src="{{url('public/design/admin')}}/assets/js/modernizr.min.js"></script>
 
 </head>
 <body>
@@ -109,22 +109,22 @@
 </script>
 
 <!-- jQuery  -->
-<script src="{{url('/design/admin')}}/assets/plugins/switchery/switchery.min.js"></script>
+<script src="{{url('public/design/admin')}}/assets/plugins/switchery/switchery.min.js"></script>
 
-<script src="{{url('/design/admin')}}/assets/js/jquery.min.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/bootstrap-rtl.min.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/detect.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/fastclick.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/jquery.slimscroll.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/jquery.blockUI.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/waves.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/wow.min.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/jquery.nicescroll.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/jquery.scrollTo.min.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/jquery.min.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/bootstrap-rtl.min.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/detect.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/fastclick.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/jquery.slimscroll.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/jquery.blockUI.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/waves.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/wow.min.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/jquery.nicescroll.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/jquery.scrollTo.min.js"></script>
 
 <!-- App js -->
-<script src="{{url('/design/admin')}}/assets/js/jquery.core.js"></script>
-<script src="{{url('/design/admin')}}/assets/js/jquery.app.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/jquery.core.js"></script>
+<script src="{{url('public/design/admin')}}/assets/js/jquery.app.js"></script>
 
 </body>
 </html>

@@ -15,7 +15,7 @@
         @yield('title')
     </title>
 
-    @yield('styles')
+@yield('styles')
 
 {{--<link href="{{url('public/design/admin')}}/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />--}}
 <!-- DataTables -->
@@ -26,8 +26,17 @@
     <link href="{{url('public/design/admin')}}/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="{{url('public/design/admin')}}/assets/plugins/custombox/dist/custombox.min.css" rel="stylesheet">
 
-    <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="{{url('public/design/admin')}}/assets/plugins/morris/morris.css">
+    <!-- Plugins css-->
+    <link href="{{url('public/design/admin')}}/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="{{url('public/design/admin')}}/assets/plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
+    <link href="{{url('public/design/admin')}}/assets/plugins/select2/dist/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="{{url('public/design/admin')}}/assets/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="{{url('public/design/admin')}}/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link href="{{url('public/design/admin')}}/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
+    <link href="{{url('public/design/admin')}}/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="{{url('public/design/admin')}}/assets/plugins/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <link href="{{url('public/design/admin')}}/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="{{url('public/design/admin')}}/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- App css -->
     <link href="{{url('public/design/admin')}}/assets/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
