@@ -7,49 +7,49 @@
     <meta name="author" content="Mohamed Masoud">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon" href="{{asset('public/images/site/logo.png')}}">
+    <link rel="shortcut icon" href="{{appPath()}}/images/site/logo.png">
 
     <title>
-        {{appName()}}
+        {{settings('site_name')}}
         |
         @yield('title')
     </title>
 
 @yield('styles')
 
-{{--<link href="{{url('public/design/admin')}}/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />--}}
+{{--<link href="{{appPath()}}/design/admin/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />--}}
 <!-- DataTables -->
-    <link href="{{url('public/design/admin')}}/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/custombox/dist/custombox.min.css" rel="stylesheet">
+    <link href="{{appPath()}}/design/admin/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/custombox/dist/custombox.min.css" rel="stylesheet">
 
     <!-- Plugins css-->
-    <link href="{{url('public/design/admin')}}/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/select2/dist/css/select2.css" rel="stylesheet" type="text/css">
-    <link href="{{url('public/design/admin')}}/assets/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="{{url('public/design/admin')}}/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="{{url('public/design/admin')}}/assets/plugins/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
-    <link href="{{url('public/design/admin')}}/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
-    <link href="{{url('public/design/admin')}}/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="{{appPath()}}/design/admin/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/select2/dist/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="{{appPath()}}/design/admin/assets/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="{{appPath()}}/design/admin/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="{{appPath()}}/design/admin/assets/plugins/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <link href="{{appPath()}}/design/admin/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="{{appPath()}}/design/admin/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- App css -->
-    <link href="{{url('public/design/admin')}}/assets/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/css/core.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/css/components.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/css/pages.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/css/menu.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/css/responsive.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
+    <link href="{{appPath()}}/design/admin/assets/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
 
-    <link href="{{url('public/design/admin')}}/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{url('public/design/admin')}}/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{appPath()}}/design/admin/assets/css/style.css" rel="stylesheet" type="text/css" />
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -57,7 +57,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <script src="{{url('public/design/admin')}}/assets/js/modernizr.min.js"></script>
+    <script src="{{appPath()}}/design/admin/assets/js/modernizr.min.js"></script>
 
 
 </head>

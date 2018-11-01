@@ -4,18 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\AppSetting;
 use App\Models\Social;
-use App\StmpSmsNotifaction;
-use Faker\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
     public function index() {
-        $setting = AppSetting::first();
+        $setting = AppSetting::all();
         $socials = Social::all();
         return view('dashboard.settings.index', [
             'setting'  => $setting,
@@ -37,8 +34,6 @@ class SettingController extends Controller
         if ($validator->fails()){
             return back()->withErrors($validator);
         }
-        $settings = AppSetting::findOrFail(1);
-
 
         if ($request->has('site_logo')) {
 
@@ -46,24 +41,12 @@ class SettingController extends Controller
             $name = 'logo.png';
             $path = public_path('/images/site');
             $image->move($path, $name);
-            $settings->site_logo = $name;
         }
 
 
-        $settings->site_name = $request->site_name;
-        $settings->save();
-
-        $ip = $request->ip();
-
-        addReport(auth()->user()->id, 'بتحديث بيانات التطبيق', $ip);
-        Session::flash('success', 'تم تعديل بيانات التطبيق');
-        return back();
-    }
-
-    public function about (Request $request) {
-        $settings = AppSetting::findOrFail(1);
-        $settings->about_us = $request->about_us;
-        $settings->save();
+        $siteName = AppSetting::where('key', 'site_name')->first();
+        $siteName->value = $request->site_name;
+        $siteName->save();
 
         $ip = $request->ip();
 
@@ -149,65 +132,6 @@ class SettingController extends Controller
         $ip = $request->ip();
         addReport(auth()->user()->id, 'بحذف موقع تواصل', $ip);
         Session::flash('success', 'تم حذف الموقع');
-        return back();
-    }
-
-    public function updateSmtp(Request $request) {
-
-        $stmp = AppSetting::findOrFail(1);
-        $stmp->smtp_type = $request->smtp_type;
-        $stmp->smtp_username = $request->smtp_username;
-        $stmp->smtp_password = $request->smtp_password;
-        $stmp->smtp_sender_email = $request->smtp_sender_email;
-        $stmp->smtp_sender_name = $request->smtp_sender_name;
-        $stmp->smtp_port = $request->smtp_port;
-        $stmp->smtp_host = $request->smtp_host;
-        $stmp->smtp_encryption = $request->smtp_encryption;
-        $stmp->save();
-
-        $ip = $request->ip();
-
-        addReport(auth()->user()->id, 'بتحديث بيانات STMP', $ip);
-        Session::flash('success', 'تم تحديث البيانات');
-        return back();
-    }
-
-    public function updateSms (Request $request) {
-        $sms = AppSetting::findOrFail(1);
-        $sms->sms_number = $request->sms_number;
-        $sms->sms_password = $request->sms_password;
-        $sms->sms_sender_name = $request->sms_sender_name;
-        $sms->save();
-
-        $ip = $request->ip();
-
-        addReport(auth()->user()->id, 'بتحديث بيانات SMS', $ip);
-        Session::flash('success', 'تم تحديث البيانات');
-        return back();
-    }
-
-    public function updateOneSignal (Request $request) {
-        $oneSignal = AppSetting::findOrFail(1);
-        $oneSignal->oneSignal_application_id = $request->oneSignal_application_id;
-        $oneSignal->oneSignal_authorization = $request->oneSignal_authorization;
-        $oneSignal->save();
-
-        $ip = $request->ip();
-        addReport(auth()->user()->id, 'بتحديث بيانات OneSignal',$ip);
-        Session::flash('success', 'تم تحديث البيانات');
-        return back();
-    }
-
-    public function updateFcm(Request $request) {
-        $fcm =  AppSetting::findOrFail(1);
-        $fcm->fcm_server_key = $request->fcm_server_key;
-        $fcm->fcm_sender_id = $request->fcm_sender_id;
-        $fcm->save();
-
-        $ip = $request->ip();
-
-        addReport(auth()->user()->id, 'بتحديث بيانات FCM', $ip);
-        Session::flash('success', 'تم تحديث البيانات');
         return back();
     }
 }

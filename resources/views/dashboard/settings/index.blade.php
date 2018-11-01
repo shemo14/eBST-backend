@@ -1,7 +1,4 @@
 @section('style')
-    <!-- Editatable  Css-->
-    <link rel="stylesheet" href="{{url('/design/admin/')}}/assets/plugins/magnific-popup/dist/magnific-popup.css" />
-    <link rel="stylesheet" href="{{url('/design/admin/')}}/assets/plugins/jquery-datatables-editable/datatables.css" />
 @endsection
 @extends('dashboard.index')
 
@@ -20,12 +17,6 @@
                     <li class="">
                         <a href="#social" data-toggle="tab" aria-expanded="true">مواقع التواصل</a>
                     </li>
-                    <li class="">
-                        <a href="#messages" data-toggle="tab" aria-expanded="true">الرسائل والايميل</a>
-                    </li>
-                    <li class="">
-                        <a href="#notify" data-toggle="tab" aria-expanded="false">الاشعارات</a>
-                    </li>
                 </ul>
                 <h4 class="header-title m-b-30">الاعدادات</h4>
 
@@ -43,13 +34,13 @@
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label" for="example-email">اسم الموقع</label>
                                                 <div class="col-md-10">
-                                                    <input type="text" id="example-email" value="{{$setting->site_name}}" name="site_name" class="form-control">
+                                                    <input type="text" id="example-email" value="{{settings('site_name')}}" name="site_name" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label" for="example-email">لوجو الموقع</label>
                                                 <div class="col-md-10">
-                                                    <input type="file" name="site_logo" data-default-file="{{asset('images/site') . '/' . $setting->site_logo}}" class="dropify photo" data-max-file-size="1M" />
+                                                    <input type="file" name="site_logo" data-default-file="{{appPath()}}/images/site/logo.png" class="dropify photo" data-max-file-size="1M" />
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-5">حفظ</button>
@@ -152,156 +143,6 @@
                             </div>
                         </div>
                     </div>
-                    <div id="messages" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="panel panel-custom panel-border">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">S M T P</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="{{route('update-smtp')}}">
-                                            {{csrf_field()}}
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">النوع</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->smtp_type}}" id="example-email" name="smtp_type" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">اسم المستخدم</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->smtp_username}}" id="example-email" name="smtp_username" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">الرقم السري</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->smtp_password}}" id="example-email" name="smtp_password" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">الاسم المرسل</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->smtp_sender_email}}" id="example-email" name="smtp_sender_email" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">الايميل المرسل</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->smtp_sender_name}}" id="example-email" name="smtp_sender_name" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">البورت</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->smtp_port}}" id="example-email" name="smtp_port" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">الهوست</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->smtp_host}}" id="example-email" name="smtp_host" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">التشفير</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->smtp_encryption}}" id="example-email" name="smtp_encryption" class="form-control">
-                                                </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-5">حفظ</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="panel panel-custom panel-border">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">S M S</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="{{route('update-sms')}}">
-                                            {{csrf_field()}}
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">رقم الهاتف</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->sms_number}}" id="example-email" name="sms_number" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">الرقم السري</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->sms_password}}" id="example-email" name="sms_password" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="example-email">اسم الراسل</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->sms_sender_name}}" id="example-email" name="sms_sender_name" class="form-control">
-                                                </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-5">حفظ</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="notify" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="panel panel-custom panel-border">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">One Signal</h3>
-                                    </div>
-                                    <div class="panel-body text-center">
-                                        <form class="form-horizontal" role="form" method="post" action="{{route('update-one-signal')}}">
-                                            {{csrf_field()}}
-                                            <div class="form-group">
-                                                <label class="col-md-2" for="example-email">Application ID</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->oneSignal_application_id}}" name="oneSignal_application_id" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2" for="example-email">Authorization</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->oneSignal_authorization}}" name="oneSignal_authorization" class="form-control">
-                                                </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-5">حفظ</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="panel panel-custom panel-border">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">FCM</h3>
-                                    </div>
-                                    <div class="panel-body text-center">
-                                        <form class="form-horizontal" role="form" method="post" action="{{route('update-fcm')}}">
-                                            {{csrf_field()}}
-                                            <div class="form-group">
-                                                <label class="col-md-2" for="example-email">FCM Server Key</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->fcm_server_key}}" name="fcm_server_key" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2" for="example-email">FCM Sender ID</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" value="{{$setting->fcm_sender_id}}" name="fcm_sender_id" class="form-control">
-                                                </div>
-                                            </div>
-                                            <button type="submit"  class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-5">حفظ</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div><!-- end col -->
@@ -312,55 +153,4 @@
 
 @section('script')
 
-    <!-- Editable js -->
-    <script src="{{url('/design/admin/')}}/assets/plugins/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-    <script src="{{url('/design/admin/')}}/assets/plugins/jquery-datatables-editable/jquery.dataTables.js"></script>
-    <script src="{{url('/design/admin/')}}/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-    <script src="{{url('/design/admin/')}}/assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
-    <script src="{{url('/design/admin/')}}/assets/plugins/tiny-editable/numeric-input-example.js"></script>
-
-    <!-- init -->
-    <script src="{{url('/design/admin/')}}/assets/pages/datatables.editable.init.js"></script>
-
-    <script>
-        $('.dropify').dropify({
-            messages: {
-                'default': 'اسحب وافلت الصورة او قم بالضغط',
-                'replace': 'اسحب وافلت الصورة او قم بالضغط لتغير الصورة',
-                'remove': 'حذف',
-                'error': 'Ooops, هناك خطأ'
-            },
-            error: {
-                'fileSize': 'حجم الصورة كير جدا'
-            }
-        });
-
-        $("#openSocialForm").on('click', function () {
-            $(this).attr('disabled', 'disabled');
-            $("#addSocial").removeClass('hidden');
-        });
-
-        $("#cancel").on('click', function () {
-            $('#openSocialForm').removeAttr('disabled');
-            $("#addSocial").addClass('hidden');
-        });
-
-        $(".editSocialForm").on('click', function () {
-            let id = $(this).data('id');
-            let name = $(this).data('name');
-            let icon = $(this).data('ics');
-            let url = $(this).data('url');
-
-            $("input[name='id']").val(id);
-            $("input[name='edit_name']").val(name);
-            $("input[name='edit_icon']").val(icon);
-            $("input[name='edit_url']").val(url);
-
-            $("#editSocial").removeClass('hidden');
-        });
-
-        $("#cancelEdit").on('click', function () {
-            $("#editSocial").addClass('hidden');
-        });
-    </script>
 @endsection

@@ -80,7 +80,7 @@
                                 <td>
                                     <input type="checkbox" class="form-control checkSingle" id="{{$user->id}}">
                                 </td>
-                                <td><img src="{{url('/images/users/') . '/' . $user->avatar}}" alt="user-img" width="60px" title="Mat Helme" class="img-circle img-thumbnail img-responsive"></td>
+                                <td><img src="{{appPath()}}/images/users/{{$user->avatar}}" alt="user-img" width="60px" title="Mat Helme" class="img-circle img-thumbnail img-responsive"></td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone}}</td>
@@ -130,7 +130,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    </form>
                 </table>
             </div>
         </div><!-- end col -->

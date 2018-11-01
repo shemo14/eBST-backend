@@ -258,7 +258,7 @@ class UsersController extends Controller
             } else {
                 $image = $request->file('avatar');
                 $avatar = time().'.'.$image->getClientOriginalExtension();
-                $path = public_path('/images/admins');
+                $path = public_path('/images/users');
                 $image->move($path, $avatar);
             }
         } else {
@@ -323,12 +323,12 @@ class UsersController extends Controller
             if ($validatorImage->passes()) {
 
                 if ($user->avatar != 'default.png') {
-                    File::delete(public_path('images/admins/' . $user->avatar));
+                    File::delete(public_path('images/users/' . $user->avatar));
                 }
 
                 $image = $request->file('avatar');
                 $avatar = time() . '.' . $image->getClientOriginalExtension();
-                $path = public_path('/images/admins');
+                $path = public_path('/images/users');
                 $image->move($path, $avatar);
                 $user->avatar = $avatar;
             }

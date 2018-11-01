@@ -203,60 +203,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             'as'    => 'deletereports',
             'title' => 'حذف التقارير'
         ]);
-
-        // ========== Pages
-        Route::get('pages',[
-            'uses' =>'PagesController@index',
-            'as'   =>'pages',
-            'title'=>'الصفحات',
-            'icon' =>'<i class="zmdi zmdi-file-text"></i>',
-            'child'=>[
-                'showPage',
-                'showCreatePage',
-                'storePage',
-                'showUpdatePage',
-                'updatePage',
-                'deletePage',
-                'deleteAllPages',
-            ]
-        ]);
-
-        Route::get('/showPage/{id}',[
-            'uses'  => 'PagesController@show',
-            'as'    => 'showPage',
-            'title' => 'عرض الصفحات'
-        ]);
-        Route::get('/showCreatePage',[
-            'uses'  => 'PagesController@create',
-            'as'    => 'showCreatePage',
-            'title' => 'عرض صفحة انشاء الصفحات'
-        ]);
-        Route::post('/storePage',[
-            'uses'  => 'PagesController@store',
-            'as'    => 'storePage',
-            'title' => 'اضافة الصفحات'
-        ]);
-        Route::get('/showUpdatePage/{id}',[
-            'uses'  => 'PagesController@edit',
-            'as'    => 'showUpdatePage',
-            'title' => 'عرض صفحة تعديل الصفحات'
-        ]);
-        Route::post('/updatePage',[
-            'uses'  => 'PagesController@update',
-            'as'    => 'updatePage',
-            'title' => 'تعديل الصفحات'
-        ]);
-        Route::post('/deletePage',[
-            'uses'  => 'PagesController@destroy',
-            'as'    => 'deletePage',
-            'title' => 'حذف الصفحات'
-        ]);
-        Route::post('/deleteAllPages',[
-            'uses'  => 'PagesController@destroyAll',
-            'as'    => 'deleteAllPages',
-            'title' => 'حذف متعدد للصفحات'
-        ]);
-
         // ========== Settings
 
         Route::get('settings',[

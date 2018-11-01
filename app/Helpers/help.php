@@ -86,14 +86,6 @@ function reports () {
 
     return $reports;
 }
-
-function appName () {
-    $setting = \App\Models\AppSetting::find( 1);
-    $siteName = $setting->site_name;
-
-    return $siteName;
-}
-
 #report
 function addReport($user_id,$event, $ip)
 {
@@ -181,7 +173,11 @@ function upload_img($base64_img ,$path) {
     return $safeName;
 }
 
-function settings($value)
+function appPath() {
+    return url('/');
+}
+
+function settings($key)
 {
-    return \App\Models\AppSetting::find(1)->$value;
+    return \App\Models\AppSetting::where('key', $key)->first()->value;
 }
