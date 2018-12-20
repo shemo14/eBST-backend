@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @method where(string $string, int $int)
+ * @method static create(array $array)
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -15,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','mobile','code','device_id',
+        'name', 'email', 'password','phone','code', 'lat', 'lng', 'avatar', 'role', 'checked'
     ];
 
     /**
@@ -30,5 +34,10 @@ class User extends Authenticatable
     public function Role()
     {
         return $this->hasOne('App\Models\Role','id','role');
+    }
+
+    public function avatar()
+    {
+        return appPath() . '/images/users/' . $this->avatar;
     }
 }

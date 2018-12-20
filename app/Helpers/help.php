@@ -53,34 +53,6 @@ function Role()
     }
 }
 
-#messages notification
-function Notification()
-{
-	$messages = Contact::where('showOrNow',0)->latest()->get(); 
-	return $messages;
-}
-
-#upload image base64
-function save_img($base64_img, $img_name, $path)
-{
-	$full_path = $_SERVER['DOCUMENT_ROOT'].'/'.$path;
-	$image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_img));
-	$image_data;
-	$source = imagecreatefromstring($image_data);
-	$angle = 0;
-	$rotate = imagerotate($source, $angle, 0); // if want to rotate the image
-	$imageName = $img_name . '.png';
-	$path_new = $full_path . '/' . $imageName;
-	$imageSave = imagejpeg($rotate, $path_new, 100);
-	if($imageSave)
-	{
-	    return true;
-	}else
-	{
-	    return false;
-	}  
-}
-
 function reports () {
     $reports = Report::orderBy('id', 'desc')->take(8)->get();
 
@@ -133,13 +105,6 @@ function currentRoute()
     }
 }
 
-#email colors
-function EmailColors()
-{
-    $html = Html::select('email_header_color','email_footer_color','email_font_color')->first();
-    return $html;
-}
-
 function convert2english($string) {
     $newNumbers = range(0, 9);
     $arabic = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
@@ -153,7 +118,9 @@ function is_unique($key,$value){
     {
         return 1;
     }
+    return 0;
 }
+
 function generate_code() {
     $characters = '0123456789';
     $charactersLength = strlen($characters);
@@ -163,14 +130,6 @@ function generate_code() {
         $token .= $characters[rand(0, $charactersLength - 1)];
     }
     return $token;
-}
-#mobily
-
-function upload_img($base64_img ,$path) {
-    $file     = base64_decode($base64_img);
-    $safeName = str_random(10) . '.' . 'png';
-    file_put_contents($path . $safeName, $file);
-    return $safeName;
 }
 
 function appPath() {

@@ -41,20 +41,20 @@
 
         <div class="col-sm-12">
             <div class="card-box table-responsive boxes">
-               <div class="pull-right" style="margin-left: 7px">
-                   <ul style="list-style-type: none;
+                <div class="pull-right" style="margin-left: 7px">
+                    <ul style="list-style-type: none;
                      margin: 0;
                        padding: 0;">
-                       <li style="display: inline">
-                           <a href="#add" class="btn btn-primary btn-rounded waves-effect waves-light w-md m-b-5" data-animation="fadein" data-plugin="custommodal"
-                              data-overlaySpeed="100" data-overlayColor="#36404a">اضافة مستخدم  </a>
-                       </li>
-                       <li style="display: inline">
-                           <a href="#deleteAll" class="btn btn-small btn-danger btn-rounded waves-effect waves-light w-md m-b-5 delete-all" data-animation="blur" data-plugin="custommodal"
-                              data-overlaySpeed="100" data-overlayColor="#36404a">حذف المحدد  </a>
-                       </li>
-                   </ul>
-               </div>
+                        <li style="display: inline">
+                            <a href="#add" class="btn btn-primary btn-rounded waves-effect waves-light w-md m-b-5" data-animation="fadein" data-plugin="custommodal"
+                               data-overlaySpeed="100" data-overlayColor="#36404a">اضافة مستخدم  </a>
+                        </li>
+                        <li style="display: inline">
+                            <a href="#deleteAll" class="btn btn-small btn-danger btn-rounded waves-effect waves-light w-md m-b-5 delete-all" data-animation="blur" data-plugin="custommodal"
+                               data-overlaySpeed="100" data-overlayColor="#36404a">حذف المحدد  </a>
+                        </li>
+                    </ul>
+                </div>
 
                 <h4 class="header-title m-t-0 m-b-30" style="display: inline-block">المستخدمين</h4>
 
@@ -62,73 +62,86 @@
                     <thead>
                     <tr>
                         <th>
-                            تحديد
-                            <input type="checkbox" id="checkedAll" style="margin-right: 10px">
+                            <label class="custom-control material-checkbox" style="margin: auto">
+                                <input type="checkbox" class="material-control-input" id="checkedAll">
+                                <span class="material-control-indicator"></span>
+                            </label>
                         </th>
                         <th>الصورة</th>
                         <th>الاسم</th>
                         <th>البريد</th>
                         <th>رقم الهاتف</th>
                         <th>الحالة</th>
+                        <th>التفعيل</th>
                         <th>التاريخ</th>
                         <th>التحكم</th>
                     </tr>
                     </thead>
                     <tbody class="text-center">
-                        @foreach($users as $user)
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="form-control checkSingle" id="{{$user->id}}">
-                                </td>
-                                <td><img src="{{appPath()}}/images/users/{{$user->avatar}}" alt="user-img" width="60px" title="Mat Helme" class="img-circle img-thumbnail img-responsive"></td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->phone}}</td>
-                                <td>
-                                    @if($user->active == 0)
-                                        <span class="label label-danger">غير نشط</span>
-                                    @else
-                                        <span class="label label-success">نشط</span>
-                                    @endif
-                                </td>
-                                <td>{{$user->created_at->diffForHumans()}}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-warning btn-rounded dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-align-center"></i> <span class="caret"></span></button>
-                                        <ul class="dropdown-menu" role="menu" style="min-width: 5px; border-radius: 10px;">
-                                            <li>
-                                                <a href="#edit" class="edit" data-animation="sign" data-plugin="custommodal"
-                                                   data-overlaySpeed="100" data-overlayColor="#36404a" style="color: #c89e28; font-weight: bold;"
-                                                   data-id = "{{$user->id}}"
-                                                   data-phone = "{{$user->phone}}"
-                                                   data-name = "{{$user->name}}"
-                                                   data-email = "{{$user->email}}"
-                                                   data-photo = "{{$user->avatar}}"
-                                                   data-lat = "{{$user->lat}}"
-                                                   data-long = "{{$user->long}}"
-                                                >
-                                                    <i class="fa fa-cogs" style="margin-left: 3px;"></i>
-                                                    تـعـديـل
-                                                </a>
-                                            </li>
-                                            <li><a href="#contact" class="contact" style="color: #79c842; font-weight: bold;" data-animation="sign" data-plugin="custommodal"
-                                                   data-overlaySpeed="100" data-overlayColor="#36404a"
-                                                   data-user_id = "{{$user->id}}"
-                                                > <i class="fa fa-comment" style="margin-left: 3px;"></i> مراسلة </a></li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href="#delete" class="delete" style="color: #c83338; font-weight: bold;" data-animation="blur" data-plugin="custommodal"
-                                                   data-overlaySpeed="100" data-overlayColor="#36404a"
-                                                   data-id = "{{$user->id}}"
-                                                >
-                                                    <i class="fa fa-trash" style="margin-left: 3px;"></i>حـذف
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach($users as $user)
+                        <tr>
+                            <td>
+                                <label class="custom-control material-checkbox" style="margin: auto">
+                                    <input type="checkbox" class="material-control-input checkSingle" id="{{$user->id}}">
+                                    <span class="material-control-indicator"></span>
+                                </label>
+                            </td>
+                            <td><img src="{{appPath()}}/images/users/{{$user->avatar}}" alt="user-img" width="60px" title="Mat Helme" class="img-circle img-thumbnail img-responsive"></td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->phone}}</td>
+                            <td>
+                                @if($user->active == 0)
+                                    <span class="label label-danger">غير متصل</span>
+                                @else
+                                    <span class="label label-success">متصل</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($user->checked == 0)
+                                    <span class="label label-danger">غير نشط</span>
+                                @else
+                                    <span class="label label-success">نشط</span>
+                                @endif
+                            </td>
+                            <td>{{$user->created_at->diffForHumans()}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-warning btn-rounded dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-align-center"></i> <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu" style="min-width: 5px; border-radius: 10px;">
+                                        <li>
+                                            <a href="#edit" class="edit" data-animation="sign" data-plugin="custommodal"
+                                               data-overlaySpeed="100" data-overlayColor="#36404a" style="color: #c89e28; font-weight: bold;"
+                                               data-id = "{{$user->id}}"
+                                               data-phone = "{{$user->phone}}"
+                                               data-name = "{{$user->name}}"
+                                               data-email = "{{$user->email}}"
+                                               data-photo = "{{$user->avatar}}"
+                                               data-lat = "{{$user->lat}}"
+                                               data-lng = "{{$user->lng}}"
+                                            >
+                                                <i class="fa fa-cogs" style="margin-left: 3px;"></i>
+                                                تـعـديـل
+                                            </a>
+                                        </li>
+                                        <li><a href="#contact" class="contact" style="color: #79c842; font-weight: bold;" data-animation="sign" data-plugin="custommodal"
+                                               data-overlaySpeed="100" data-overlayColor="#36404a"
+                                               data-user_id = "{{$user->id}}"
+                                            > <i class="fa fa-comment" style="margin-left: 3px;"></i> مراسلة </a></li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="#delete" class="delete" style="color: #c83338; font-weight: bold;" data-animation="blur" data-plugin="custommodal"
+                                               data-overlaySpeed="100" data-overlayColor="#36404a"
+                                               data-id = "{{$user->id}}"
+                                            >
+                                                <i class="fa fa-trash" style="margin-left: 3px;"></i>حـذف
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -175,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-top: 15px;width: 65%;margin: auto;">
+                <div class="row" style="margin-top: 15px;">
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="col-sm-12">
@@ -197,7 +210,7 @@
                 </div>
             </div>
             <input type="hidden" name="lat">
-            <input type="hidden" name="long">
+            <input type="hidden" name="lng">
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success waves-effect waves-light">اضافة</button>
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" onclick="Custombox.close();">رجوع</button>
@@ -245,12 +258,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-top: 15px">
+                <div class="row" style="margin-top: 15px;">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">الصورة الشخصية</label>
-                            <div class="col-sm-8">
-                                <input type="file" name="avatar" data-default-file="" class="dropify photo" data-max-file-size="1M">
+                            <div class="col-sm-12">
+                                <label class="col-sm-4 control-label">الصورة الشخصية</label>
+                                <input type="file" name="avatar" class="dropify" data-max-file-size="1M">
                             </div>
                         </div>
                     </div>
@@ -267,7 +280,7 @@
                 </div>
             </div>
             <input type="hidden" name="edit_lat">
-            <input type="hidden" name="edit_long">
+            <input type="hidden" name="edit_lng">
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success waves-effect waves-light">تعديل</button>
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" onclick="Custombox.close();">رجوع</button>
@@ -341,9 +354,9 @@
         <div class="custombox-modal-container" style="width: 400px !important; height: 160px;">
             <div class="row">
                 <div class="col-sm-12">
-                   <h3 style="margin-top: 35px">
-                       هل تريد مواصلة عملية الحذف ؟
-                   </h3>
+                    <h3 style="margin-top: 35px">
+                        هل تريد مواصلة عملية الحذف ؟
+                    </h3>
                 </div>
             </div>
             <div class="row">
@@ -386,188 +399,188 @@
 
     {{-- Maps --}}
     <script>
-        var map;
-        var editMap;
-        var currentLocation;
-        var markers = [];
-        var editMarkers = [];
-        function initMap() {
-            var haightAshbury = {lat: 31.043956282336183, lng: 31.38311851319736};
+		var map;
+		var editMap;
+		var currentLocation;
+		var markers = [];
+		var editMarkers = [];
+		function initMap() {
+			var haightAshbury = {lat: 31.043956282336183, lng: 31.38311851319736};
 
-            map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
-                center: haightAshbury,
-                mapTypeId: 'terrain'
-            });
+			map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 4,
+				center: haightAshbury,
+				mapTypeId: 'terrain'
+			});
 
-            editMap = new google.maps.Map(document.getElementById('editMap'), {
-                zoom: 4,
-                center: haightAshbury,
-                mapTypeId: 'terrain'
-            });
+			editMap = new google.maps.Map(document.getElementById('editMap'), {
+				zoom: 4,
+				center: haightAshbury,
+				mapTypeId: 'terrain'
+			});
 
-            editMap.addListener('click', function(event) {
-                deleteEditMarkers();
-                var lat = event.latLng.lat();
-                var lng = event.latLng.lng();
-                $("input[name='edit_lat']").val(lat);
-                $("input[name='edit_long']").val(lng);
-                addEditMarker(event.latLng);
-            });
+			editMap.addListener('click', function(event) {
+				deleteEditMarkers();
+				var lat = event.latLng.lat();
+				var lng = event.latLng.lng();
+				$("input[name='edit_lat']").val(lat);
+				$("input[name='edit_lng']").val(lng);
+				addEditMarker(event.latLng);
+			});
 
-            // This event listener will call addMarker() when the map is clicked.
-            map.addListener('click', function(event) {
-                deleteMarkers();
-                var lat = event.latLng.lat();
-                var lng = event.latLng.lng();
-                $("input[name='lat']").val(lat);
-                $("input[name='long']").val(lng);
-                addMarker(event.latLng);
-            });
+			// This event listener will call addMarker() when the map is clicked.
+			map.addListener('click', function(event) {
+				deleteMarkers();
+				var lat = event.latLng.lat();
+				var lng = event.latLng.lng();
+				$("input[name='lat']").val(lat);
+				$("input[name='lng']").val(lng);
+				addMarker(event.latLng);
+			});
 
-        }
+		}
 
-        function addEditMarker(location) {
-            var marker = new google.maps.Marker({
-                position: location,
-                map: editMap
-            });
-            editMarkers.push(marker);
-        }
+		function addEditMarker(location) {
+			var marker = new google.maps.Marker({
+				position: location,
+				map: editMap
+			});
+			editMarkers.push(marker);
+		}
 
-        function setEditMapOnAll(map) {
-            for (var i = 0; i < editMarkers.length; i++) {
-                editMarkers[i].setMap(map);
-            }
-        }
+		function setEditMapOnAll(map) {
+			for (var i = 0; i < editMarkers.length; i++) {
+				editMarkers[i].setMap(map);
+			}
+		}
 
-        // Removes the markers from the map, but keeps them in the array.
-        function clearEditMarkers() {
-            setEditMapOnAll(null);
-        }
+		// Removes the markers from the map, but keeps them in the array.
+		function clearEditMarkers() {
+			setEditMapOnAll(null);
+		}
 
-        // Deletes all markers in the array by removing references to them.
-        function deleteEditMarkers() {
-            clearEditMarkers();
-            editMarkers = [];
-        }
+		// Deletes all markers in the array by removing references to them.
+		function deleteEditMarkers() {
+			clearEditMarkers();
+			editMarkers = [];
+		}
 
-        function addMarker(location) {
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            });
-            markers.push(marker);
-        }
+		function addMarker(location) {
+			var marker = new google.maps.Marker({
+				position: location,
+				map: map
+			});
+			markers.push(marker);
+		}
 
-        // Sets the map on all markers in the array.
-        function setMapOnAll(map) {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
+		// Sets the map on all markers in the array.
+		function setMapOnAll(map) {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(map);
+			}
+		}
 
-        // Removes the markers from the map, but keeps them in the array.
-        function clearMarkers() {
-            setMapOnAll(null);
-        }
+		// Removes the markers from the map, but keeps them in the array.
+		function clearMarkers() {
+			setMapOnAll(null);
+		}
 
-        // Deletes all markers in the array by removing references to them.
-        function deleteMarkers() {
-            clearMarkers();
-            markers = [];
-        }
+		// Deletes all markers in the array by removing references to them.
+		function deleteMarkers() {
+			clearMarkers();
+			markers = [];
+		}
 
     </script>
     <script>
 
-        $(".contact").on('click', function () {
-            let id = $(this).data('user_id');
-            console.log(id)
-            $("input[name='user_id']").val(id);
-        });
+		$(".contact").on('click', function () {
+			let id = $(this).data('user_id');
+			console.log(id)
+			$("input[name='user_id']").val(id);
+		});
 
-        $('.edit').on('click',function() {
+		$('.edit').on('click',function() {
 
-            let id = $(this).data('id');
-            let name = $(this).data('name');
-            let photo = $(this).data('photo');
-            let phone = $(this).data('phone');
-            let email = $(this).data('email');
-            let lat = $(this).data('lat');
-            let long = $(this).data('long');
-            currentLocation = {lat: lat, lng: long};
-            addEditMarker(currentLocation);
+			let id = $(this).data('id');
+			let name = $(this).data('name');
+			let photo = $(this).data('photo');
+			let phone = $(this).data('phone');
+			let email = $(this).data('email');
+			let lat = $(this).data('lat');
+			let lng = $(this).data('lng');
+			currentLocation = {lat: lat, lng: lng};
+			addEditMarker(currentLocation);
 
-            $("input[name='id']").val(id);
-            $("input[name='edit_name']").val(name);
-            $("input[name='edit_phone']").val(phone);
-            $("input[name='edit_lat']").val(lat);
-            $("input[name='edit_long']").val(long);
-            $("input[name='edit_email']").val(email);
-            let link = "{{asset('images/users/')}}" + '/' + photo;
-            $('.photo').attr('data-default-file', link);
-            $("#username").html(name);
-        });
+			$("input[name='id']").val(id);
+			$("input[name='edit_name']").val(name);
+			$("input[name='edit_phone']").val(phone);
+			$("input[name='edit_lat']").val(lat);
+			$("input[name='edit_lng']").val(lng);
+			$("input[name='edit_email']").val(email);
+			let link = "{{asset('images/users/')}}" + '/' + photo;
+			$('.photo').attr('data-default-file', link);
+			$("#username").html(name);
+		});
 
-        $('.delete').on('click',function(){
+		$('.delete').on('click',function(){
 
-            let id         = $(this).data('id');
+			let id         = $(this).data('id');
 
-            $("input[name='delete_id']").val(id);
+			$("input[name='delete_id']").val(id);
 
-        });
+		});
 
-        $("#checkedAll").change(function(){
-            if(this.checked){
-                $(".checkSingle").each(function(){
-                    this.checked=true;
-                })
-            }else{
-                $(".checkSingle").each(function(){
-                    this.checked=false;
-                })
-            }
-        });
+		$("#checkedAll").change(function(){
+			if(this.checked){
+				$(".checkSingle").each(function(){
+					this.checked=true;
+				})
+			}else{
+				$(".checkSingle").each(function(){
+					this.checked=false;
+				})
+			}
+		});
 
-        $(".checkSingle").click(function () {
-            if ($(this).is(":checked")){
-                var isAllChecked = 0;
-                $(".checkSingle").each(function(){
-                    if(!this.checked)
-                        isAllChecked = 1;
-                })
-                if(isAllChecked == 0){ $("#checkedAll").prop("checked", true); }
-            }else {
-                $("#checkedAll").prop("checked", false);
-            }
-        });
+		$(".checkSingle").click(function () {
+			if ($(this).is(":checked")){
+				var isAllChecked = 0;
+				$(".checkSingle").each(function(){
+					if(!this.checked)
+						isAllChecked = 1;
+				})
+				if(isAllChecked == 0){ $("#checkedAll").prop("checked", true); }
+			}else {
+				$("#checkedAll").prop("checked", false);
+			}
+		});
 
-        $('.send-delete-all').on('click', function (e) {
+		$('.send-delete-all').on('click', function (e) {
 
-            var usersIds = [];
-            $('.checkSingle:checked').each(function () {
-                var id = $(this).attr('id');
-                usersIds.push({
-                    id: id,
-                });
-            });
-            var requestData = JSON.stringify(usersIds);
-            // console.log(requestData);
-            if (usersIds.length > 0) {
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "{{route('deleteusers')}}",
-                    data: {data: requestData, _token: '{{csrf_token()}}'},
-                    success: function( msg ) {
-                        if (msg == 'success') {
-                            location.reload()
-                        }
-                    }
-                });
-            }
-        });
+			var usersIds = [];
+			$('.checkSingle:checked').each(function () {
+				var id = $(this).attr('id');
+				usersIds.push({
+					id: id,
+				});
+			});
+			var requestData = JSON.stringify(usersIds);
+			// console.log(requestData);
+			if (usersIds.length > 0) {
+				e.preventDefault();
+				$.ajax({
+					type: "POST",
+					url: "{{route('deleteusers')}}",
+					data: {data: requestData, _token: '{{csrf_token()}}'},
+					success: function( msg ) {
+						if (msg == 'success') {
+							location.reload()
+						}
+					}
+				});
+			}
+		});
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5Xz9rMq52xAtXTjm6v_cMeppcxWnm0-M&callback=initMap"></script>
 

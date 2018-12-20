@@ -5,10 +5,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    echo bcrypt(123456);
-});
-
 // Dashboard
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
@@ -216,10 +212,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
                 'add-social',
                 'update-social',
                 'delete-social',
-                'update-smtp',
-                'update-sms',
-                'update-fcm',
-                'update-one-signal',
             ]
         ]);
 
@@ -253,31 +245,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             'uses'  => 'SettingController@deleteSocial',
             'as'    => 'delete-social',
             'title' => 'حذف مواقع التواصل'
-        ]);
-
-        // SMTP, SMS, Notifications
-        Route::post('/update-smtp',[
-            'uses'  => 'SettingController@updateSmtp',
-            'as'    => 'update-smtp',
-            'title' => 'تحديث ال STMP'
-        ]);
-
-        Route::post('/update-sms',[
-            'uses'  => 'SettingController@updateSms',
-            'as'    => 'update-sms',
-            'title' => 'تحديث ال SMS'
-        ]);
-
-        Route::post('/update-fcm',[
-            'uses'  => 'SettingController@updateFcm',
-            'as'    => 'update-fcm',
-            'title' => 'تحديث ال FCM'
-        ]);
-
-        Route::post('/update-one-signal',[
-            'uses'  => 'SettingController@updateOneSignal',
-            'as'    => 'update-one-signal',
-            'title' => 'تحديث ال One Signal'
         ]);
 
     });

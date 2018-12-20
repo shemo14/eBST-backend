@@ -51,6 +51,18 @@
 @section('script')
     <script>
 
+	    $(document).ready(function () {
+		    var check = true;
+		    $(".checkSingle").each(function(){
+			    if (this.checked == false) {
+				    check = false;
+			    }
+		    });
+		    if (check) {
+			    $("#checkedAll").attr('checked', true);
+		    }
+	    });
+
         $("#checkedAll").change(function(){
             if(this.checked){
                 $(".checkSingle").each(function(){

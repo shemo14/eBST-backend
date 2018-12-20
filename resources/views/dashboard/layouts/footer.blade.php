@@ -64,6 +64,9 @@
 <script src="{{appPath()}}/design/admin/assets/plugins/custombox/dist/custombox.min.js"></script>
 <script src="{{appPath()}}/design/admin/assets/plugins/custombox/dist/legacy.min.js"></script>
 
+<script src="{{appPath()}}/additions/vue.js"></script>
+<script src="{{appPath()}}/additions/axios.js"></script>
+
 <script src="{{appPath()}}/design/admin/assets/js/main.js"></script>
 
 @yield('script')

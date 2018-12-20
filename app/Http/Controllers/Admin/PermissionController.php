@@ -55,12 +55,14 @@ class PermissionController extends Controller
         $role->save();
 
         Permission::where('role_id',$request->id)->delete();
-        foreach($request->permissions as $per)
-        {
-            $permission = new Permission;
-            $permission->permissions = $per;
-            $permission->role_id = $role->id;
-            $permission->save();
+        if (count($request->permissions) > 0) {
+            foreach($request->permissions as $per)
+            {
+                $permission = new Permission;
+                $permission->permissions = $per;
+                $permission->role_id = $role->id;
+                $permission->save();
+            }
         }
 
         Session::flash('success','تم حفظ التعديلات');

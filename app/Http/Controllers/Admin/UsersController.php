@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\UploadFile;
 use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -9,11 +10,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use LaravelFCM\Message\OptionsBuilder;
-use LaravelFCM\Message\PayloadDataBuilder;
-use LaravelFCM\Message\PayloadNotificationBuilder;
-use FCM;
-use Monolog\Handler\SyslogUdp\UdpSocket;
 
 class UsersController extends Controller
 {
@@ -44,57 +40,31 @@ class UsersController extends Controller
             'phone'     => 'required|unique:users,phone',
             'email'     => 'required|email|unique:users,email',
             'password'  => 'required',
-            'avatar'    => 'nullable'
+            'avatar'    => 'nullable|image'
         ];
-
-        // Validator messages
-        $messages = [
-            'name.required'      => 'الاسم مطلوب',
-            'name.min'           => 'الاسم لابد ان يكون اكبر من حرفين',
-            'name.max'           => 'الاسم لابد ان يكون اصغر من 190 حرف',
-            'phone.required'     => 'رقم الهاتف مطلوب',
-            'phone.unique'       => 'رقم الهاتف موجود بالفعل',
-            'email.required'     => 'البريد الالكتروني مطلوب',
-            'email.unique'       => 'البريد الالكتروني موجود بالفعل',
-            'email.email'        => 'تحقق من صحة البريد الالكتروني',
-            'password.required'  => 'كلمة السر مطلوب',
-        ];
-
         // Validation
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = validator($request->all(), $rules);
 
         // If failed
         if ($validator->fails()) {
             return back()->withErrors($validator);
         }
-        if ($request->has('avatar')) {
-            // Validation image
-            $validatorImage = Validator::make($request->all(), [
-                'avatar' => 'image'
-            ]);
-
-            if ($validatorImage->fails()) {
-                $avatar = 'default.png';
-            } else {
-                $image = $request->file('avatar');
-                $avatar = time().'.'.$image->getClientOriginalExtension();
-                $path = public_path('/images/users');
-                $image->move($path, $avatar);
-            }
+        if ($request->hasFile('avatar')) {
+            $avatar = UploadFile::uploadImage($request->file('avatar'), 'users');
         } else {
             $avatar = 'default.png';
         }
 
         // Save User
-        $user = new User();
-        $user->name  = $request->name;
-        $user->phone = convert2english($request->phone);
-        $user->email = $request->email;
-        $user->lat = $request->lat;
-        $user->long = $request->long;
-        $user->password = bcrypt($request->password);
-        $user->avatar = $avatar;
-        $user->save();
+        User::create([
+            'name'      => $request['name'],
+            'phone'     => convert2english($request['phone']),
+            'email'     => $request['email'],
+            'lat'       => $request['lat'],
+            'lng'       => $request['lng'],
+            'password'  => $request['password'],
+            'avatar'    => $avatar,
+        ]);
 
         $ip = $request->ip();
 
@@ -113,20 +83,8 @@ class UsersController extends Controller
             'avatar'         => 'nullable'
         ];
 
-        // Validator messages
-        $messages = [
-            'edit_name.required'      => 'الاسم مطلوب',
-            'edit_name.min'           => 'الاسم لابد ان يكون اكبر من حرفين',
-            'edit_name.max'           => 'الاسم لابد ان يكون اصغر من 190 حرف',
-            'edit_phone.required'     => 'رقم الهاتف مطلوب',
-            'edit_phone.unique'       => 'رقم الهاتف موجود بالفعل',
-            'edit_email.required'     => 'البريد الالكتروني مطلوب',
-            'edit_email.unique'       => 'البريد الالكتروني موجود بالفعل',
-            'edit_email.email'        => 'تحقق من صحة البريد الالكتروني',
-        ];
-
         // Validation
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules);
 
         // If failed
         if ($validator->fails()) {
@@ -136,21 +94,11 @@ class UsersController extends Controller
         $user = User::findOrFail($request->id);
 
         if ($request->has('avatar')) {
-            // Validation image
-            $validatorImage = Validator::make($request->all(), [
-                'avatar' => 'image'
-            ]);
-
-            if ($validatorImage->passes()) {
-                if ($user->avatar != 'default.png') {
-                    File::delete(public_path('images/users/' . $user->avatar));
-                }
-                $image = $request->file('avatar');
-                $avatar = time() . '.' . $image->getClientOriginalExtension();
-                $path = public_path('/images/users');
-                $image->move($path, $avatar);
-                $user->avatar = $avatar;
+            if ($user->avatar != 'default.png') {
+                File::delete(public_path('images/users/' . $user->avatar));
             }
+
+            $user->avatar = UploadFile::uploadImage($request->file('avatar'), 'users');
         }
         if (isset($request->password) || $request->password != null) {
             $user->password = bcrypt($request->password);
@@ -158,7 +106,7 @@ class UsersController extends Controller
 
         $user->name  = $request->edit_name;
         $user->lat  = $request->edit_lat;
-        $user->long  = $request->edit_long;
+        $user->lng  = $request->edit_lng;
         $user->phone = convert2english($request->edit_phone);
         $user->email = $request->edit_email;
         $user->save();
@@ -377,31 +325,8 @@ class UsersController extends Controller
     }
 
     public function sendNotify(Request $request) {
-
-        $user = User::find($request->user_id);
-
-        $optionBuilder = new OptionsBuilder();
-        $optionBuilder->setTimeToLive(60*20);
-
-        $notificationBuilder = new PayloadNotificationBuilder('aait-dashboard');
-        $notificationBuilder->setBody($request->message)
-            ->setSound('default');
-
-        $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData(['message' => $request->message]);
-
-        $option = $optionBuilder->build();
-        $notification = $notificationBuilder->build();
-        $data = $dataBuilder->build();
-
-        $token = $user->device_id;
-
-        $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
-
-        if ($downstreamResponse){
-            addReport(auth()->user()->id, 'قام بارسال اشعار', $request->ip());
-            Session::flash('success', 'تم الارسال بنجاح');
-        }
+        addReport(auth()->user()->id, 'قام بارسال اشعار', $request->ip());
+        Session::flash('success', 'تم الارسال بنجاح');
         return back();
     }
 }
