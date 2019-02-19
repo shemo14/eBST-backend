@@ -15,6 +15,16 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
+
+
+    $(document).on('click','.t-load', function() {
+        $('.cssload-container').fadeIn();
+    });
+
+    // function ajaxSuccess() {
+    //     $('.cssload-container').fadeOut();
+    // };
+
     $('#datatable').DataTable({
         lengthChange: true,
         "language": {

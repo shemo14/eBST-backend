@@ -6,25 +6,32 @@
 
     <div class="row">
 
-        @foreach(Home() as $h)
-            <div class="col-lg-4 col-sm-6" style=" color: whitesmoke; font-family: Cairo !important;">
-                <div class="card-box" style="background-color: {{$h['color']}}; font-family: Cairo !important;">
-                    <h4 class="header-title m-t-0 m-b-30" style=" color: whitesmoke; font-family: Cairo !important;">{{$h['name']}}</h4>
-
-                    <div class="widget-chart-1">
-                        <div class="widget-chart-box-1">
-                            {!! $h['icon'] !!}
-                        </div>
-
-                        <div class="widget-detail-1">
-                            <h2 class="p-t-10 m-b-0" style=" color: whitesmoke; font-family: Cairo !important;">
-                                {{$h['count']}}
-                            </h2>
-                        </div>
-                    </div>
+        <div class="col-lg-4 col-xs-6">
+            <div class="small-box smallBoxCustom bg-aqua">
+                <div class="inner">
+                    <h3>{{$users}}</h3>
+                    <p> عدد المستخدمين</p>
                 </div>
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+                <a href="{{route('users')}}" class="small-box-footer"> الذهاب <i class="fa fa-arrow-circle-left"></i></a>
             </div>
-        @endforeach
+        </div>
+
+        <div class="col-lg-4 col-xs-6">
+            <div class="small-box smallBoxCustom bg-red">
+                <div class="inner">
+                    <h3>{{$admins}}</h3>
+                    <p> عدد المشرفين</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user-secret"></i>
+                </div>
+                <a href="{{route('admins')}}" class="small-box-footer"> الذهاب <i class="fa fa-arrow-circle-left"></i></a>
+            </div>
+        </div>
+
 
     </div>
 

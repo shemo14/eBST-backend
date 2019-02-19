@@ -51,6 +51,19 @@
 @section('script')
     <script>
 
+        $('.per_parent').change(function () {
+            var id = $(this).attr('id');
+            if(this.checked){
+                $(".per_" + id).each(function(){
+                    this.checked=true
+                })
+            }else{
+                $(".per_" + id).each(function(){
+                    this.checked=false;
+                })
+            }
+        });
+
 	    $(document).ready(function () {
 		    var check = true;
 		    $(".checkSingle").each(function(){

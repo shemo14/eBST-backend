@@ -1,34 +1,4 @@
 @section('styles')
-
-    <style>
-
-        @media (max-width: 475.98px) {
-            .boxes .col-sm-6 div#datatable_filter {
-                float: none;
-                text-align: center;
-            }
-
-            .boxes .col-sm-6 {
-                float:  none;
-                text-align: center;
-                display:  inline-block;
-                width:  10px;
-            }
-        }
-
-        @media (min-width: 476px) and (max-width: 767.98px) {
-            .boxes .col-sm-6 div#datatable_filter {
-                float: right;
-            }
-
-            .boxes .col-sm-6 {
-                float:  right;
-                display:  inline-block;
-                width:  50%;
-            }
-        }
-
-    </style>
 @endsection
 
 @extends('dashboard.index')
@@ -37,28 +7,20 @@
 @endsection
 @section('content')
 
+    <div class="btn-group btn-group-justified m-b-10">
+        <a href="#add" class="btn btn-success waves-effect btn-lg waves-light" data-animation="fadein" data-plugin="custommodal"
+            data-overlaySpeed="100" data-overlayColor="#36404a">اضافة مستخدم <i class="fa fa-plus"></i> </a>
+        <a href="#deleteAll" class="btn btn-danger waves-effect btn-lg waves-light delete-all" data-animation="blur" data-plugin="custommodal"
+            data-overlaySpeed="100" data-overlayColor="#36404a">حذف المحدد <i class="fa fa-trash"></i> </a>
+        <a class="btn btn-primary waves-effect btn-lg waves-light" onclick="window.location.reload()" role="button">تحديث الصفحة <i class="fa fa-refresh"></i> </a>
+    </div>
+
     <div class="row">
 
         <div class="col-sm-12">
             <div class="card-box table-responsive boxes">
-                <div class="pull-right" style="margin-left: 7px">
-                    <ul style="list-style-type: none;
-                     margin: 0;
-                       padding: 0;">
-                        <li style="display: inline">
-                            <a href="#add" class="btn btn-primary btn-rounded waves-effect waves-light w-md m-b-5" data-animation="fadein" data-plugin="custommodal"
-                               data-overlaySpeed="100" data-overlayColor="#36404a">اضافة مستخدم  </a>
-                        </li>
-                        <li style="display: inline">
-                            <a href="#deleteAll" class="btn btn-small btn-danger btn-rounded waves-effect waves-light w-md m-b-5 delete-all" data-animation="blur" data-plugin="custommodal"
-                               data-overlaySpeed="100" data-overlayColor="#36404a">حذف المحدد  </a>
-                        </li>
-                    </ul>
-                </div>
 
-                <h4 class="header-title m-t-0 m-b-30" style="display: inline-block">المستخدمين</h4>
-
-                <table id="datatable" class="table table-striped table-bordered table-responsives">
+                <table id="datatable" class="table table-bordered table-responsives">
                     <thead>
                     <tr>
                         <th>
@@ -106,38 +68,29 @@
                             </td>
                             <td>{{$user->created_at->diffForHumans()}}</td>
                             <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-warning btn-rounded dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-align-center"></i> <span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu" style="min-width: 5px; border-radius: 10px;">
-                                        <li>
-                                            <a href="#edit" class="edit" data-animation="sign" data-plugin="custommodal"
-                                               data-overlaySpeed="100" data-overlayColor="#36404a" style="color: #c89e28; font-weight: bold;"
-                                               data-id = "{{$user->id}}"
-                                               data-phone = "{{$user->phone}}"
-                                               data-name = "{{$user->name}}"
-                                               data-email = "{{$user->email}}"
-                                               data-photo = "{{$user->avatar}}"
-                                               data-lat = "{{$user->lat}}"
-                                               data-lng = "{{$user->lng}}"
-                                            >
-                                                <i class="fa fa-cogs" style="margin-left: 3px;"></i>
-                                                تـعـديـل
-                                            </a>
-                                        </li>
-                                        <li><a href="#contact" class="contact" style="color: #79c842; font-weight: bold;" data-animation="sign" data-plugin="custommodal"
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="#edit" class="edit btn btn-success" data-animation="fadein" data-plugin="custommodal"
+                                        data-overlaySpeed="100" data-overlayColor="#36404a"
+                                        data-id = "{{$user->id}}"
+                                        data-phone = "{{$user->phone}}"
+                                        data-name = "{{$user->name}}"
+                                        data-email = "{{$user->email}}"
+                                        data-photo = "{{$user->avatar}}"
+                                        data-lat = "{{$user->lat}}"
+                                        data-lng = "{{$user->lng}}"
+                                    >
+                                        <i class="fa fa-cogs"></i>
+                                    </a>
+                                    <a href="#contact" class="contact btn btn-warning" style="color: #79c842; font-weight: bold;" data-animation="sign" data-plugin="custommodal"
                                                data-overlaySpeed="100" data-overlayColor="#36404a"
                                                data-user_id = "{{$user->id}}"
-                                            > <i class="fa fa-comment" style="margin-left: 3px;"></i> مراسلة </a></li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="#delete" class="delete" style="color: #c83338; font-weight: bold;" data-animation="blur" data-plugin="custommodal"
-                                               data-overlaySpeed="100" data-overlayColor="#36404a"
-                                               data-id = "{{$user->id}}"
-                                            >
-                                                <i class="fa fa-trash" style="margin-left: 3px;"></i>حـذف
-                                            </a>
-                                        </li>
-                                    </ul>
+                                            > <i class="fa fa-comment" style="margin-left: 3px;"></i> </a>
+                                    <a href="#delete" class="delete btn btn-danger" data-animation="blur" data-plugin="custommodal"
+                                        data-overlaySpeed="100" data-overlayColor="#36404a"
+                                        data-id = "{{$user->id}}"
+                                    >
+                                        <i class="fa fa-trash"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

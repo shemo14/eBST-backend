@@ -48,6 +48,11 @@
                             <!-- End Notification bar -->
                         </li>
                         <li>
+                            <a href="@if(!request()->is('admin')){{url()->previous()}}@endif" style="font-size: 24px;margin-top: 8px; color: red;">
+                                <i class="zmdi zmdi-arrow-back"></i>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('logout')}}" class="text-custom notification-box" style="font-size: 24px;margin-top: 8px">
                                 <i class="zmdi zmdi-power"></i>
                             </a>
@@ -87,21 +92,27 @@
                     @if(session()->has('success'))
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="alert alert-success text-center">
-                                    <h4 style="color: #0d3625; display: inline-block ">{{session()->get('success')}}</h4>
-                                </div>
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <strong>{!! session()->get('success') !!}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
                             </div>
                         </div>
                     @endif
 
                     @if(session()->has('danger'))
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="alert alert-danger text-center">
-                                    <h4 style="color: #0d3625">{{session()->get('danger')}}</h4>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <strong>{!! session()->get('danger') !!}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
                         </div>
+                    </div>
                     @endif
 
                     @yield('content')

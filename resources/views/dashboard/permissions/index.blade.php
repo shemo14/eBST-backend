@@ -18,11 +18,10 @@
 
                 <h4 class="header-title m-t-0 m-b-30" style="display: inline-block">قائمة الصلاحيات</h4>
 
-                <table id="datatable" class="table table-striped table-bordered table-responsives">
+                <table class="table table-bordered table-responsives">
                     <thead>
                     <tr>
-                        <th>الاسم</th>
-                        <th>التاريخ</th>
+                        <th class="th-width">الصلاحية</th>
                         <th>التحكم</th>
                     </tr>
                     </thead>
@@ -31,16 +30,15 @@
                         @foreach($roles as $role)
                             <tr>
                                 <td>{{$role->role}}</td>
-                                <td>{{$role->created_at->diffForHumans()}}</td>
                                 <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-info dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-align-center"></i> <span class="caret"></span></button>
-                                        <ul class="dropdown-menu" role="menu" style="min-width: 5px; border-radius: 10px;">
-                                            <li><a href="{{route('editpermissionpage', $role->id)}}" style="color: #c89e28; font-weight: bold;"> <i class="fa fa-cogs" style="margin-left: 3px;"></i> تـعـديـل </a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#delete" class="delete" style="color: #c83338; font-weight: bold;" data-animation="blur" data-plugin="custommodal"
-                                                   data-overlaySpeed="100" data-overlayColor="#36404a" data-id="{{$role->id}}"> <i class="fa fa-trash" style="margin-left: 3px;"></i> حـذف </a></li>
-                                        </ul>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="{{route('editpermissionpage', $role->id)}}" class="btn btn-success">
+                                            <i class="fa fa-cogs"></i>
+                                        </a>
+                                        <a href="#delete" class="delete btn btn-danger" data-animation="blur" data-plugin="custommodal"
+                                            data-overlaySpeed="100" data-overlayColor="#36404a" data-id="{{$role->id}}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

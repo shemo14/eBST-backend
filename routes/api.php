@@ -1,3 +1,4 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
-Route::get('/all-users', 'Admin\UsersController@allUsers');
+Route::get('/load-users', 'Admin\UsersController@loadUsers')->name('api.load-users');

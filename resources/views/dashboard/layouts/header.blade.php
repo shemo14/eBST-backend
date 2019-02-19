@@ -59,21 +59,26 @@
 
     <script src="{{appPath()}}/design/admin/assets/js/modernizr.min.js"></script>
 
-
+    <script>
+        function ajaxSuccess() {
+            $('.cssload-container').fadeOut();
+        };
+        function ajaxStart() {
+            $('.cssload-container').fadeIn();
+        };
+    </script>
 </head>
 
 
 <body class="fixed-left" onload="myFunction()">
 {{--<div id="loader"></div>--}}
-
+    <div class="cssload-container t-all-loader">
+        <div class="cssload-whirlpool"></div>
+    </div>
 <div class='box-loader' id="boxLoader">
     <div class='loader'>
-        <div class='loader--dot'></div>
-        <div class='loader--dot'></div>
-        <div class='loader--dot'></div>
-        <div class='loader--dot'></div>
-        <div class='loader--dot'></div>
-        <div class='loader--dot'></div>
-        <div class='loader--text'></div>
+            <div class="cssload-container t-part-loader">
+                    <div class="cssload-whirlpool"></div>
+                </div>
     </div>
 </div>

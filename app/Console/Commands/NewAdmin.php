@@ -38,23 +38,15 @@ class NewAdmin extends Command
      */
     public function handle()
     {
-        $name = $this->ask('What is admin name?');
+        User::create([
+            'name' => 'Admin',
+            'phone' => '01024963844',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('password'),
+            'checked' => 1,
+            'role' => '1',
+        ]);
 
-        $phone = $this->ask('What is admin phone?');
-
-        $email = $this->ask('What is admin email?');
-
-        $password = $this->secret('What is the password?');
-
-        if ($this->confirm('Is '.$email.' correct, do you wish to continue? [y|N]')) {
-            User::create([
-                'name'      => $name,
-                'phone'     => convert2english($phone),
-                'email'     => $email,
-                'password'  => bcrypt($password),
-                'checked'   => 1,
-                'role'      => '1',
-            ]);
-        }
+        return 'Admin added successfully';
     }
 }

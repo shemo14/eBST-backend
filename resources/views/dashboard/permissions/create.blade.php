@@ -17,29 +17,37 @@
                         <input type="checkbox" class="material-control-input" id="checkedAll">
                         <span class="material-control-indicator"></span>
                     </label>
-                    {{--<label for="checkAll" id="check">تحديد الكل</label>--}}
-                    {{--<input type="checkbox" id="checkAll" class="pull-right" data-plugin="switchery" data-color="rgb(12, 105, 140)" data-size="small"/>--}}
                 </div>
 
-                <h4 class="header-title m-t-0 m-b-30 text-purple">قائمة الصلاحيات</h4>
+                <h4 class="header-title m-t-0 m-b-30">قائمة الصلاحيات</h4>
                 <hr>
                 <div class="card-footer">
-                    <form action="{{route('addpermission')}}" method="post" class="form-horizontal">
-                        {{csrf_field()}}
+                    <div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label class="col-md-2" for="example-email">الصلاحية</label>
+                                    <label class="col-md-2" for="role">اسم الصلاحية</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" required name="role">
+                                        <input type="text" id="role" class="form-control" required name="role">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <hr>
-                        {{Permissions()}}
-                        <button type="submit" class="btn btn-block btn-success btn-rounded waves-effect waves-light w-md m-b-5"><span style="font-weight: bolder;font-size: 15px">حــفــظ</span></button>
-                    </form>
+
+                        {{permissions()}}
+                        <div class="form-row text-center">
+                            <div class="col-12">
+                                <button 
+                                    style="font-weight: bolder;font-size: 15px;" 
+                                    type="button" 
+                                    id="send"
+                                    class="btn btn-success btn-rounded waves-effect waves-light w-md m-b-5">
+                                    حــفــظ
+                                </button>
+                            </div>
+                         </div>
+                    </div>
                 </div>
 
             </div>
@@ -51,16 +59,18 @@
 @section('script')
     <script>
 
-        // $(document).ready(function() {
-        //     $("#checkAll").on('change', function () {
-        //         if ($(this).prop('checked') == true) {
-        //             $("#check").html('الفاء تحديد الكل');
-        //         } else {
-        //             $("#check").html('تحديد الكل');
-        //         }
-        //          $('.check-permission').trigger('click');
-        //     });
-        // });
+        $('.per_parent').change(function () {
+            var id = $(this).attr('id');
+	        if(this.checked){
+		        $(".per_" + id).each(function(){
+			        this.checked=true
+		        })
+	        }else{
+		        $(".per_" + id).each(function(){
+			        this.checked=false;
+		        })
+	        }
+        });
 
         $("#checkedAll").change(function(){
             if(this.checked){
@@ -85,6 +95,51 @@
             }else {
                 $("#checkedAll").prop("checked", false);
             }
+        });
+
+        $('#send').on('click', function () {
+            var permissions = [];
+            $('.permission:checked').each(function (index, el) {
+                permissions.push($(el).val());
+            });
+            var role = $('#role').val();
+            if (role === '') {
+                ajaxSuccess();
+                Swal.fire({
+                    html: '<h4>اسم الصلاحية مطلوب</h4>',
+                    type: 'error',
+                    showConfirmButton: false,
+		            timer: 2000
+                });
+                return;
+            }
+
+            if (permissions.length === 0) {
+                ajaxSuccess();
+                Swal.fire({
+                    html: '<h4>قم بإختيار صلاحية واحدة على الأقل</h4>',
+                    type: 'error',
+                    showConfirmButton: false,
+		            timer: 2000
+                });
+                return;
+            }
+            ajaxStart();
+            var _token = '{{csrf_token()}}';
+            var url = "{{route('addpermission')}}";
+            $.ajax({
+                method: 'POST',
+                url,
+                data: { _token, role, permissions }
+            }).success(function (res) {
+                ajaxSuccess();
+                // console.log(res)
+                if(res === 1) {
+                    window.location.assign('{{route("permissionslist")}}')   
+                }
+            }).error(function (err) {
+                console.log(err);
+            });
         });
 
     </script>

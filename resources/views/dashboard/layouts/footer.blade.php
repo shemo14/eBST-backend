@@ -68,13 +68,13 @@
 <script src="{{appPath()}}/additions/axios.js"></script>
 
 <script src="{{appPath()}}/design/admin/assets/js/main.js"></script>
+<script src="{{appPath()}}/design/admin/assets/js/sweetalert2.all.min.js"></script>
 
 @yield('script')
 
 <!-- App js -->
 <script src="{{appPath()}}/design/admin/assets/js/jquery.core.js"></script>
 <script src="{{appPath()}}/design/admin/assets/js/jquery.app.js"></script>
-
 
 </body>
 </html>
