@@ -48,9 +48,11 @@
                             <!-- End Notification bar -->
                         </li>
                         <li>
-                            <a href="@if(!request()->is('admin')){{url()->previous()}}@endif" style="font-size: 24px;margin-top: 8px; color: red;">
-                                <i class="zmdi zmdi-arrow-back"></i>
-                            </a>
+                            @if(!request()->is('admin'))
+                                <a href="{{url()->previous()}}" style="font-size: 24px;margin-top: 8px; color: red;">
+                                    <i class="zmdi zmdi-arrow-back"></i>
+                                </a>
+                            @endif
                         </li>
                         <li>
                             <a href="{{route('logout')}}" class="text-custom notification-box" style="font-size: 24px;margin-top: 8px">
