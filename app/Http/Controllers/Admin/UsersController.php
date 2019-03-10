@@ -37,11 +37,11 @@ class UsersController extends Controller
     {
         // Validation rules
         $rules = [
-            'name' => 'required|min:2|max:190',
-            'phone' => 'required|unique:users,phone',
-            'email' => 'required|email|unique:users,email',
+            'name'     => 'required|min:2|max:190',
+            'phone'    => 'required|unique:users,phone',
+            'email'    => 'required|email|unique:users,email',
             'password' => 'required',
-            'avatar' => 'nullable|image'
+            'avatar'   => 'nullable|image'
         ];
         // Validation
         $validator = validator($request->all(), $rules);

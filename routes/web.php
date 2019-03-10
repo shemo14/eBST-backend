@@ -163,10 +163,55 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             'title' => 'ارسال اشعارات'
         ]);
 
+
+        // ======== Categories
+        Route::get('/categories', [
+            'uses' => 'CategoriesController@index',
+            'as' => 'categories',
+            'title' => 'الاقسام ',
+            'icon' => '<i class="fa fa-bars"></i>',
+            'child' => [
+                'addCategory',
+                'updateCategory',
+                'deleteCategory',
+                'deleteCategories',
+            ]
+        ]);
+
+        // Add User
+        Route::post('/add-category', [
+            'uses' => 'CategoriesController@addCategory',
+            'as' => 'addCategory',
+            'title' => 'اضافة قسم'
+        ]);
+
+        // Update User
+        Route::post('/update-category', [
+            'uses' => 'CategoriesController@updateCategory',
+            'as' => 'updateCategory',
+            'title' => 'تعديل قسم'
+        ]);
+
+        // Delete User
+        Route::post('/delete-category', [
+            'uses' => 'CategoriesController@deleteCategory',
+            'as' => 'deleteCategory',
+            'title' => 'حذف قسم'
+        ]);
+
+        // Delete Users
+        Route::post('/delete-categories', [
+            'uses' => 'CategoriesController@deleteAllCategories',
+            'as' => 'deleteCategories',
+            'title' => 'حذف اكتر من قسم'
+        ]);
+
+
+
         // ======== Reports
         Route::get('all-reports', [
             'uses' => 'ReportController@index',
-            'as' => 'reports',
+            'as' => 'allreports',
             'title' => 'التقارير',
             'icon' => '<i class="fa fa-flag"></i>',
             'child' => [
