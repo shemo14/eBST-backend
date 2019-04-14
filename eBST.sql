@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2019 at 04:30 PM
+-- Generation Time: Apr 14, 2019 at 05:42 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.2.15
 
@@ -36,6 +36,13 @@ CREATE TABLE `ads` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `ads`
+--
+
+INSERT INTO `ads` (`id`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(3, 0, 2, '2019-04-11 13:56:48', '2019-04-11 13:56:48');
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +62,9 @@ CREATE TABLE `app_settings` (
 --
 
 INSERT INTO `app_settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
-(1, 'site_name', 'اوامر الشبكة', '2019-03-07 09:09:29', '2019-03-07 09:09:29');
+(1, 'site_name', 'اوامر الشبكة', '2019-03-07 09:09:29', '2019-03-07 09:09:29'),
+(2, 'about_ar', 'وصف التطبيق بالعربية', NULL, NULL),
+(3, 'about_en', 'app desc of app in English', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -71,6 +80,13 @@ CREATE TABLE `categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name_ar`, `name_en`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'جوالات', 'mobiles', '5cb2f44216bc0-1555231810-7Chz6ky7Aq.jpg', '2019-04-14 06:50:10', '2019-04-14 06:50:10');
 
 -- --------------------------------------------------------
 
@@ -106,6 +122,27 @@ CREATE TABLE `content_reports` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `countries`
+--
+
+CREATE TABLE `countries` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name_ar` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` (`id`, `name_ar`, `name_en`, `created_at`, `updated_at`) VALUES
+(4, 'مصر', 'Egypt', '2019-04-14 11:33:31', '2019-04-14 11:33:31');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `favs`
 --
 
@@ -125,13 +162,26 @@ CREATE TABLE `favs` (
 
 CREATE TABLE `images` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name_ar` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_en` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `key` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `name`, `type`, `key`, `created_at`, `updated_at`) VALUES
+(1, '1554998208_21565.png', 'ads', 3, '2019-04-11 13:56:48', '2019-04-11 13:56:48'),
+(2, '1554998208_96780.png', 'ads', 3, '2019-04-11 13:56:48', '2019-04-11 13:56:48'),
+(3, '1555253184_38250.png', 'product', 3, '2019-04-14 12:46:24', '2019-04-14 12:46:24'),
+(4, '1555253184_27377.png', 'product', 3, '2019-04-14 12:46:24', '2019-04-14 12:46:24'),
+(5, '1555253204_39913.png', 'product', 4, '2019-04-14 12:46:44', '2019-04-14 12:46:44'),
+(6, '1555253204_47172.png', 'product', 4, '2019-04-14 12:46:44', '2019-04-14 12:46:44'),
+(7, '1555253219_89158.png', 'product', 5, '2019-04-14 12:46:59', '2019-04-14 12:46:59'),
+(8, '1555253219_85171.png', 'product', 5, '2019-04-14 12:46:59', '2019-04-14 12:46:59');
 
 -- --------------------------------------------------------
 
@@ -165,7 +215,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2019_03_10_111809_create_reports_table', 6),
 (14, '2019_03_10_111828_create_rates_table', 6),
 (15, '2019_03_10_111840_create_favs_table', 6),
-(16, '2019_03_10_112800_create_comments_table', 6);
+(16, '2019_03_10_112800_create_comments_table', 6),
+(17, '2019_04_14_094700_create_countries_table', 7),
+(18, '2019_04_14_134623_create_products_table', 8);
 
 -- --------------------------------------------------------
 
@@ -217,37 +269,79 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `permissions`, `role_id`, `created_at`, `updated_at`) VALUES
-(65, 'dashboard', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(66, 'permissionslist', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(67, 'addpermissionspage', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(68, 'addpermission', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(69, 'editpermissionpage', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(70, 'updatepermission', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(71, 'deletepermission', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(72, 'admins', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(73, 'addadmin', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(74, 'updateadmin', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(75, 'deleteadmin', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(76, 'deleteadmins', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(77, 'users', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(78, 'adduser', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(79, 'updateuser', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(80, 'deleteuser', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(81, 'deleteusers', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(82, 'send-fcm', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(83, 'categories', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(84, 'addCategory', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(85, 'updateCategory', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(86, 'deleteCategory', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(87, 'deleteCategories', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(88, 'allreports', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(89, 'deletereports', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(90, 'settings', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(91, 'sitesetting', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(92, 'about', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(93, 'add-social', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(94, 'update-social', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32'),
-(95, 'delete-social', 1, '2019-03-07 12:37:32', '2019-03-07 12:37:32');
+(164, 'dashboard', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(165, 'permissionslist', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(166, 'addpermissionspage', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(167, 'addpermission', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(168, 'editpermissionpage', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(169, 'updatepermission', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(170, 'deletepermission', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(171, 'admins', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(172, 'addadmin', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(173, 'updateadmin', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(174, 'deleteadmin', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(175, 'deleteadmins', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(176, 'users', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(177, 'adduser', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(178, 'updateuser', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(179, 'deleteuser', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(180, 'deleteusers', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(181, 'send-fcm', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(182, 'categories', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(183, 'addCategory', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(184, 'updateCategory', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(185, 'deleteCategory', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(186, 'deleteCategories', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(187, 'ads', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(188, 'addAd', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(189, 'updateAd', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(190, 'deleteAd', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(191, 'deleteAds', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(192, 'countries', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(193, 'addCountry', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(194, 'updateCountry', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(195, 'deleteCountry', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(196, 'deleteCountries', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(197, 'allreports', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(198, 'deletereports', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(199, 'settings', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(200, 'sitesetting', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(201, 'about', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(202, 'add-social', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(203, 'update-social', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31'),
+(204, 'delete-social', 1, '2019-04-14 08:51:31', '2019-04-14 08:51:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `price` double(8,2) DEFAULT NULL,
+  `type` int(11) NOT NULL,
+  `exchange_price` double(8,2) DEFAULT NULL,
+  `exchange_product` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `max_price` double(8,2) DEFAULT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `desc`, `category_id`, `price`, `type`, `exchange_price`, `exchange_product`, `max_price`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'test', 'desc', 1, 100.00, 1, 20.00, 'test2', 200.00, 2, '2019-04-14 12:44:16', '2019-04-14 12:44:16'),
+(2, 'test', 'desc', 1, 100.00, 1, 20.00, 'test2', 200.00, 2, '2019-04-14 12:44:46', '2019-04-14 12:44:46'),
+(3, 'test', 'desc', 1, 100.00, 1, 20.00, 'test2', 200.00, 2, '2019-04-14 12:46:24', '2019-04-14 12:46:24'),
+(4, 'test', 'desc', 1, 100.00, 1, 20.00, 'test2', NULL, 2, '2019-04-14 12:46:44', '2019-04-14 12:46:44'),
+(5, 'test', 'desc', 1, 100.00, 1, NULL, 'test2', NULL, 2, '2019-04-14 12:46:59', '2019-04-14 12:46:59');
 
 -- --------------------------------------------------------
 
@@ -292,7 +386,15 @@ INSERT INTO `reports` (`id`, `event`, `supervisor`, `ip`, `country`, `city`, `ar
 (2, 'قام Admin اضافة قسم', 1, '60.64.15.86', 'JP', '', '', 1, '2019-03-10 06:24:00', '2019-03-10 06:24:00'),
 (3, 'قام Admin تعديل قسم فثسف ddd', 1, '205.209.188.141', 'US', 'San Jose', 'California', 1, '2019-03-10 06:24:15', '2019-03-10 06:24:15'),
 (4, 'قام Admin بحذف القسم', 1, '110.199.229.15', 'CN', '', '', 1, '2019-03-10 07:10:55', '2019-03-10 07:10:55'),
-(5, 'قام Admin قام بحذف العديد من الاقسام', 1, '30.117.186.209', 'US', '', '', 1, '2019-03-10 07:11:08', '2019-03-10 07:11:08');
+(5, 'قام Admin قام بحذف العديد من الاقسام', 1, '30.117.186.209', 'US', '', '', 1, '2019-03-10 07:11:08', '2019-03-10 07:11:08'),
+(6, 'قام Admin اضافة قسم', 1, '52.69.141.226', 'JP', 'Tokyo', 'Tokyo', 1, '2019-04-14 06:50:10', '2019-04-14 06:50:10'),
+(7, 'قام Admin اضافة دولة', 1, '172.19.136.9', '', '', '', 1, '2019-04-14 11:26:00', '2019-04-14 11:26:00'),
+(8, 'قام Admin اضافة دولة', 1, '4.14.51.151', 'US', 'Omaha', 'Nebraska', 1, '2019-04-14 11:26:33', '2019-04-14 11:26:33'),
+(9, 'قام Admin تعديل دولة مصر 2', 1, '120.171.70.158', 'ID', '', '', 1, '2019-04-14 11:31:34', '2019-04-14 11:31:34'),
+(10, 'قام Admin اضافة دولة', 1, '231.71.196.174', '', '', '', 1, '2019-04-14 11:32:59', '2019-04-14 11:32:59'),
+(11, 'قام Admin بحذف دولة', 1, '210.66.227.85', 'TW', '', '', 1, '2019-04-14 11:33:07', '2019-04-14 11:33:07'),
+(12, 'قام Admin قام بحذف العديد من الدول', 1, '154.58.93.232', 'US', 'Washington', 'District of Columbia', 1, '2019-04-14 11:33:19', '2019-04-14 11:33:19'),
+(13, 'قام Admin اضافة دولة', 1, '207.147.216.253', 'US', '', '', 1, '2019-04-14 11:33:32', '2019-04-14 11:33:32');
 
 -- --------------------------------------------------------
 
@@ -369,6 +471,9 @@ CREATE TABLE `users` (
   `role` int(11) NOT NULL DEFAULT '0',
   `lat` decimal(16,14) DEFAULT NULL,
   `lng` decimal(16,14) DEFAULT NULL,
+  `type` int(11) NOT NULL DEFAULT '0',
+  `device_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ar',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -378,8 +483,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `code`, `avatar`, `active`, `checked`, `role`, `lat`, `lng`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@admin.com', '$2y$10$YlAZYU1yRQN4cjtWcfKzSO86RSPAxBbmtuZ6PapafDJqc49ULiRKe', '01024963844', NULL, 'default.png', 1, 1, 1, NULL, NULL, NULL, '2019-03-07 09:14:04', '2019-03-07 09:17:59');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `code`, `avatar`, `active`, `checked`, `role`, `lat`, `lng`, `type`, `device_id`, `lang`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@admin.com', '$2y$10$rgPC9pcjRqWtZzF/ZFSni.ikfFG/zLUC9MrLRXRDNhaIrLI7PNrq2', '01024963844', NULL, 'default.png', 1, 1, 1, NULL, NULL, 0, NULL, 'ar', NULL, '2019-03-07 09:14:04', '2019-03-07 09:17:59'),
+(2, 'shams', 'shams@email.com', '$2y$10$S1LVuHHRzHMz7Y.5JXike.sfHx0B0gDO8x7OMgUJqoD.eFoTIqHr6', '0102345678', '2437', 'default.png', 1, 0, 0, NULL, NULL, 0, '112546988', 'ar', NULL, '2019-04-10 12:13:12', '2019-04-11 06:18:18');
 
 --
 -- Indexes for dumped tables
@@ -420,6 +526,12 @@ ALTER TABLE `content_reports`
   ADD KEY `content_reports_user_id_foreign` (`user_id`);
 
 --
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `favs`
 --
 ALTER TABLE `favs`
@@ -458,6 +570,14 @@ ALTER TABLE `password_resets`
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `permissions_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `products_category_id_foreign` (`category_id`),
+  ADD KEY `products_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `rates`
@@ -510,19 +630,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `app_settings`
 --
 ALTER TABLE `app_settings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -537,6 +657,12 @@ ALTER TABLE `content_reports`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `favs`
 --
 ALTER TABLE `favs`
@@ -546,13 +672,13 @@ ALTER TABLE `favs`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -564,7 +690,13 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `rates`
@@ -576,7 +708,7 @@ ALTER TABLE `rates`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -600,7 +732,7 @@ ALTER TABLE `socials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -643,6 +775,13 @@ ALTER TABLE `notifications`
 --
 ALTER TABLE `permissions`
   ADD CONSTRAINT `permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `products_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `rates`

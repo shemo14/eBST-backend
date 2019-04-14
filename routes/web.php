@@ -163,7 +163,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             'title' => 'ارسال اشعارات'
         ]);
 
-
         // ======== Categories
         Route::get('/categories', [
             'uses' => 'CategoriesController@index',
@@ -178,34 +177,120 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ]
         ]);
 
-        // Add User
+        // Add Category
         Route::post('/add-category', [
             'uses' => 'CategoriesController@addCategory',
             'as' => 'addCategory',
             'title' => 'اضافة قسم'
         ]);
 
-        // Update User
+        // Update Category
         Route::post('/update-category', [
             'uses' => 'CategoriesController@updateCategory',
             'as' => 'updateCategory',
             'title' => 'تعديل قسم'
         ]);
 
-        // Delete User
+        // Delete Category
         Route::post('/delete-category', [
             'uses' => 'CategoriesController@deleteCategory',
             'as' => 'deleteCategory',
             'title' => 'حذف قسم'
         ]);
 
-        // Delete Users
+        // Delete Categories
         Route::post('/delete-categories', [
             'uses' => 'CategoriesController@deleteAllCategories',
             'as' => 'deleteCategories',
             'title' => 'حذف اكتر من قسم'
         ]);
 
+
+        // ======== Ads
+        Route::get('/all-ads', [
+            'uses' => 'AdsController@index',
+            'as' => 'ads',
+            'title' => 'الاعلانات ',
+            'icon' => '<i class="fa fa-map-signs"></i>',
+            'child' => [
+                'addAd',
+                'updateAd',
+                'deleteAd',
+                'deleteAds',
+            ]
+        ]);
+
+        // Add ad
+        Route::post('/add-ad', [
+            'uses' => 'AdsController@addAd',
+            'as' => 'addAd',
+            'title' => 'اضافة اعلان'
+        ]);
+
+        // Update ad
+        Route::post('/update-ad', [
+            'uses' => 'AdsController@updateAd',
+            'as' => 'updateAd',
+            'title' => 'تعديل اعلان'
+        ]);
+
+        // Delete ad
+        Route::post('/delete-ad', [
+            'uses' => 'AdsController@deleteAd',
+            'as' => 'deleteAd',
+            'title' => 'حذف اعلان'
+        ]);
+
+        // Delete ads
+        Route::post('/delete-ads', [
+            'uses' => 'AdsController@deleteAllAds',
+            'as' => 'deleteAds',
+            'title' => 'حذف اكتر من اعلان'
+        ]);
+
+
+
+        // ======== Countries
+        Route::get('/countries', [
+            'uses'  => 'CountriesController@index',
+            'as'    => 'countries',
+            'title' => 'الدول',
+            'icon'  => '<i class="fa fa-globe"></i>',
+            'child' => [
+                'addCountry',
+                'updateCountry',
+                'deleteCountry',
+                'deleteCountries',
+            ]
+        ]);
+
+        // Add Country
+        Route::post('/add-country', [
+            'uses'  => 'CountriesController@addCountry',
+            'as'    => 'addCountry',
+            'title' => 'اضافة دولة'
+        ]);
+
+        // Update Country
+        Route::post('/update-country', [
+            'uses'  => 'CountriesController@updateCountry',
+            'as'    => 'updateCountry',
+            'title' => 'تعديل دولة'
+        ]);
+
+        // Delete Country
+        Route::post('/delete-country', [
+            'uses'  => 'CountriesController@deleteCountry',
+            'as'    => 'deleteCountry',
+            'title' => 'حذف دولة'
+        ]);
+
+        // Delete Countries
+        Route::post('/delete-countries', [
+            'uses'  => 'CountriesController@deleteCountries',
+            'as'    => 'deleteCountries',
+            'title' => 'حذف اكتر من دولة'
+        ]);
 
 
         // ======== Reports

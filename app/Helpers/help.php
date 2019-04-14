@@ -140,3 +140,32 @@ function settings($key)
 {
     return \App\Models\AppSetting::where('key', $key)->first()->value;
 }
+
+
+function validateRequest ($validator) {
+    foreach ((array)$validator->errors() as $key => $value){
+        foreach ($value as $msg){
+            return $msg[0];
+        }
+    }
+}
+
+function returnResponse($data, $msg, $code ){
+    if ($data !== null){
+        if ($msg == '')
+            return response()->json([ 'status' => $code, 'data' => $data ]);
+        else
+            return response()->json([ 'status' => $code, 'msg' => $msg, 'data' => $data ]);
+    }else
+        return response()->json([ 'status' => $code, 'msg' => $msg ]);
+}
+
+function save_img_base64($base64_img, $path)
+{
+    $image      = str_replace('data:image/png;base64,', '', $base64_img);
+    $image      = str_replace(' ', '+', $image);
+    $image      = base64_decode( $image );
+    $imageName  = time() . '_' . rand(11111, 99999) . '.' . 'png';
+    File::put($path. '/' . $imageName, $image);
+    return $imageName;
+}
