@@ -35,9 +35,9 @@ class AuthController extends Controller
         }
 
 
-        $user = auth()->user();
+        $user          = auth()->user();
         $user['token'] = $token;
-        $msg = $request['lang'] == 'ar' ? 'تم تسجيل الدخول بنجاح' : 'user login successfully';
+        $msg           = $request['lang'] == 'ar' ? 'تم تسجيل الدخول بنجاح' : 'user login successfully';
         return returnResponse($user, $msg, 200);
     }
 
@@ -127,5 +127,12 @@ class AuthController extends Controller
 
         $msg  = $request['lang'] == 'ar' ? 'تم تغير كلمة المرور بنجاح' : 'password updated successfully';
         return returnResponse(null, $msg, 200);
+    }
+
+    public function user_data(Request $request){
+        $user           = auth()->user();
+        $token          = $request->header('Authorization');
+        $user['token']  = $token;
+        return returnResponse($user, '', 200);
     }
 }

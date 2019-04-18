@@ -9,7 +9,7 @@ class UploadFile
         $image     = base64_decode($base64);
         $imgName = uniqid() . '-' . time() . '-' . str_random(10) . '.jpg';
         $p = 'images/' . $path;
-        file_put_contents(public_path($p) . $imgName, $image);
+        file_put_contents($p . $imgName, $image);
         return (string) $imgName;
     }
 
@@ -18,7 +18,7 @@ class UploadFile
         $extension = $image->getClientOriginalExtension();
         $imgName = uniqid() . '-' . time() . '-' . str_random(10) . '.' . $extension;
         $p = 'images/' . $path;
-        $image->move(public_path($p), $imgName);
+        $image->move($p, $imgName);
         return (string) $imgName;
     }
 
@@ -27,7 +27,7 @@ class UploadFile
         $extension = $image->getClientOriginalExtension();
         $fileName = uniqid() . '-' . time() . '-' . str_random(10) . '.' . $extension;
         $p = 'files/' . $path;
-        $image->move(public_path($p), $fileName);
+        $image->move($p, $fileName);
         return (string) $fileName;
     }
 }

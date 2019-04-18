@@ -34,7 +34,6 @@ class CategoriesController extends Controller
 
     public function categories_search(Request $request){
         $rules = [
-            'search'   => 'required',
             'lang'     => 'required',
         ];
 
@@ -44,9 +43,15 @@ class CategoriesController extends Controller
             return returnResponse([], validateRequest($validator), 400);
         }
 
-        $categories      = Categories::where('name_ar', 'LIKE' , '%'. $request['search'] .'%')
-                                        ->orWhere('name_en', 'LIKE' , '%'. $request['search'] .'%')
-                                        ->select('id', 'image', 'name_' . $request['lang'] . ' as name')->get();
+        $categories = [];
+
+        if ($request['search']){
+            $categories      = Categories::where('name_ar', 'LIKE' , '%'. $request['search'] .'%')
+                                            ->orWhere('name_en', 'LIKE' , '%'. $request['search'] .'%')
+                                            ->select('id', 'image', 'name_' . $request['lang'] . ' as name')->get();
+        }else{
+            $categories      = Categories::select('id', 'image', 'name_' . $request['lang'] . ' as name')->get();
+        }
 
         $all_categories  = [];
         foreach ($categories as $category) {

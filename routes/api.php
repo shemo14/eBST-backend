@@ -18,6 +18,12 @@ Route::post('categories_search'  , 'Apis\CategoriesController@categories_search'
 // countries
 Route::post('countries'          , 'Apis\ApisController@countries');
 
+// products
+Route::post('show_product'       , 'Apis\ProductsController@show_product');
+
+// Fav
+Route::post('set_fav'            , 'Apis\FavsController@set_fav');
+Route::post('get_fav'            , 'Apis\FavsController@get_fav');
 
 Route::group(['middleware' => ['jwt']], function (){
     // ads
@@ -27,4 +33,11 @@ Route::group(['middleware' => ['jwt']], function (){
     Route::post('add_product'    , 'Apis\ProductsController@add_product');
     Route::post('edit_product'   , 'Apis\ProductsController@edit_product');
     Route::post('delete_image'   , 'Apis\ProductsController@delete_image');
+    Route::post('rate'           , 'Apis\ProductsController@rate');
+
+    // Rate
+    Route::post('set_rate'       , 'Apis\ProductsController@delete_image');
+
+    // user
+    Route::post('user_data'      , 'Apis\AuthController@user_data');
 });
