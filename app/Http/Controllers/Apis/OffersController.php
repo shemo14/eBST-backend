@@ -84,9 +84,11 @@ class OffersController extends Controller
                 'product_id'    => $offer->product_id,
                 'product_name'  => $offer->product->name,
                 'product_image' => url('images/products') . '/' . $offer->product->images()->first()->name,
-                'offers_count'  => offersCounter($offer->product_id),
-                'offer_type'    =>
+                'offers_count'  => offers_counter($offer->product_id),
+                'offer_type'    => offer_type($request['lang'], $offer->type)
             ];
         }
+
+        return returnResponse($allOffers, '', 200);
     }
 }

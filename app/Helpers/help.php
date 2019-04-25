@@ -193,20 +193,17 @@ function isLiked($product_id, $user_id, $device_id){
     return $isLiked;
 }
 
-function offersCounter($product_id){
+function offers_counter($product_id){
     $counter = Offers::where('product_id', $product_id)->count();
 
     return $counter;
 }
 
-function offerType($lang, $type){
+function offer_type($lang, $type){
     $translation = [
-        'ar' => [
-            'buy' => 'شراء',
-            'exchange' => 'مبادلة',
-            'exchange_price' => 'مبادلة مع فرق سعر',
-            'auction' => 'مزايدة'
-        ],
-//        'en'
+        'ar' => [ 'شراء', 'مبادلة'   , 'مبادلة مع فرق سعر' , 'مزايدة'  ],
+        'en' => [ 'buy' , 'exchange' , 'difference price'  , 'auction' ]
     ];
+
+    return $translation[$lang][$type-1];
 }
