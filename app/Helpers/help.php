@@ -8,6 +8,11 @@ use App\Models\Role;
 //use App\SmsEmailNotification;
 use App\Models\Permission;
 use App\Models\Report;
+use App\Models\Offers;
+
+
+use App\Models\Products;
+use App\Models\Favs;
 
 function Home()
 {
@@ -168,4 +173,40 @@ function save_img_base64($base64_img, $path)
     $imageName  = time() . '_' . rand(11111, 99999) . '.' . 'png';
     File::put($path. '/' . $imageName, $image);
     return $imageName;
+}
+
+function isLiked($product_id, $user_id, $device_id){
+    $isLiked = false;
+
+    if ($user_id != null){
+        if (Favs::where(['product_id' => $product_id, 'user_id' => $user_id])->exists()){
+            $isLiked = true;
+        }else
+            $isLiked = false;
+    }else{
+        if (Favs::where(['product_id' => $product_id, 'device_id' => $device_id])->exists()){
+            $isLiked = true;
+        }else
+            $isLiked = false;
+    }
+
+    return $isLiked;
+}
+
+function offersCounter($product_id){
+    $counter = Offers::where('product_id', $product_id)->count();
+
+    return $counter;
+}
+
+function offerType($lang, $type){
+    $translation = [
+        'ar' => [
+            'buy' => 'شراء',
+            'exchange' => 'مبادلة',
+            'exchange_price' => 'مبادلة مع فرق سعر',
+            'auction' => 'مزايدة'
+        ],
+//        'en'
+    ];
 }
