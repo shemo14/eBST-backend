@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2019 at 05:42 PM
+-- Generation Time: Apr 18, 2019 at 05:26 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.2.15
 
@@ -41,7 +41,8 @@ CREATE TABLE `ads` (
 --
 
 INSERT INTO `ads` (`id`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(3, 0, 2, '2019-04-11 13:56:48', '2019-04-11 13:56:48');
+(3, 0, 2, '2019-04-11 13:56:48', '2019-04-11 13:56:48'),
+(4, 0, 2, '2019-04-18 08:14:00', '2019-04-18 08:14:00');
 
 -- --------------------------------------------------------
 
@@ -97,7 +98,7 @@ INSERT INTO `categories` (`id`, `name_ar`, `name_en`, `image`, `created_at`, `up
 CREATE TABLE `comments` (
   `id` int(10) UNSIGNED NOT NULL,
   `comment` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `service_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -148,11 +149,20 @@ INSERT INTO `countries` (`id`, `name_ar`, `name_en`, `created_at`, `updated_at`)
 
 CREATE TABLE `favs` (
   `id` int(10) UNSIGNED NOT NULL,
-  `service_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
+  `device_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `favs`
+--
+
+INSERT INTO `favs` (`id`, `product_id`, `user_id`, `device_id`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, NULL, '2019-04-16 09:32:27', '2019-04-16 09:32:27'),
+(3, 1, NULL, '111111', '2019-04-16 09:36:43', '2019-04-16 09:36:43');
 
 -- --------------------------------------------------------
 
@@ -176,12 +186,14 @@ CREATE TABLE `images` (
 INSERT INTO `images` (`id`, `name`, `type`, `key`, `created_at`, `updated_at`) VALUES
 (1, '1554998208_21565.png', 'ads', 3, '2019-04-11 13:56:48', '2019-04-11 13:56:48'),
 (2, '1554998208_96780.png', 'ads', 3, '2019-04-11 13:56:48', '2019-04-11 13:56:48'),
-(3, '1555253184_38250.png', 'product', 3, '2019-04-14 12:46:24', '2019-04-14 12:46:24'),
+(3, '1555253184_38250.png', 'product', 1, '2019-04-14 12:46:24', '2019-04-14 12:46:24'),
 (4, '1555253184_27377.png', 'product', 3, '2019-04-14 12:46:24', '2019-04-14 12:46:24'),
 (5, '1555253204_39913.png', 'product', 4, '2019-04-14 12:46:44', '2019-04-14 12:46:44'),
 (6, '1555253204_47172.png', 'product', 4, '2019-04-14 12:46:44', '2019-04-14 12:46:44'),
 (7, '1555253219_89158.png', 'product', 5, '2019-04-14 12:46:59', '2019-04-14 12:46:59'),
-(8, '1555253219_85171.png', 'product', 5, '2019-04-14 12:46:59', '2019-04-14 12:46:59');
+(8, '1555253219_85171.png', 'product', 5, '2019-04-14 12:46:59', '2019-04-14 12:46:59'),
+(9, '1555582440_78608.png', 'ads', 4, '2019-04-18 08:14:00', '2019-04-18 08:14:00'),
+(10, '1555582440_68498.png', 'ads', 4, '2019-04-18 08:14:00', '2019-04-18 08:14:00');
 
 -- --------------------------------------------------------
 
@@ -352,11 +364,18 @@ INSERT INTO `products` (`id`, `name`, `desc`, `category_id`, `price`, `type`, `e
 CREATE TABLE `rates` (
   `id` int(10) UNSIGNED NOT NULL,
   `rate` double(8,2) NOT NULL,
-  `service_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rates`
+--
+
+INSERT INTO `rates` (`id`, `rate`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(3, 4.00, 1, 2, '2019-04-16 11:56:14', '2019-04-16 11:56:14');
 
 -- --------------------------------------------------------
 
@@ -515,8 +534,8 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `comments_service_id_foreign` (`service_id`),
-  ADD KEY `comments_user_id_foreign` (`user_id`);
+  ADD KEY `comments_user_id_foreign` (`user_id`),
+  ADD KEY `comments_service_id_foreign` (`product_id`);
 
 --
 -- Indexes for table `content_reports`
@@ -536,8 +555,8 @@ ALTER TABLE `countries`
 --
 ALTER TABLE `favs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `favs_service_id_foreign` (`service_id`),
-  ADD KEY `favs_user_id_foreign` (`user_id`);
+  ADD KEY `favs_user_id_foreign` (`user_id`),
+  ADD KEY `favs_service_id_foreign` (`product_id`);
 
 --
 -- Indexes for table `images`
@@ -584,8 +603,8 @@ ALTER TABLE `products`
 --
 ALTER TABLE `rates`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `rates_service_id_foreign` (`service_id`),
-  ADD KEY `rates_user_id_foreign` (`user_id`);
+  ADD KEY `rates_user_id_foreign` (`user_id`),
+  ADD KEY `rates_service_id_foreign` (`product_id`);
 
 --
 -- Indexes for table `reports`
@@ -630,7 +649,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `app_settings`
@@ -666,13 +685,13 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `favs`
 --
 ALTER TABLE `favs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -702,7 +721,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `rates`
 --
 ALTER TABLE `rates`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `reports`
@@ -748,7 +767,7 @@ ALTER TABLE `ads`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_service_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
@@ -761,7 +780,7 @@ ALTER TABLE `content_reports`
 -- Constraints for table `favs`
 --
 ALTER TABLE `favs`
-  ADD CONSTRAINT `favs_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `favs_service_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `favs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
@@ -787,7 +806,7 @@ ALTER TABLE `products`
 -- Constraints for table `rates`
 --
 ALTER TABLE `rates`
-  ADD CONSTRAINT `rates_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `rates_service_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `rates_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --

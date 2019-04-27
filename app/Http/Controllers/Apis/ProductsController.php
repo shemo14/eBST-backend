@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Products;
 use App\Models\Images;
+use App\Models\Rates;
+use App\Models\Comments;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductsController extends Controller
 {
@@ -137,4 +141,44 @@ class ProductsController extends Controller
             return returnResponse(null, $msg, 200);
         }
     }
+
+    public function rate(Request $request){
+        $rules = [
+            'product_id'    => 'required',
+            'rate'          => 'required',
+            'lang'          => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        if ($is_rated = Rates::where(['user_id' => Auth::user()->id, 'product_id' => $request['product_id']])->first()){
+            $is_rated->rate = $request['rate'];
+            $is_rated->update();
+
+            $msg      = $request['lang'] == 'ar' ? 'تم التقيم بنجاح' : 'rated successfully';
+            $avg_rate = Rates::where('product_id', $request['product_id'])->avg('rate');
+            return returnResponse(['rate' => $avg_rate], $msg, 200);
+
+        }else{
+            $rate               = new Rates();
+            $rate->user_id      = Auth::user()->id;
+            $rate->rate         = $request['rate'];
+            $rate->product_id   = $request['product_id'];
+            if ($rate->save()){
+                $avg_rate = $rate->avg('rate');
+                $msg      = $request['lang'] == 'ar' ? 'تم التقيم بنجاح' : 'rated successfully';
+                return returnResponse(['rate' => $avg_rate], $msg, 200);
+            }else{
+                $msg      = $request['lang'] == 'ar' ? 'لم يتم التقيم بعد ,الرجاء المحاولة مرة اخري' : 'something went wrong, plz try again';
+                return returnResponse(null, $msg, 400);
+            }
+        }
+
+    }
+
+
 }
