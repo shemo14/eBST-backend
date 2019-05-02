@@ -53,4 +53,11 @@ Route::group(['middleware' => ['jwt']], function (){
     // Offers
     Route::post('set_offer'      , 'Apis\OffersController@set_offer');
     Route::post('offers'         , 'Apis\OffersController@offers');
+    Route::post('product_offers' , 'Apis\OffersController@product_offers');
+    Route::post('offer_action'   , 'Apis\OffersController@offer_action');
+    Route::post('offer_details'  , 'Apis\OffersController@offer_details');
+    Route::post('delete_offer'   , 'Apis\OffersController@delete_offer');
+
+    // Notifications
+    Route::post('notifications'   , 'Apis\NotifyController@notifications');
 });

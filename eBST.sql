@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2019 at 11:52 AM
+-- Generation Time: May 02, 2019 at 05:20 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.2.15
 
@@ -324,8 +324,8 @@ CREATE TABLE `notifications` (
   `body_ar` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `body_en` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `service_id` int(11) NOT NULL,
-  `ads_id` int(11) NOT NULL,
+  `product_id` int(10) UNSIGNED DEFAULT NULL,
+  `offer_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -342,6 +342,7 @@ CREATE TABLE `offers` (
   `status` int(11) NOT NULL DEFAULT '0',
   `product_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
+  `price` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -350,10 +351,10 @@ CREATE TABLE `offers` (
 -- Dumping data for table `offers`
 --
 
-INSERT INTO `offers` (`id`, `type`, `status`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 1, 2, '2019-04-23 12:36:16', '2019-04-23 12:36:16'),
-(4, 2, 0, 1, 2, '2019-04-23 12:41:47', '2019-04-23 12:41:47'),
-(5, 2, 0, 1, 2, '2019-04-23 12:43:15', '2019-04-23 12:43:15');
+INSERT INTO `offers` (`id`, `type`, `status`, `product_id`, `user_id`, `price`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 2, NULL, '2019-04-23 12:36:16', '2019-04-30 06:37:09'),
+(4, 3, 0, 1, 2, NULL, '2019-04-23 12:41:47', '2019-04-23 12:41:47'),
+(5, 2, 0, 1, 2, NULL, '2019-04-23 12:43:15', '2019-04-23 12:43:15');
 
 -- --------------------------------------------------------
 
@@ -719,7 +720,9 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `notifications_user_id_foreign` (`user_id`);
+  ADD KEY `notifications_user_id_foreign` (`user_id`),
+  ADD KEY `offer_id` (`offer_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `offers`
@@ -996,6 +999,8 @@ ALTER TABLE `favs`
 -- Constraints for table `notifications`
 --
 ALTER TABLE `notifications`
+  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `notifications_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
