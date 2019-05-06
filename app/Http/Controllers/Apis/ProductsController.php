@@ -2,17 +2,78 @@
 
 namespace App\Http\Controllers\Apis;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Products;
 use App\Models\Images;
 use App\Models\Rates;
-use App\Models\Comments;
 use Illuminate\Support\Facades\Auth;
-
+use JWTAuth;
+use App\Models\AppReports;
 
 class ProductsController extends Controller
 {
+    public function show_product(Request $request){
+        $rules = [
+            'id'          => 'required',
+            'device_id'   => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        if (!$request->header('Authorization') && !$request['device_id'])
+            return returnResponse(null, 'plz, enter auth token or device id to set fav', 400);
+
+        $product        = Products::find($request['id']);
+        $images         = $product->images()->get();
+        $productImages  = [];
+
+        foreach ($images as $image) {
+            $productImages[] = url('images/products') . '/' . $image->name;
+        }
+
+        $comments           = $product->comments()->get();
+        $productComments    = [];
+
+        foreach ($comments as $comment) {
+            $productComments[] = [
+                'id'           => $comment->id,
+                'comment'      => $comment->comment,
+                'user_name'    => $comment->user->name,
+                'user_avatar'  => url('images/users') . '/' . $comment->user->avatar
+            ];
+        }
+
+        $user_id   = null;
+        $device_id = null;
+        if ($request->header('Authorization')){
+            $user       = JWTAuth::parseToken()->authenticate();
+            $user_id    = Auth::user()->id;
+        }else
+            $device_id  = $request['device_id'];
+
+        $productData = [
+            'id'            => $product->id,
+            'name'          => $product->name,
+            'desc'          => $product->desc,
+            'price'         => $product->price,
+            'rate'          => $product->rate()->avg('rate'),
+            'provider_name' => $product->user->name,
+            'provider_id'   => $product->user->id,
+            'views'         => $product->views()->where('device_id', $request['device_id'])->count(),
+            'isLiked'       => isLiked($product->id, $user_id, $device_id),
+            'images'        => $productImages,
+            'comments'      => $productComments
+        ];
+
+        return returnResponse($productData, '', 200);
+    }
+
     public function add_product(Request $request){
         $rules = [
             'images'        => 'required',
@@ -60,7 +121,6 @@ class ProductsController extends Controller
         }
 
     }
-
 
     public function edit_product(Request $request){
         $rules = [
@@ -162,7 +222,6 @@ class ProductsController extends Controller
             $msg      = $request['lang'] == 'ar' ? 'تم التقيم بنجاح' : 'rated successfully';
             $avg_rate = Rates::where('product_id', $request['product_id'])->avg('rate');
             return returnResponse(['rate' => $avg_rate], $msg, 200);
-
         }else{
             $rate               = new Rates();
             $rate->user_id      = Auth::user()->id;
@@ -180,5 +239,125 @@ class ProductsController extends Controller
 
     }
 
+    public function products_search(Request $request){
+        $rules = [
+            'category_id' => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        if (!$request->header('Authorization') && !$request['device_id'])
+            return returnResponse(null, 'plz, enter auth token or device id to set fav', 400);
+
+        $user_id   = null;
+        $device_id = null;
+        if ($request->header('Authorization')){
+            $user       = JWTAuth::parseToken()->authenticate();
+            $user_id    = Auth::user()->id;
+        }else
+            $device_id  = $request['device_id'];
+
+        $products    = Products::where('category_id', $request['category_id'])->where('name', 'LIKE', '%' . $request['search'] . '%')->get();
+        $allProducts = [];
+
+        foreach ($products as $product) {
+            $allProducts[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'image'    => url('images/products') . '/' . $product->images()->first()->name,
+                'rate'     => $product->rate()->avg('rate'),
+                'price'    => $product->price,
+                'isLiked'  => isLiked($product->id, $user_id, $device_id)
+            ];
+        }
+
+        return returnResponse($allProducts, '', 200);
+    }
+
+    public function products_filter(Request $request){
+        $rules = [
+            'category_id'   => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        if (!$request->header('Authorization') && !$request['device_id'])
+            return returnResponse(null, 'plz, enter auth token or device id to set fav', 400);
+
+        $user_id   = null;
+        $device_id = null;
+        if ($request->header('Authorization')){
+            $user       = JWTAuth::parseToken()->authenticate();
+            $user_id    = Auth::user()->id;
+        }else
+            $device_id  = $request['device_id'];
+
+        $products = Products::query();
+        if ($request['country_id']){
+            $usersIds = User::where('country_id', $request['country_id'])->get(['id']);
+            $products = $products->whereIn('products.user_id', $usersIds);
+        }
+
+        if ($request['type']){
+            $products = $products->where('type', $request['type']);
+        }
+
+        if ($request['rate']){
+            $products = $products->join('rates', 'products.id', '=', 'rates.product_id')
+                                    ->select('products.id', 'name', 'price')
+                                    ->selectRaw('AVG(rates.rate) AS rate')
+                                    ->groupBy('products.id')
+                                    ->havingRaw('AVG(rates.rate) = ?', [$request['rate']]);
+        }
+
+        $products    = $products->where('category_id', $request['category_id'])->get();
+        $allProducts = [];
+
+        foreach ($products as $product) {
+            $allProducts[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'image'    => url('images/products') . '/' . $product->images()->first()->name,
+                'rate'     => $product->rate()->avg('rate'),
+                'price'    => $product->price,
+                'isLiked'  => isLiked($product->id, $user_id, $device_id)
+            ];
+        }
+
+        return returnResponse($allProducts, '', 200);
+
+    }
+
+    public function product_report(Request $request){
+        $rules = [
+            'product_id'   => 'required',
+            'lang'         => 'required',
+            'report'       => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        $add                = new AppReports();
+        $add->user_id       = Auth::user()->id;
+        $add->comment_id    = $request['product_id'];
+        $add->report        = $request['report'];
+
+        if ($add->save()){
+            $msg = $request['lang'] == 'ar' ? 'تم ارسال الابلاغ بنجاح' : 'report sent successfully';
+            return returnResponse(null, $msg, 200);
+        }
+    }
 
 }

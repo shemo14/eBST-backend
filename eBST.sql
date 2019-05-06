@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2019 at 05:26 PM
+-- Generation Time: Apr 25, 2019 at 11:52 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.2.15
 
@@ -47,6 +47,30 @@ INSERT INTO `ads` (`id`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `app_reports`
+--
+
+CREATE TABLE `app_reports` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `report` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` int(10) UNSIGNED DEFAULT NULL,
+  `comment_id` int(10) UNSIGNED DEFAULT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `app_reports`
+--
+
+INSERT INTO `app_reports` (`id`, `report`, `product_id`, `comment_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'test report', NULL, 1, 2, '2019-04-23 07:14:30', '2019-04-23 07:14:30'),
+(2, 'test  product report', NULL, 1, 2, '2019-04-23 07:40:21', '2019-04-23 07:40:21');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `app_settings`
 --
 
@@ -66,6 +90,20 @@ INSERT INTO `app_settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VA
 (1, 'site_name', 'اوامر الشبكة', '2019-03-07 09:09:29', '2019-03-07 09:09:29'),
 (2, 'about_ar', 'وصف التطبيق بالعربية', NULL, NULL),
 (3, 'about_en', 'app desc of app in English', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auctions`
+--
+
+CREATE TABLE `auctions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `price` double(8,2) NOT NULL,
+  `offer_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -104,6 +142,13 @@ CREATE TABLE `comments` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `comment`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'test comment', 1, 2, '2019-04-23 06:28:13', '2019-04-23 06:28:13');
+
 -- --------------------------------------------------------
 
 --
@@ -140,6 +185,30 @@ CREATE TABLE `countries` (
 
 INSERT INTO `countries` (`id`, `name_ar`, `name_en`, `created_at`, `updated_at`) VALUES
 (4, 'مصر', 'Egypt', '2019-04-14 11:33:31', '2019-04-14 11:33:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exchanges`
+--
+
+CREATE TABLE `exchanges` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extra_price` double(8,2) DEFAULT NULL,
+  `offer_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `exchanges`
+--
+
+INSERT INTO `exchanges` (`id`, `name`, `desc`, `extra_price`, `offer_id`, `created_at`, `updated_at`) VALUES
+(3, 'iphone', 'desc of my exchange iphone', NULL, 4, '2019-04-23 12:41:47', '2019-04-23 12:41:47'),
+(4, 'iphone', 'desc of my exchange iphone', NULL, 5, '2019-04-23 12:43:15', '2019-04-23 12:43:15');
 
 -- --------------------------------------------------------
 
@@ -190,10 +259,16 @@ INSERT INTO `images` (`id`, `name`, `type`, `key`, `created_at`, `updated_at`) V
 (4, '1555253184_27377.png', 'product', 3, '2019-04-14 12:46:24', '2019-04-14 12:46:24'),
 (5, '1555253204_39913.png', 'product', 4, '2019-04-14 12:46:44', '2019-04-14 12:46:44'),
 (6, '1555253204_47172.png', 'product', 4, '2019-04-14 12:46:44', '2019-04-14 12:46:44'),
-(7, '1555253219_89158.png', 'product', 5, '2019-04-14 12:46:59', '2019-04-14 12:46:59'),
+(7, '1555253219_89158.png', 'product', 2, '2019-04-14 12:46:59', '2019-04-14 12:46:59'),
 (8, '1555253219_85171.png', 'product', 5, '2019-04-14 12:46:59', '2019-04-14 12:46:59'),
 (9, '1555582440_78608.png', 'ads', 4, '2019-04-18 08:14:00', '2019-04-18 08:14:00'),
-(10, '1555582440_68498.png', 'ads', 4, '2019-04-18 08:14:00', '2019-04-18 08:14:00');
+(10, '1555582440_68498.png', 'ads', 4, '2019-04-18 08:14:00', '2019-04-18 08:14:00'),
+(11, '1555845026_88231.png', 'product', 6, '2019-04-21 09:10:26', '2019-04-21 09:10:26'),
+(12, '1555845026_97965.png', 'product', 6, '2019-04-21 09:10:26', '2019-04-21 09:10:26'),
+(13, '1556030507_21830.png', 'exchange', 3, '2019-04-23 12:41:47', '2019-04-23 12:41:47'),
+(14, '1556030507_79428.png', 'exchange', 3, '2019-04-23 12:41:47', '2019-04-23 12:41:47'),
+(15, '1556030595_82275.png', 'exchange', 4, '2019-04-23 12:43:15', '2019-04-23 12:43:15'),
+(16, '1556030595_98743.png', 'exchange', 4, '2019-04-23 12:43:15', '2019-04-23 12:43:15');
 
 -- --------------------------------------------------------
 
@@ -229,7 +304,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2019_03_10_111840_create_favs_table', 6),
 (16, '2019_03_10_112800_create_comments_table', 6),
 (17, '2019_04_14_094700_create_countries_table', 7),
-(18, '2019_04_14_134623_create_products_table', 8);
+(18, '2019_04_14_134623_create_products_table', 8),
+(19, '2019_04_22_093714_create_views_table', 9),
+(20, '2019_04_23_084644_create_app_reports_table', 10),
+(21, '2019_04_23_095309_create_offers_table', 11),
+(22, '2019_04_23_100426_create_auctions_table', 12),
+(23, '2019_04_23_101507_create_exchanges_table', 13);
 
 -- --------------------------------------------------------
 
@@ -249,6 +329,31 @@ CREATE TABLE `notifications` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offers`
+--
+
+CREATE TABLE `offers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `type` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`id`, `type`, `status`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 0, 1, 2, '2019-04-23 12:36:16', '2019-04-23 12:36:16'),
+(4, 2, 0, 1, 2, '2019-04-23 12:41:47', '2019-04-23 12:41:47'),
+(5, 2, 0, 1, 2, '2019-04-23 12:43:15', '2019-04-23 12:43:15');
 
 -- --------------------------------------------------------
 
@@ -353,7 +458,8 @@ INSERT INTO `products` (`id`, `name`, `desc`, `category_id`, `price`, `type`, `e
 (2, 'test', 'desc', 1, 100.00, 1, 20.00, 'test2', 200.00, 2, '2019-04-14 12:44:46', '2019-04-14 12:44:46'),
 (3, 'test', 'desc', 1, 100.00, 1, 20.00, 'test2', 200.00, 2, '2019-04-14 12:46:24', '2019-04-14 12:46:24'),
 (4, 'test', 'desc', 1, 100.00, 1, 20.00, 'test2', NULL, 2, '2019-04-14 12:46:44', '2019-04-14 12:46:44'),
-(5, 'test', 'desc', 1, 100.00, 1, NULL, 'test2', NULL, 2, '2019-04-14 12:46:59', '2019-04-14 12:46:59');
+(5, 'test', 'desc', 1, 100.00, 1, NULL, 'test2', NULL, 2, '2019-04-14 12:46:59', '2019-04-14 12:46:59'),
+(6, 'test', 'desc', 1, 100.00, 1, NULL, 'test2', NULL, 2, '2019-04-21 09:10:25', '2019-04-21 09:10:25');
 
 -- --------------------------------------------------------
 
@@ -483,6 +589,7 @@ CREATE TABLE `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_id` int(10) UNSIGNED NOT NULL,
   `code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `avatar` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png',
   `active` int(11) NOT NULL DEFAULT '0',
@@ -502,9 +609,23 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `code`, `avatar`, `active`, `checked`, `role`, `lat`, `lng`, `type`, `device_id`, `lang`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@admin.com', '$2y$10$rgPC9pcjRqWtZzF/ZFSni.ikfFG/zLUC9MrLRXRDNhaIrLI7PNrq2', '01024963844', NULL, 'default.png', 1, 1, 1, NULL, NULL, 0, NULL, 'ar', NULL, '2019-03-07 09:14:04', '2019-03-07 09:17:59'),
-(2, 'shams', 'shams@email.com', '$2y$10$S1LVuHHRzHMz7Y.5JXike.sfHx0B0gDO8x7OMgUJqoD.eFoTIqHr6', '0102345678', '2437', 'default.png', 1, 0, 0, NULL, NULL, 0, '112546988', 'ar', NULL, '2019-04-10 12:13:12', '2019-04-11 06:18:18');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `country_id`, `code`, `avatar`, `active`, `checked`, `role`, `lat`, `lng`, `type`, `device_id`, `lang`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@admin.com', '$2y$10$rgPC9pcjRqWtZzF/ZFSni.ikfFG/zLUC9MrLRXRDNhaIrLI7PNrq2', '01024963844', 4, NULL, 'default.png', 1, 1, 1, NULL, NULL, 0, NULL, 'ar', NULL, '2019-03-07 09:14:04', '2019-03-07 09:17:59'),
+(2, 'shams', 'shams@email.com', '$2y$10$S1LVuHHRzHMz7Y.5JXike.sfHx0B0gDO8x7OMgUJqoD.eFoTIqHr6', '0102345678', 4, '2437', 'default.png', 1, 0, 0, NULL, NULL, 0, '112546988', 'ar', NULL, '2019-04-10 12:13:12', '2019-04-11 06:18:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `views`
+--
+
+CREATE TABLE `views` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `device_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -518,10 +639,26 @@ ALTER TABLE `ads`
   ADD KEY `ads_user_id_foreign` (`user_id`);
 
 --
+-- Indexes for table `app_reports`
+--
+ALTER TABLE `app_reports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `app_reports_product_id_foreign` (`product_id`),
+  ADD KEY `app_reports_comment_id_foreign` (`comment_id`),
+  ADD KEY `app_reports_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `app_settings`
 --
 ALTER TABLE `app_settings`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `auctions`
+--
+ALTER TABLE `auctions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `auctions_offer_id_foreign` (`offer_id`);
 
 --
 -- Indexes for table `categories`
@@ -551,6 +688,13 @@ ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `exchanges`
+--
+ALTER TABLE `exchanges`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `exchanges_offer_id_foreign` (`offer_id`);
+
+--
 -- Indexes for table `favs`
 --
 ALTER TABLE `favs`
@@ -576,6 +720,14 @@ ALTER TABLE `migrations`
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
   ADD KEY `notifications_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `offers`
+--
+ALTER TABLE `offers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `offers_product_id_foreign` (`product_id`),
+  ADD KEY `offers_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `password_resets`
@@ -642,6 +794,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_phone_unique` (`phone`);
 
 --
+-- Indexes for table `views`
+--
+ALTER TABLE `views`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `views_product_id_foreign` (`product_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -652,10 +811,22 @@ ALTER TABLE `ads`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `app_reports`
+--
+ALTER TABLE `app_reports`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `app_settings`
 --
 ALTER TABLE `app_settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `auctions`
+--
+ALTER TABLE `auctions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -667,7 +838,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `content_reports`
@@ -682,6 +853,12 @@ ALTER TABLE `countries`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `exchanges`
+--
+ALTER TABLE `exchanges`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `favs`
 --
 ALTER TABLE `favs`
@@ -691,19 +868,25 @@ ALTER TABLE `favs`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `offers`
+--
+ALTER TABLE `offers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -715,7 +898,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rates`
@@ -754,6 +937,12 @@ ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `views`
+--
+ALTER TABLE `views`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -762,6 +951,20 @@ ALTER TABLE `users`
 --
 ALTER TABLE `ads`
   ADD CONSTRAINT `ads_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `app_reports`
+--
+ALTER TABLE `app_reports`
+  ADD CONSTRAINT `app_reports_comment_id_foreign` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_reports_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `app_reports_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `auctions`
+--
+ALTER TABLE `auctions`
+  ADD CONSTRAINT `auctions_offer_id_foreign` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `comments`
@@ -777,6 +980,12 @@ ALTER TABLE `content_reports`
   ADD CONSTRAINT `content_reports_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `exchanges`
+--
+ALTER TABLE `exchanges`
+  ADD CONSTRAINT `exchanges_offer_id_foreign` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `favs`
 --
 ALTER TABLE `favs`
@@ -788,6 +997,13 @@ ALTER TABLE `favs`
 --
 ALTER TABLE `notifications`
   ADD CONSTRAINT `notifications_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `offers`
+--
+ALTER TABLE `offers`
+  ADD CONSTRAINT `offers_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `offers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `permissions`
@@ -820,6 +1036,12 @@ ALTER TABLE `reports`
 --
 ALTER TABLE `services`
   ADD CONSTRAINT `services_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `views`
+--
+ALTER TABLE `views`
+  ADD CONSTRAINT `views_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
