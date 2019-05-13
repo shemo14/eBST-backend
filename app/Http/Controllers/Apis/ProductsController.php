@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Apis;
 
+use App\Models\Views;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +18,8 @@ class ProductsController extends Controller
     public function show_product(Request $request){
         $rules = [
             'id'          => 'required',
-            'device_id'   => 'required',
+            'lang'        => 'required',
+         //   'device_id'   => 'required',
         ];
 
         $validator  = validator($request->all(), $rules);
@@ -58,20 +60,86 @@ class ProductsController extends Controller
             $device_id  = $request['device_id'];
 
         $productData = [
-            'id'            => $product->id,
-            'name'          => $product->name,
-            'desc'          => $product->desc,
-            'price'         => $product->price,
-            'rate'          => $product->rate()->avg('rate'),
-            'provider_name' => $product->user->name,
-            'provider_id'   => $product->user->id,
-            'views'         => $product->views()->where('device_id', $request['device_id'])->count(),
-            'isLiked'       => isLiked($product->id, $user_id, $device_id),
+            'details'         => [
+                'id'                => $product->id,
+                'name'              => $product->name,
+                'desc'              => $product->desc,
+                'type'              => $product->type,
+                'exchange_price'    => $product->exchange_price,
+                'exchange_product'  => $product->exchange_product,
+                'max_price'         => $product->max_price,
+                'price'             => $product->price,
+                'category_id'       => $product->category_id,
+                'rate'              => $product->rate()->avg('rate'),
+                'provider_name'     => $product->user->name,
+                'provider_id'       => $product->user->id,
+                'views'             => $product->views()->where('device_id', $request['device_id'])->count(),
+                'isLiked'           => isLiked($product->id, $user_id, $device_id),
+            ],
             'images'        => $productImages,
             'comments'      => $productComments
         ];
 
         return returnResponse($productData, '', 200);
+    }
+
+    public function my_products(Request $request){
+        $rules = [
+            'lang'   => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        $user           = Auth::user();
+        $country        = $user->country()->select('name_' . $request['lang'] . ' as name')->first()->name;
+        $products       = Products::where('user_id', $user->id)->get();
+        $productsIds    = Products::where('user_id', $user->id)->get(['id']);
+        $rate           = Rates::whereIn('product_id', $productsIds)->avg('rate');
+        $views          = Views::whereIn('product_id', $productsIds)->count();
+        $all_products   = [];
+
+        foreach ($products as $product) {
+            $all_products[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'image'    => url('images/products') . '/' . $product->images()->first()->name,
+                'rate'     => $product->rate()->avg('rate'),
+                'price'    => $product->price,
+                'isLiked'  => isLiked($product->id, $user->id, null)
+            ];
+        }
+
+        $data = [
+            'rate'     => $rate,
+            'views'    => $views,
+            'country'  => $country,
+            'products' => $all_products
+        ];
+
+        return returnResponse($data, '', 200);
+    }
+
+    public function search_my_products(Request $request){
+        $user_id     = Auth::user()->id;
+        $products    = Products::where('user_id', $user_id)->where('name', 'LIKE', '%' . $request['search'] . '%')->get();
+        $allProducts = [];
+
+        foreach ($products as $product) {
+            $allProducts[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'image'    => url('images/products') . '/' . $product->images()->first()->name,
+                'rate'     => $product->rate()->avg('rate'),
+                'price'    => $product->price,
+                'isLiked'  => isLiked($product->id, $user_id, null)
+            ];
+        }
+
+        return returnResponse($allProducts, '', 200);
     }
 
     public function add_product(Request $request){
@@ -154,7 +222,6 @@ class ProductsController extends Controller
         $edit->category_id       = $request['category_id'];
 
         if ($edit->save()){
-
             if (count($images) > 0){
                 foreach ($images as $image) {
                     $img        = new Images();
@@ -170,6 +237,41 @@ class ProductsController extends Controller
         }else{
             $msg  = $request['lang'] == 'ar' ? 'لم يتم التعديل بعد ,الرجاء المحاولة مره اخري' : 'something went wrong, Plz try again';
             return returnResponse(null, $msg, 400);
+        }
+    }
+
+    public function delete_product(Request $request){
+        $rules = [
+            'product_id'    => 'required',
+            'lang'          => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        $product = Products::find($request['product_id']);
+
+        if ($product->delete()){
+            $user = Auth::user();
+            $products       = Products::where('user_id', $user->id)->get();
+            $all_products   = [];
+
+            foreach ($products as $product) {
+                $all_products[] = [
+                    'id'       => $product->id,
+                    'name'     => $product->name,
+                    'image'    => url('images/products') . '/' . $product->images()->first()->name,
+                    'rate'     => $product->rate()->avg('rate'),
+                    'price'    => $product->price,
+                    'isLiked'  => isLiked($product->id, $user->id, null)
+                ];
+            }
+
+            $msg  = $request['lang'] == 'ar' ? 'تم حذف المنتج بنجاح' : 'product deleted successfully';
+            return returnResponse($all_products, $msg, 200);
         }
     }
 
@@ -242,6 +344,7 @@ class ProductsController extends Controller
     public function products_search(Request $request){
         $rules = [
             'category_id' => 'required',
+            'type'        => 'required',
         ];
 
         $validator  = validator($request->all(), $rules);
@@ -261,7 +364,15 @@ class ProductsController extends Controller
         }else
             $device_id  = $request['device_id'];
 
-        $products    = Products::where('category_id', $request['category_id'])->where('name', 'LIKE', '%' . $request['search'] . '%')->get();
+        $type = [];
+        if ($request['type'] == 1)
+            $type = [1];
+        elseif ($request['type'] == 2)
+            $type = [2, 3, 4];
+        elseif ($request['type'] == 3)
+            $type = [3, 4];
+
+        $products    = Products::whereIn('type', $type)->where('category_id', $request['category_id'])->where('name', 'LIKE', '%' . $request['search'] . '%')->get();
         $allProducts = [];
 
         foreach ($products as $product) {
@@ -281,6 +392,7 @@ class ProductsController extends Controller
     public function products_filter(Request $request){
         $rules = [
             'category_id'   => 'required',
+            'product_type'  => 'required',
         ];
 
         $validator  = validator($request->all(), $rules);
@@ -318,7 +430,15 @@ class ProductsController extends Controller
                                     ->havingRaw('AVG(rates.rate) = ?', [$request['rate']]);
         }
 
-        $products    = $products->where('category_id', $request['category_id'])->get();
+        $type = [];
+        if ($request['product_type'] == 1)
+            $type = [1];
+        elseif ($request['product_type'] == 2)
+            $type = [2, 3, 4];
+        elseif ($request['product_type'] == 3)
+            $type = [3, 4];
+
+        $products    = $products->whereIn('type', $type)->where('category_id', $request['category_id'])->get();
         $allProducts = [];
 
         foreach ($products as $product) {

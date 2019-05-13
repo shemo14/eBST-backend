@@ -72,6 +72,7 @@ class CategoriesController extends Controller
     public function category_products(Request $request){
         $rules = [
             'category_id' => 'required',
+            'type'        => 'required',
         ];
 
         $validator  = validator($request->all(), $rules);
@@ -91,7 +92,15 @@ class CategoriesController extends Controller
         }else
             $device_id  = $request['device_id'];
 
-        $products    = Products::where('category_id', $request['category_id'])->get();
+        $type = [];
+        if ($request['type'] == 1)
+            $type = [1];
+        elseif ($request['type'] == 2)
+            $type = [2, 3, 4];
+        elseif ($request['type'] == 3)
+            $type = [3, 4];
+
+        $products    = Products::whereIn('type', $type)->where('category_id', $request['category_id'])->get();
         $allProducts = [];
 
         foreach ($products as $product) {

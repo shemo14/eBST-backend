@@ -52,4 +52,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return appPath() . '/images/users/' . $this->avatar;
     }
+
+    public function country(){
+        return $this->belongsTo('App\Models\Countries','country_id','id');
+    }
 }

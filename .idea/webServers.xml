@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="01e6d5ae-fb4e-40cc-907a-17a04f7f6561" name="ana-b5er" url="http://45.76.159.126">
-        <fileTransfer host="45.76.159.126" port="22" rootFolder="/var/www/html/old" accessType="SFTP">
+        <fileTransfer host="45.76.159.126" port="22" rootFolder="/var/www/html/" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
@@ -12,6 +12,22 @@
       </webServer>
       <webServer id="06f083ca-8c06-4d30-a390-f367974a286a" name="t7ader" url="http://c.mta.sa">
         <fileTransfer host="c.mta.sa" port="21" rootFolder="/public_html">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="aefa8e01-6e43-4611-8726-da75ada9af85" name="shams" url="http://shams.arabsdesign.com">
+        <fileTransfer host="shams.arabsdesign.com" port="21" rootFolder="/public_html">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="14b8b353-8b52-487c-9ce3-8086b9cbcdfc" name="rahat" url="http://rahat.aait-sa.com">
+        <fileTransfer host="rahat.aait-sa.com" port="21" rootFolder="/public_html">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

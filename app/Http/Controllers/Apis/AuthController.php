@@ -36,9 +36,30 @@ class AuthController extends Controller
 
 
         $user          = auth()->user();
-        $user['token'] = $token;
+        $userData      = [
+            'id'            => $user->id,
+            'name'          => $user->name,
+            'email'         => $user->email,
+            'phone'         => $user->phone,
+            'desc'          => $user->desc,
+            'country_id'    => $user->country_id,
+            'code'          => $user->code,
+            'avatar'        => url('images/users') . '/' . $user->avatar,
+            'active'        => $user->active,
+            'checked'       => $user->checked,
+            'role'          => $user->role,
+            'lat'           => $user->lat,
+            'lng'           => $user->lng,
+            'type'          => $user->type,
+            'device_id'     => $user->device_id,
+            'lang'          => $user->lang,
+            'created_at'    => $user->created_at,
+            'updated_at'    => $user->updated_at,
+            'token'         => $token,
+        ];
+
         $msg           = $request['lang'] == 'ar' ? 'تم تسجيل الدخول بنجاح' : 'user login successfully';
-        return returnResponse($user, $msg, 200);
+        return returnResponse($userData, $msg, 200);
     }
 
     public function register(Request $request){
@@ -132,7 +153,27 @@ class AuthController extends Controller
     public function user_data(Request $request){
         $user           = auth()->user();
         $token          = $request->header('Authorization');
-        $user['token']  = $token;
-        return returnResponse($user, '', 200);
+        $userData       = [
+            'id'            => $user->id,
+            'name'          => $user->name,
+            'email'         => $user->email,
+            'desc'          => $user->desc,
+            'phone'         => $user->phone,
+            'country_id'    => $user->country_id,
+            'code'          => $user->code,
+            'avatar'        => url('images/users') . '/' . $user->avatar,
+            'active'        => $user->active,
+            'checked'       => $user->checked,
+            'role'          => $user->role,
+            'lat'           => $user->lat,
+            'lng'           => $user->lng,
+            'type'          => $user->type,
+            'device_id'     => $user->device_id,
+            'lang'          => $user->lang,
+            'created_at'    => $user->created_at,
+            'updated_at'    => $user->updated_at,
+            'token'         => $token,
+        ];
+        return returnResponse($userData, '', 200);
     }
 }
