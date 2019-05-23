@@ -19,7 +19,7 @@ class ProductsController extends Controller
         $rules = [
             'id'          => 'required',
             'lang'        => 'required',
-         //   'device_id'   => 'required',
+            //   'device_id'   => 'required',
         ];
 
         $validator  = validator($request->all(), $rules);
@@ -69,8 +69,8 @@ class ProductsController extends Controller
                 'exchange_product'  => $product->exchange_product,
                 'max_price'         => $product->max_price,
                 'price'             => $product->price,
-                'category_id'       => $product->category_id,
                 'rate'              => $product->rate()->avg('rate'),
+                'category_id'       => $product->category_id,
                 'provider_name'     => $product->user->name,
                 'provider_id'       => $product->user->id,
                 'views'             => $product->views()->where('device_id', $request['device_id'])->count(),
@@ -81,6 +81,98 @@ class ProductsController extends Controller
         ];
 
         return returnResponse($productData, '', 200);
+    }
+
+    public function view_product(Request $request){
+        $rules = [
+            'product_id'    => 'required',
+            'device_id'     => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        $view             = new Views();
+        $view->device_id  = $request['device_id'];
+        $view->product_id = $request['product_id'];
+
+        if ($view->save()){
+            $views = Views::where(['device_id' => $request['device_id'], 'product_id' => $request['product_id']])->count();
+            return returnResponse(['views' => $views], '', 200);
+        }
+    }
+
+    public function best_products(Request $request){
+        if (!$request->header('Authorization') && !$request['device_id'])
+            return returnResponse(null, 'plz, enter auth token or device id to set fav', 400);
+
+        $user_id   = null;
+        $device_id = null;
+        if ($request->header('Authorization')){
+            $user      = JWTAuth::parseToken()->authenticate();
+            $user_id   = Auth::user()->id;
+        }else
+            $device_id  = $request['device_id'];
+
+        $productIds = Views::select('product_id')
+                            ->groupBy('product_id')
+                            ->orderByRaw('COUNT(*) DESC')
+                            ->distinct()
+                            ->get(['product_id']);
+
+        $products    = Products::whereIn('id', $productIds)->get();
+        $allProducts = [];
+
+        foreach ($products as $product) {
+            $allProducts[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'image'    => url('images/products') . '/' . $product->images()->first()->name,
+                'rate'     => $product->rate()->avg('rate'),
+                'price'    => $product->price,
+                'isLiked'  => isLiked($product->id, $user_id, $device_id)
+            ];
+        }
+
+        return returnResponse($allProducts, '', 200);
+    }
+
+    public function delete_product(Request $request){
+        $rules = [
+            'product_id'    => 'required',
+            'lang'          => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        $product = Products::find($request['product_id']);
+
+        if ($product->delete()){
+            $user = Auth::user();
+            $products       = Products::where('user_id', $user->id)->get();
+            $all_products   = [];
+
+            foreach ($products as $product) {
+                $all_products[] = [
+                    'id'       => $product->id,
+                    'name'     => $product->name,
+                    'image'    => url('images/products') . '/' . $product->images()->first()->name,
+                    'rate'     => $product->rate()->avg('rate'),
+                    'price'    => $product->price,
+                    'isLiked'  => isLiked($product->id, $user->id, null)
+                ];
+            }
+
+            $msg  = $request['lang'] == 'ar' ? 'تم حذف المنتج بنجاح' : 'product deleted successfully';
+            return returnResponse($all_products, $msg, 200);
+        }
     }
 
     public function my_products(Request $request){
@@ -222,6 +314,7 @@ class ProductsController extends Controller
         $edit->category_id       = $request['category_id'];
 
         if ($edit->save()){
+
             if (count($images) > 0){
                 foreach ($images as $image) {
                     $img        = new Images();
@@ -237,41 +330,6 @@ class ProductsController extends Controller
         }else{
             $msg  = $request['lang'] == 'ar' ? 'لم يتم التعديل بعد ,الرجاء المحاولة مره اخري' : 'something went wrong, Plz try again';
             return returnResponse(null, $msg, 400);
-        }
-    }
-
-    public function delete_product(Request $request){
-        $rules = [
-            'product_id'    => 'required',
-            'lang'          => 'required',
-        ];
-
-        $validator  = validator($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return returnResponse(null, validateRequest($validator), 400);
-        }
-
-        $product = Products::find($request['product_id']);
-
-        if ($product->delete()){
-            $user = Auth::user();
-            $products       = Products::where('user_id', $user->id)->get();
-            $all_products   = [];
-
-            foreach ($products as $product) {
-                $all_products[] = [
-                    'id'       => $product->id,
-                    'name'     => $product->name,
-                    'image'    => url('images/products') . '/' . $product->images()->first()->name,
-                    'rate'     => $product->rate()->avg('rate'),
-                    'price'    => $product->price,
-                    'isLiked'  => isLiked($product->id, $user->id, null)
-                ];
-            }
-
-            $msg  = $request['lang'] == 'ar' ? 'تم حذف المنتج بنجاح' : 'product deleted successfully';
-            return returnResponse($all_products, $msg, 200);
         }
     }
 
@@ -424,10 +482,10 @@ class ProductsController extends Controller
 
         if ($request['rate']){
             $products = $products->join('rates', 'products.id', '=', 'rates.product_id')
-                                    ->select('products.id', 'name', 'price')
-                                    ->selectRaw('AVG(rates.rate) AS rate')
-                                    ->groupBy('products.id')
-                                    ->havingRaw('AVG(rates.rate) = ?', [$request['rate']]);
+                ->select('products.id', 'name', 'price')
+                ->selectRaw('AVG(rates.rate) AS rate')
+                ->groupBy('products.id')
+                ->havingRaw('AVG(rates.rate) = ?', [$request['rate']]);
         }
 
         $type = [];

@@ -24,10 +24,24 @@ Route::post('show_product'       , 'Apis\ProductsController@show_product');
 Route::post('products_search'    , 'Apis\ProductsController@products_search');
 Route::post('products_filter'    , 'Apis\ProductsController@products_filter');
 Route::post('show_product'       , 'Apis\ProductsController@show_product');
+Route::post('view_product'       , 'Apis\ProductsController@view_product');
+Route::post('best_products'      , 'Apis\ProductsController@best_products');
 
 // Fav
 Route::post('set_fav'            , 'Apis\FavsController@set_fav');
 Route::post('get_fav'            , 'Apis\FavsController@get_fav');
+
+// about us
+Route::post('about-us'            , 'Apis\AppController@about_us');
+
+// policy
+Route::post('policy'              , 'Apis\AppController@policy');
+
+// app info
+Route::post('app-info'              , 'Apis\AppController@app_info');
+
+// contact us
+Route::post('contact-us'            , 'Apis\AppController@contact_us');
 
 Route::group(['middleware' => ['jwt']], function (){
     // ads
@@ -63,4 +77,5 @@ Route::group(['middleware' => ['jwt']], function (){
 
     // Notifications
     Route::post('notifications'         , 'Apis\NotifyController@notifications');
+    Route::post('stop-notifications'    , 'Apis\NotifyController@stop_notifications');
 });

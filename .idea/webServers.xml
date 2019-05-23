@@ -10,10 +10,10 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
-      <webServer id="06f083ca-8c06-4d30-a390-f367974a286a" name="t7ader" url="http://c.mta.sa">
-        <fileTransfer host="c.mta.sa" port="21" rootFolder="/public_html">
+      <webServer id="06f083ca-8c06-4d30-a390-f367974a286a" name="t7ader" url="http://88.198.40.76">
+        <fileTransfer host="88.198.40.76" port="21" rootFolder="/public_html">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
           </advancedOptions>
           <option name="port" value="21" />
         </fileTransfer>

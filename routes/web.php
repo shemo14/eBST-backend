@@ -248,6 +248,39 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             'title' => 'حذف اكتر من اعلان'
         ]);
 
+        // ======== Contact Us
+        Route::get('/contact-us', [
+            'uses' => 'ContactUsController@index',
+            'as' => 'contact-us',
+            'title' => 'اتصل بنا',
+            'icon' => '<i class="fa fa-phone"></i>',
+            'child' => [
+                'deleteMsg',
+                'replayMsg',
+                'deleteAllMsg',
+            ]
+        ]);
+
+        // delete msg
+        Route::post('/delete-msg', [
+            'uses' => 'ContactUsController@deleteMsg',
+            'as' => 'deleteMsg',
+            'title' => 'حذف الرسالة'
+        ]);
+
+        // Replay MSG
+        Route::post('/replay-msg', [
+            'uses' => 'ContactUsController@replayMsg',
+            'as' => 'replayMsg',
+            'title' => 'الرد علي الرسائل'
+        ]);
+
+        // Delete All Msg
+        Route::post('/delete-all-msg', [
+            'uses' => 'ContactUsController@deleteAllMsg',
+            'as' => 'deleteAllMsg',
+            'title' => 'حذف اكتر من رسالة'
+        ]);
 
 
         // ======== Countries
@@ -322,6 +355,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'add-social',
                 'update-social',
                 'delete-social',
+                'post-about-app',
+                'post-policy',
             ]
         ]);
 
@@ -355,6 +390,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             'uses' => 'SettingController@deleteSocial',
             'as' => 'delete-social',
             'title' => 'حذف مواقع التواصل'
+        ]);
+
+        Route::post('/post-about-app', [
+            'uses' => 'SettingController@aboutApp',
+            'as' => 'post-about-app',
+            'title' => 'عن التطبيق'
+        ]);
+
+        Route::post('/post-policy', [
+            'uses' => 'SettingController@policy',
+            'as' => 'post-policy',
+            'title' => 'الشروط و الاحكام'
         ]);
 
     });

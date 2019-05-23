@@ -106,7 +106,7 @@ class OffersController extends Controller
         }
 
         $product        = Products::find($request['product_id']);
-        $offers         = Offers::where('product_id', $request['product_id'])->get();
+        $offers         = Offers::where(['product_id' => $request['product_id'], 'status' => 0])->get();
         $allOffers      = [];
         $images         = $product->images()->get();
         $productImages  = [];
@@ -125,13 +125,14 @@ class OffersController extends Controller
         }
 
         $productDetails = [
-            'id'     => $product->id,
-            'name'   => $product->name,
-            'type'   => offer_type($request['lang'], $product->type),
-            'desc'   => $product->desc,
-            'price'  => $product->price,
-            'images' => $productImages,
-            'offers' => $allOffers
+            'id'        => $product->id,
+            'name'      => $product->name,
+            'type'      => offer_type($request['lang'], $product->type),
+            'type_id'   => $product->type,
+            'desc'      => $product->desc,
+            'price'     => $product->price,
+            'images'    => $productImages,
+            'offers'    => $allOffers
         ];
 
         return returnResponse($productDetails, '', 200);
@@ -195,6 +196,7 @@ class OffersController extends Controller
 
         if ($offer->type == 1 || $offer->type == 2){
             $offerDetails = [
+                'id'       => $offer->id,
                 'avatar'   => url('images/users') . '/' . $offer->user->avatar,
                 'name'     => $offer->user->name,
                 'phone'    => $offer->user->phone,
@@ -211,6 +213,7 @@ class OffersController extends Controller
             }
 
             $offerDetails = [
+                'id'       => $offer->id,
                 'avatar'   => url('images/users') . '/' . $offer->user->avatar,
                 'name'     => $offer->user->name,
                 'phone'    => $offer->user->phone,

@@ -51,8 +51,8 @@ class CategoriesController extends Controller
 
         if ($request['search']){
             $categories      = Categories::where('name_ar', 'LIKE' , '%'. $request['search'] .'%')
-                                            ->orWhere('name_en', 'LIKE' , '%'. $request['search'] .'%')
-                                            ->select('id', 'image', 'name_' . $request['lang'] . ' as name')->get();
+                ->orWhere('name_en', 'LIKE' , '%'. $request['search'] .'%')
+                ->select('id', 'image', 'name_' . $request['lang'] . ' as name')->get();
         }else{
             $categories      = Categories::select('id', 'image', 'name_' . $request['lang'] . ' as name')->get();
         }

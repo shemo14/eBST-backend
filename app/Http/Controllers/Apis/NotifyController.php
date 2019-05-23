@@ -34,4 +34,21 @@ class NotifyController extends Controller
             ];
         }
     }
+
+    public function stop_notifications(Request $request){
+        $user = Auth::user();
+        $msg  = '';
+
+        if ($user->isNotify){
+            $user->isNotify = 0;
+            $msg = 'notification stoped successfully';
+        }else{
+            $user->isNotify = 1;
+            $msg = 'notification worked successfully';
+        }
+
+        if ($user->save()){
+            return returnResponse(null, $msg, 200);
+        }
+    }
 }
