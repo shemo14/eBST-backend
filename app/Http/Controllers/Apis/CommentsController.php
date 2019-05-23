@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Comments;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AppReports;
+use App\Models\Notifications;
+
 
 class CommentsController extends Controller
 {
@@ -29,6 +31,8 @@ class CommentsController extends Controller
         $add->comment       = $request['comment'];
 
         if ($add->save()){
+
+
             $comments       = Comments::where('product_id', $request['product_id'])->get();
             $allComments    = [];
 

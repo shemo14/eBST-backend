@@ -202,7 +202,7 @@ function offers_counter($product_id){
 function offer_type($lang, $type){
     $translation = [
         'ar' => [ 'شراء' , 'مزايدة'  , 'مبادلة'   , 'مبادلة مع فرق سعر'  ],
-        'en' => [ 'buy'  , 'auction' , 'exchange' , 'difference price'   ]
+        'en' => [ 'buy'  , 'auction' , 'exchange' , 'exchange with difference price'   ]
     ];
 
     return $translation[$lang][$type-1];

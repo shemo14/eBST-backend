@@ -10,6 +10,8 @@
   "require": {
     "php": "^7.1.3",
     "abdullahobaid/sms": "dev-master",
+    "alymosul/exponent-server-sdk-php": "^1.1",
+    "alymosul/laravel-exponent-push-notifications": "^1.5",
     "berkayk/onesignal-laravel": "^0.9.9",
     "brozot/laravel-fcm": "^1.2",
     "fideloper/proxy": "^4.0",

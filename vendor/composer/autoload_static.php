@@ -8,11 +8,11 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -76,7 +76,8 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
         '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
-        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         'cf97c57bfe0f23854afd2f3818abb7a0' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/create_uploaded_file.php',
         '9bf37a3d0dad93e29cb4e1b1bfab04e9' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/marshal_headers_from_sapi.php',
         'ce70dccb4bcc2efc6e94d2ee526e6972' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/marshal_method_from_sapi.php',
@@ -85,6 +86,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         '0b0974a5566a1077e4f2e111341112c1' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/normalize_server.php',
         '1ca3bc274755662169f9629d5412a1da' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/normalize_uploaded_files.php',
         '40360c0b9b437e69bcbb7f1349ce029e' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/parse_cookie_header.php',
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
@@ -133,6 +135,8 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
             'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Php56\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
+            'Symfony\\Polyfill\\Iconv\\' => 23,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\' => 18,
             'Symfony\\Component\\VarDumper\\' => 28,
@@ -169,6 +173,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         ),
         'N' => 
         array (
+            'NotificationChannels\\ExpoPushNotifications\\' => 43,
             'Nexmo\\' => 6,
             'Namshi\\JOSE\\' => 12,
         ),
@@ -220,6 +225,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         ),
         'E' => 
         array (
+            'ExponentPhpSDK\\' => 15,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -312,6 +318,14 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
+        ),
+        'Symfony\\Polyfill\\Iconv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-iconv',
         ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
@@ -408,6 +422,10 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Opis\\Closure\\' => 
         array (
             0 => __DIR__ . '/..' . '/opis/closure/src',
+        ),
+        'NotificationChannels\\ExpoPushNotifications\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src',
         ),
         'Nexmo\\' => 
         array (
@@ -518,6 +536,10 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
+        'ExponentPhpSDK\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
@@ -616,6 +638,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'App\\Http\\Controllers\\Apis\\CategoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/CategoriesController.php',
         'App\\Http\\Controllers\\Apis\\CommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/CommentsController.php',
         'App\\Http\\Controllers\\Apis\\FavsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/FavsController.php',
+        'App\\Http\\Controllers\\Apis\\NotifyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/NotifyController.php',
         'App\\Http\\Controllers\\Apis\\OffersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/OffersController.php',
         'App\\Http\\Controllers\\Apis\\ProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/ProductsController.php',
         'App\\Http\\Controllers\\Apis\\RateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/RateController.php',
@@ -654,7 +677,6 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'App\\Models\\Services' => __DIR__ . '/../..' . '/app/Models/Services.php',
         'App\\Models\\Social' => __DIR__ . '/../..' . '/app/Models/Social.php',
         'App\\Models\\Views' => __DIR__ . '/../..' . '/app/Models/Views.php',
-        'App\\Notification' => __DIR__ . '/../..',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -792,6 +814,12 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/Warning.php',
+        'ExponentPhpSDK\\Exceptions\\ExpoException' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/Exceptions/ExpoException.php',
+        'ExponentPhpSDK\\Exceptions\\ExpoRegistrarException' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/Exceptions/ExpoRegistrarException.php',
+        'ExponentPhpSDK\\Expo' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/Expo.php',
+        'ExponentPhpSDK\\ExpoRegistrar' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/ExpoRegistrar.php',
+        'ExponentPhpSDK\\ExpoRepository' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/ExpoRepository.php',
+        'ExponentPhpSDK\\Repositories\\ExpoFileDriver' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/Repositories/ExpoFileDriver.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',
         'Faker\\Calculator\\Luhn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
@@ -2423,6 +2451,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Maatwebsite\\Excel\\Events\\BeforeSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/BeforeSheet.php',
         'Maatwebsite\\Excel\\Events\\BeforeWriting' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/BeforeWriting.php',
         'Maatwebsite\\Excel\\Events\\Event' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/Event.php',
+        'Maatwebsite\\Excel\\Events\\ImportFailed' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/ImportFailed.php',
         'Maatwebsite\\Excel\\Excel' => __DIR__ . '/..' . '/maatwebsite/excel/src/Excel.php',
         'Maatwebsite\\Excel\\ExcelServiceProvider' => __DIR__ . '/..' . '/maatwebsite/excel/src/ExcelServiceProvider.php',
         'Maatwebsite\\Excel\\Exceptions\\ConcernConflictException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/ConcernConflictException.php',
@@ -2448,6 +2477,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Maatwebsite\\Excel\\HasEventBus' => __DIR__ . '/..' . '/maatwebsite/excel/src/HasEventBus.php',
         'Maatwebsite\\Excel\\HeadingRowImport' => __DIR__ . '/..' . '/maatwebsite/excel/src/HeadingRowImport.php',
         'Maatwebsite\\Excel\\Helpers\\ArrayHelper' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/ArrayHelper.php',
+        'Maatwebsite\\Excel\\Helpers\\CellHelper' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/CellHelper.php',
         'Maatwebsite\\Excel\\Helpers\\FileTypeDetector' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/FileTypeDetector.php',
         'Maatwebsite\\Excel\\Importer' => __DIR__ . '/..' . '/maatwebsite/excel/src/Importer.php',
         'Maatwebsite\\Excel\\Imports\\EndRowFinder' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/EndRowFinder.php',
@@ -2455,6 +2485,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Maatwebsite\\Excel\\Imports\\HeadingRowFormatter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/HeadingRowFormatter.php',
         'Maatwebsite\\Excel\\Imports\\ModelImporter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/ModelImporter.php',
         'Maatwebsite\\Excel\\Imports\\ModelManager' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/ModelManager.php',
+        'Maatwebsite\\Excel\\Jobs\\AfterImportJob' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AfterImportJob.php',
         'Maatwebsite\\Excel\\Jobs\\AppendDataToSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AppendDataToSheet.php',
         'Maatwebsite\\Excel\\Jobs\\AppendQueryToSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AppendQueryToSheet.php',
         'Maatwebsite\\Excel\\Jobs\\CloseSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/CloseSheet.php',
@@ -2716,6 +2747,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Namshi\\JOSE\\SimpleJWS' => __DIR__ . '/..' . '/namshi/jose/src/Namshi/JOSE/SimpleJWS.php',
         'Nexmo\\Account\\Balance' => __DIR__ . '/..' . '/nexmo/client/src/Account/Balance.php',
         'Nexmo\\Account\\Client' => __DIR__ . '/..' . '/nexmo/client/src/Account/Client.php',
+        'Nexmo\\Account\\Config' => __DIR__ . '/..' . '/nexmo/client/src/Account/Config.php',
         'Nexmo\\Account\\PrefixPrice' => __DIR__ . '/..' . '/nexmo/client/src/Account/PrefixPrice.php',
         'Nexmo\\Account\\Price' => __DIR__ . '/..' . '/nexmo/client/src/Account/Price.php',
         'Nexmo\\Account\\Secret' => __DIR__ . '/..' . '/nexmo/client/src/Account/Secret.php',
@@ -2838,6 +2870,14 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Nexmo\\Voice\\Call\\Inbound' => __DIR__ . '/..' . '/nexmo/client/src/Voice/Call/Inbound.php',
         'Nexmo\\Voice\\Message\\Callback' => __DIR__ . '/..' . '/nexmo/client/src/Voice/Message/Callback.php',
         'Nexmo\\Voice\\Message\\Message' => __DIR__ . '/..' . '/nexmo/client/src/Voice/Message/Message.php',
+        'NotificationChannels\\ExpoPushNotifications\\Exceptions\\CouldNotCreateMessage' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Exceptions/CouldNotCreateMessage.php',
+        'NotificationChannels\\ExpoPushNotifications\\Exceptions\\CouldNotSendNotification' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Exceptions/CouldNotSendNotification.php',
+        'NotificationChannels\\ExpoPushNotifications\\ExpoChannel' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/ExpoChannel.php',
+        'NotificationChannels\\ExpoPushNotifications\\ExpoMessage' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/ExpoMessage.php',
+        'NotificationChannels\\ExpoPushNotifications\\ExpoPushNotificationsServiceProvider' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/ExpoPushNotificationsServiceProvider.php',
+        'NotificationChannels\\ExpoPushNotifications\\Http\\ExpoController' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Http/ExpoController.php',
+        'NotificationChannels\\ExpoPushNotifications\\Models\\Interest' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Models/Interest.php',
+        'NotificationChannels\\ExpoPushNotifications\\Repositories\\ExpoDatabaseDriver' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Repositories/ExpoDatabaseDriver.php',
         'Opis\\Closure\\Analyzer' => __DIR__ . '/..' . '/opis/closure/src/Analyzer.php',
         'Opis\\Closure\\ClosureContext' => __DIR__ . '/..' . '/opis/closure/src/ClosureContext.php',
         'Opis\\Closure\\ClosureScope' => __DIR__ . '/..' . '/opis/closure/src/ClosureScope.php',
@@ -4111,16 +4151,6 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Symfony\\Bridge\\PsrHttpMessage\\Factory\\PsrHttpFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/PsrHttpFactory.php',
         'Symfony\\Bridge\\PsrHttpMessage\\HttpFoundationFactoryInterface' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/HttpFoundationFactoryInterface.php',
         'Symfony\\Bridge\\PsrHttpMessage\\HttpMessageFactoryInterface' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/HttpMessageFactoryInterface.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Factory\\AbstractHttpMessageFactoryTest' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Factory/AbstractHttpMessageFactoryTest.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Factory\\DiactorosFactoryTest' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Factory/DiactorosFactoryTest.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Factory\\HttpFoundationFactoryTest' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Factory/HttpFoundationFactoryTest.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Factory\\PsrHttpFactoryTest' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Factory/PsrHttpFactoryTest.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Fixtures\\Message' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Fixtures/Message.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Fixtures\\Response' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Fixtures/Response.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Fixtures\\ServerRequest' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Fixtures/ServerRequest.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Fixtures\\Stream' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Fixtures/Stream.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Fixtures\\UploadedFile' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Fixtures/UploadedFile.php',
-        'Symfony\\Bridge\\PsrHttpMessage\\Tests\\Fixtures\\Uri' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Tests/Fixtures/Uri.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
@@ -4720,6 +4750,8 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Symfony\\Contracts\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorInterface.php',
         'Symfony\\Contracts\\Translation\\TranslatorTrait' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorTrait.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
+        'Symfony\\Polyfill\\Iconv\\Iconv' => __DIR__ . '/..' . '/symfony/polyfill-iconv/Iconv.php',
+        'Symfony\\Polyfill\\Intl\\Idn\\Idn' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/Idn.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
         'Symfony\\Polyfill\\Php56\\Php56' => __DIR__ . '/..' . '/symfony/polyfill-php56/Php56.php',
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
