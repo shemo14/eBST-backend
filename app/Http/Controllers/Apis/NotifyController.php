@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apis;
 use App\Models\Notifications;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class NotifyController extends Controller
@@ -19,9 +20,9 @@ class NotifyController extends Controller
         if ($validator->fails()) {
             return returnResponse(null, validateRequest($validator), 400);
         }
-
+        App::setLocale($request['lang']);
         $user          = Auth::user();
-        $notifications = Notifications::where('id', 'user_id', $user->id)->select('title_' . $request['lang'] . ' title', 'body_' . $request['lang'] . ' body', 'user_id', 'offer_id', 'product_id', 'created_at')->get();
+        $notifications = Notifications::where('user_id', $user->id)->select('title_' . $request['lang'] . ' as title', 'body_' . $request['lang'] . ' as body', 'user_id', 'offer_id', 'product_id', 'type', 'id', 'created_at')->get();
         $allNotify     = [];
 
         foreach ($notifications as $notification) {
@@ -31,8 +32,12 @@ class NotifyController extends Controller
                 'body'          => $notification->body,
                 'offer_id'      => $notification->offer_id,
                 'product_id'    => $notification->product_id,
+                'type'          => $notification->type,
+                'time'          => $notification->created_at->diffForHumans(),
             ];
         }
+
+        return returnResponse($allNotify, '', 200);
     }
 
     public function stop_notifications(Request $request){
@@ -48,6 +53,25 @@ class NotifyController extends Controller
         }
 
         if ($user->save()){
+            return returnResponse(null, $msg, 200);
+        }
+    }
+
+    public function delete_notification(Request $request){
+        $rules = [
+            'notification_id'    => 'required',
+            'lang'               => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        $notify = Notifications::find($request['notification_id']);
+        if ($notify->delete()){
+            $msg = $request['lang'] == 'ar' ? 'تم حذف الاشعار بنجاح' : 'notification deleted successfully';
             return returnResponse(null, $msg, 200);
         }
     }

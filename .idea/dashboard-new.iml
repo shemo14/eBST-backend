@@ -6,7 +6,10 @@
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/abdullahobaid/sms" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/alymosul/exponent-server-sdk-php" />
+<<<<<<< HEAD
       <excludeFolder url="file://$MODULE_DIR$/vendor/alymosul/laravel-exponent-push-notifications" />
+=======
+>>>>>>> 96a45f1adeb430fd373cb9b0e4bb57d748a08a90
       <excludeFolder url="file://$MODULE_DIR$/vendor/berkayk/onesignal-laravel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brozot/laravel-fcm" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />

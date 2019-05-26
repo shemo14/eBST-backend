@@ -59,11 +59,13 @@ class AppController extends Controller
                 'url'  => $social->url,
             ];
         }
-
-        $data = [
+        $info = [
             'phone'     => settings('phone'),
             'email'     => settings('email'),
             'address'   => settings('address_' . $request['lang']),
+        ];
+        $data = [
+            'info'      => $info,
             'socials'   => $allSocials
         ];
 

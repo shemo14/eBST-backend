@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
+class ComposerStaticInite0774f1fefdd4f34ef28bddf1d6482a8
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -173,7 +173,6 @@ class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
         ),
         'N' => 
         array (
-            'NotificationChannels\\ExpoPushNotifications\\' => 43,
             'Nexmo\\' => 6,
             'Namshi\\JOSE\\' => 12,
         ),
@@ -424,10 +423,6 @@ class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
         array (
             0 => __DIR__ . '/..' . '/opis/closure/src',
         ),
-        'NotificationChannels\\ExpoPushNotifications\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src',
-        ),
         'Nexmo\\' => 
         array (
             0 => __DIR__ . '/..' . '/nexmo/client/src',
@@ -645,6 +640,7 @@ class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
         'App\\Http\\Controllers\\Apis\\OffersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/OffersController.php',
         'App\\Http\\Controllers\\Apis\\ProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/ProductsController.php',
         'App\\Http\\Controllers\\Apis\\RateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/RateController.php',
+        'App\\Http\\Controllers\\Apis\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/UserController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -2880,14 +2876,6 @@ class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
         'Nexmo\\Voice\\Call\\Inbound' => __DIR__ . '/..' . '/nexmo/client/src/Voice/Call/Inbound.php',
         'Nexmo\\Voice\\Message\\Callback' => __DIR__ . '/..' . '/nexmo/client/src/Voice/Message/Callback.php',
         'Nexmo\\Voice\\Message\\Message' => __DIR__ . '/..' . '/nexmo/client/src/Voice/Message/Message.php',
-        'NotificationChannels\\ExpoPushNotifications\\Exceptions\\CouldNotCreateMessage' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Exceptions/CouldNotCreateMessage.php',
-        'NotificationChannels\\ExpoPushNotifications\\Exceptions\\CouldNotSendNotification' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Exceptions/CouldNotSendNotification.php',
-        'NotificationChannels\\ExpoPushNotifications\\ExpoChannel' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/ExpoChannel.php',
-        'NotificationChannels\\ExpoPushNotifications\\ExpoMessage' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/ExpoMessage.php',
-        'NotificationChannels\\ExpoPushNotifications\\ExpoPushNotificationsServiceProvider' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/ExpoPushNotificationsServiceProvider.php',
-        'NotificationChannels\\ExpoPushNotifications\\Http\\ExpoController' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Http/ExpoController.php',
-        'NotificationChannels\\ExpoPushNotifications\\Models\\Interest' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Models/Interest.php',
-        'NotificationChannels\\ExpoPushNotifications\\Repositories\\ExpoDatabaseDriver' => __DIR__ . '/..' . '/alymosul/laravel-exponent-push-notifications/src/Repositories/ExpoDatabaseDriver.php',
         'Opis\\Closure\\Analyzer' => __DIR__ . '/..' . '/opis/closure/src/Analyzer.php',
         'Opis\\Closure\\ClosureContext' => __DIR__ . '/..' . '/opis/closure/src/ClosureContext.php',
         'Opis\\Closure\\ClosureScope' => __DIR__ . '/..' . '/opis/closure/src/ClosureScope.php',
@@ -3365,6 +3353,7 @@ class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
         'PhpOffice\\PhpSpreadsheet\\Cell\\DefaultValueBinder' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/DefaultValueBinder.php',
         'PhpOffice\\PhpSpreadsheet\\Cell\\Hyperlink' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/Hyperlink.php',
         'PhpOffice\\PhpSpreadsheet\\Cell\\IValueBinder' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/IValueBinder.php',
+        'PhpOffice\\PhpSpreadsheet\\Cell\\StringValueBinder' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/StringValueBinder.php',
         'PhpOffice\\PhpSpreadsheet\\Chart\\Axis' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/Axis.php',
         'PhpOffice\\PhpSpreadsheet\\Chart\\Chart' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/Chart.php',
         'PhpOffice\\PhpSpreadsheet\\Chart\\DataSeries' => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Chart/DataSeries.php',
@@ -3571,6 +3560,9 @@ class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
         'PhpParser\\JsonDecoder' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/JsonDecoder.php',
         'PhpParser\\Lexer' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer.php',
         'PhpParser\\Lexer\\Emulative' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/Emulative.php',
+        'PhpParser\\Lexer\\TokenEmulator\\CoaleseEqualTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/CoaleseEqualTokenEmulator.php',
+        'PhpParser\\Lexer\\TokenEmulator\\FnTokenEmulator' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/FnTokenEmulator.php',
+        'PhpParser\\Lexer\\TokenEmulator\\TokenEmulatorInterface' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Lexer/TokenEmulator/TokenEmulatorInterface.php',
         'PhpParser\\NameContext' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/NameContext.php',
         'PhpParser\\Node' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node.php',
         'PhpParser\\NodeAbstract' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/NodeAbstract.php',
@@ -3590,6 +3582,7 @@ class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
         'PhpParser\\Node\\Expr\\ArrayDimFetch' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ArrayDimFetch.php',
         'PhpParser\\Node\\Expr\\ArrayItem' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ArrayItem.php',
         'PhpParser\\Node\\Expr\\Array_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Array_.php',
+        'PhpParser\\Node\\Expr\\ArrowFunction' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/ArrowFunction.php',
         'PhpParser\\Node\\Expr\\Assign' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Assign.php',
         'PhpParser\\Node\\Expr\\AssignOp' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp.php',
         'PhpParser\\Node\\Expr\\AssignOp\\BitwiseAnd' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/BitwiseAnd.php',
@@ -5097,11 +5090,11 @@ class ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit26e304e705ff6d98f83f4f74d14152bf::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite0774f1fefdd4f34ef28bddf1d6482a8::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite0774f1fefdd4f34ef28bddf1d6482a8::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInite0774f1fefdd4f34ef28bddf1d6482a8::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInite0774f1fefdd4f34ef28bddf1d6482a8::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInite0774f1fefdd4f34ef28bddf1d6482a8::$classMap;
 
         }, null, ClassLoader::class);
     }
