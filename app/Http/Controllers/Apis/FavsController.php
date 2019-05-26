@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use JWTAuth;
 use App\Models\Favs;
 use App\Models\Products;
+use Illuminate\Support\Facades\Auth;
 
 class FavsController extends Controller
 {
@@ -37,7 +38,7 @@ class FavsController extends Controller
             }else{
                 $fav              = new Favs();
                 $fav->product_id  = $request['product_id'];
-                $fav->user_id     = $request['user_id'];
+                $fav->user_id     = Auth::user()->id;
                 $fav->save();
                 return returnResponse(null, $like_msg, 200);
             }

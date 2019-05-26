@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\App;
 
 class AuthController extends Controller
 {
@@ -35,10 +36,35 @@ class AuthController extends Controller
         }
 
 
-        $user          = auth()->user();
-        $user['token'] = $token;
+        $user               = auth()->user();
+        $user->device_id    = $request['device_id'];
+        $user->checked      = 1;
+        $user->save();
+
+        $userData      = [
+            'id'            => $user->id,
+            'name'          => $user->name,
+            'email'         => $user->email,
+            'phone'         => $user->phone,
+            'desc'          => $user->desc,
+            'country_id'    => $user->country_id,
+            'code'          => $user->code,
+            'avatar'        => url('images/users') . '/' . $user->avatar,
+            'active'        => $user->active,
+            'checked'       => $user->checked,
+            'role'          => $user->role,
+            'lat'           => $user->lat,
+            'lng'           => $user->lng,
+            'type'          => $user->type,
+            'device_id'     => $user->device_id,
+            'lang'          => $user->lang,
+            'created_at'    => $user->created_at,
+            'updated_at'    => $user->updated_at,
+            'token'         => $token,
+        ];
+
         $msg           = $request['lang'] == 'ar' ? 'تم تسجيل الدخول بنجاح' : 'user login successfully';
-        return returnResponse($user, $msg, 200);
+        return returnResponse($userData, $msg, 200);
     }
 
     public function register(Request $request){
@@ -46,12 +72,13 @@ class AuthController extends Controller
             'name'          => 'required',
             'password'      => 'required|min:6',
             'device_id'     => 'required',
+            'country_id'    => 'required',
             'lang'          => 'required',
             'type'          => 'required',
             'email'         => 'required|unique:users,email',
             'phone'         => 'required|unique:users,phone',
         ];
-
+        App::setLocale($request['lang']);
         $validator = validator($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -63,6 +90,7 @@ class AuthController extends Controller
         $user->name       = $request['name'];
         $user->phone      = $request['phone'];
         $user->device_id  = $request['device_id'];
+        $user->country_id = $request['country_id'];
         $user->lang       = $request['lang'];
         $user->email      = $request['email'];
         $user->type       = $request['type'];
@@ -132,7 +160,27 @@ class AuthController extends Controller
     public function user_data(Request $request){
         $user           = auth()->user();
         $token          = $request->header('Authorization');
-        $user['token']  = $token;
-        return returnResponse($user, '', 200);
+        $userData       = [
+            'id'            => $user->id,
+            'name'          => $user->name,
+            'email'         => $user->email,
+            'phone'         => $user->phone,
+            'desc'          => $user->desc,
+            'country_id'    => $user->country_id,
+            'code'          => $user->code,
+            'avatar'        => url('images/users') . '/' . $user->avatar,
+            'active'        => $user->active,
+            'checked'       => $user->checked,
+            'role'          => $user->role,
+            'lat'           => $user->lat,
+            'lng'           => $user->lng,
+            'type'          => $user->type,
+            'device_id'     => $user->device_id,
+            'lang'          => $user->lang,
+            'created_at'    => $user->created_at,
+            'updated_at'    => $user->updated_at,
+            'token'         => $token,
+        ];
+        return returnResponse($userData, '', 200);
     }
 }

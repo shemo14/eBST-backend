@@ -2,16 +2,32 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="e997caf8-03a1-4de2-af7a-971c2ff5d258" name="press" url="http://press.aait-sa.com">
-        <fileTransfer host="press.aait-sa.com" port="21" rootFolder="/public_html">
+      <webServer id="01e6d5ae-fb4e-40cc-907a-17a04f7f6561" name="ana-b5er" url="http://45.76.159.126">
+        <fileTransfer host="45.76.159.126" port="22" rootFolder="/var/www/html/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="06f083ca-8c06-4d30-a390-f367974a286a" name="t7ader" url="http://88.198.40.76">
+        <fileTransfer host="88.198.40.76" port="21" rootFolder="/public_html">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="aefa8e01-6e43-4611-8726-da75ada9af85" name="shams" url="http://shams.arabsdesign.com">
+        <fileTransfer host="shams.arabsdesign.com" port="21" rootFolder="/public_html">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
-      <webServer id="98ca5651-69b8-4279-9aaf-a85e4c4932b2" name="shams" url="http://shams.arabsdesign.com">
-        <fileTransfer host="shams.arabsdesign.com" port="21" rootFolder="/public_html/eBST-backend">
+      <webServer id="14b8b353-8b52-487c-9ce3-8086b9cbcdfc" name="rahat" url="http://rahat.aait-sa.com">
+        <fileTransfer host="rahat.aait-sa.com" port="21" rootFolder="/public_html">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

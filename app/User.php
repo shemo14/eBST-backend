@@ -48,6 +48,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne('App\Models\Role','id','role');
     }
 
+    public function country(){
+        return $this->belongsTo('App\Models\Countries','country_id','id');
+    }
+
     public function avatar()
     {
         return appPath() . '/images/users/' . $this->avatar;

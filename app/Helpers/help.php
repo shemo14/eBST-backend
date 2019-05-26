@@ -207,3 +207,10 @@ function offer_type($lang, $type){
 
     return $translation[$lang][$type-1];
 }
+
+function set_notification(){
+    // type = 1 => admin notification
+    // type = 2 => order notification (send - accept - refuse)
+    // type = 3 => comment
+    // type = 4 like
+}
