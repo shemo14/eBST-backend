@@ -224,6 +224,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         ),
         'E' => 
         array (
+            'ExponentPhpSDK\\' => 15,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -530,6 +531,10 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
+        'ExponentPhpSDK\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
@@ -617,6 +622,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
         'App\\Http\\Controllers\\Admin\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AuthController.php',
         'App\\Http\\Controllers\\Admin\\CategoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CategoriesController.php',
+        'App\\Http\\Controllers\\Admin\\ContactUsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ContactUsController.php',
         'App\\Http\\Controllers\\Admin\\CountriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CountriesController.php',
         'App\\Http\\Controllers\\Admin\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PermissionController.php',
         'App\\Http\\Controllers\\Admin\\ReportController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ReportController.php',
@@ -624,10 +630,12 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'App\\Http\\Controllers\\Admin\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UsersController.php',
         'App\\Http\\Controllers\\Apis\\AdsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/AdsController.php',
         'App\\Http\\Controllers\\Apis\\ApisController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/ApisController.php',
+        'App\\Http\\Controllers\\Apis\\AppController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/AppController.php',
         'App\\Http\\Controllers\\Apis\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/AuthController.php',
         'App\\Http\\Controllers\\Apis\\CategoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/CategoriesController.php',
         'App\\Http\\Controllers\\Apis\\CommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/CommentsController.php',
         'App\\Http\\Controllers\\Apis\\FavsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/FavsController.php',
+        'App\\Http\\Controllers\\Apis\\NotifyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/NotifyController.php',
         'App\\Http\\Controllers\\Apis\\OffersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/OffersController.php',
         'App\\Http\\Controllers\\Apis\\ProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/ProductsController.php',
         'App\\Http\\Controllers\\Apis\\RateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Apis/RateController.php',
@@ -651,6 +659,7 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'App\\Models\\Auctions' => __DIR__ . '/../..' . '/app/Models/Auctions.php',
         'App\\Models\\Categories' => __DIR__ . '/../..' . '/app/Models/Categories.php',
         'App\\Models\\Comments' => __DIR__ . '/../..' . '/app/Models/Comments.php',
+        'App\\Models\\ContactUs' => __DIR__ . '/../..' . '/app/Models/ContactUs.php',
         'App\\Models\\Countries' => __DIR__ . '/../..' . '/app/Models/Countries.php',
         'App\\Models\\Exchanges' => __DIR__ . '/../..' . '/app/Models/Exchanges.php',
         'App\\Models\\Favs' => __DIR__ . '/../..' . '/app/Models/Favs.php',
@@ -666,7 +675,6 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'App\\Models\\Services' => __DIR__ . '/../..' . '/app/Models/Services.php',
         'App\\Models\\Social' => __DIR__ . '/../..' . '/app/Models/Social.php',
         'App\\Models\\Views' => __DIR__ . '/../..' . '/app/Models/Views.php',
-        'App\\Notification' => __DIR__ . '/../..',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -804,6 +812,12 @@ class ComposerStaticInit2b6e81007bcc9e4c8bfd84109ae84b86
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator/Warning/Warning.php',
+        'ExponentPhpSDK\\Exceptions\\ExpoException' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/Exceptions/ExpoException.php',
+        'ExponentPhpSDK\\Exceptions\\ExpoRegistrarException' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/Exceptions/ExpoRegistrarException.php',
+        'ExponentPhpSDK\\Expo' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/Expo.php',
+        'ExponentPhpSDK\\ExpoRegistrar' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/ExpoRegistrar.php',
+        'ExponentPhpSDK\\ExpoRepository' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/ExpoRepository.php',
+        'ExponentPhpSDK\\Repositories\\ExpoFileDriver' => __DIR__ . '/..' . '/alymosul/exponent-server-sdk-php/lib/Repositories/ExpoFileDriver.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',
         'Faker\\Calculator\\Luhn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',

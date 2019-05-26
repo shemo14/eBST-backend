@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Apis;
 
+use App\Models\Products;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Comments;
@@ -29,6 +31,9 @@ class CommentsController extends Controller
         $add->comment       = $request['comment'];
 
         if ($add->save()){
+            $user_id = Products::where('id', $request['product_id'])->first()->user_id;
+            set_notification($user_id, $add->id,$request['product_id'], null, null, 3, $request['lang'], null, null);
+
             $comments       = Comments::where('product_id', $request['product_id'])->get();
             $allComments    = [];
 

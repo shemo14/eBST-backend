@@ -11,6 +11,7 @@ use App\Models\Exchanges;
 use App\Models\Auctions;
 use App\Models\Images;
 
+
 class OffersController extends Controller
 {
     public function set_offer(Request $request){
@@ -51,6 +52,9 @@ class OffersController extends Controller
                 }
             }
 
+            $user_id = Products::where('id', $request['product_id'])->first()->user_id;
+            set_notification($user_id, null,$request['product_id'], null, $offer->id, 2, $request['lang'], null, null);
+
             $msg  = $request['lang'] == 'ar' ? 'تم ارسال العرض بنجاح' : 'your offer sent successfully';
             return returnResponse(null, $msg, 200);
         }
@@ -73,10 +77,10 @@ class OffersController extends Controller
         $allOffers  = [];
 
         if ($request['type'] == 0){
-            $offers      = Offers::where('user_id', $user_id)->get();
+            $offers      = Offers::where(['user_id' => $user_id, 'status' => 0])->get();
         }else{
             $productsIds = Products::where('user_id', $user_id)->get(['id']);
-            $offers      = Offers::whereIn('product_id', $productsIds)->get();
+            $offers      = Offers::whereIn('product_id', $productsIds)->where('status', 0)->get();
         }
 
         foreach ($offers as $offer) {
@@ -156,6 +160,9 @@ class OffersController extends Controller
         $offer->status = $request['status'];
 
         if ($offer->save()){
+
+            $user_id = $offer->user_id;
+            set_notification($user_id, null,$request['product_id'], null, $offer->id, 2, $request['lang'], null, null);
 
             $offers    = Offers::where(['product_id' => $request['product_id'], 'status' => 0])->get();
             $allOffers = [];
@@ -244,5 +251,43 @@ class OffersController extends Controller
             $msg = $request['lang'] == 'ar' ? 'تم حذف العرض بنجاح' : 'offer deleted successfully';
             return returnResponse(null, $msg, 200);
         }
+    }
+
+    public function accepted_offers(Request $request){
+        $rules = [
+            'type'        => 'required',
+            'lang'        => 'required',
+        ];
+
+        $validator  = validator($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return returnResponse(null, validateRequest($validator), 400);
+        }
+
+        $user_id    = Auth::user()->id;
+        $offers     = [];
+        $allOffers  = [];
+
+        if ($request['type'] == 0){
+            $offers      = Offers::where(['user_id' => $user_id, 'status' => 2])->get();
+        }else{
+            $productsIds = Products::where('user_id', $user_id)->get(['id']);
+            $offers      = Offers::whereIn('product_id', $productsIds)->where('status', 2)->get();
+        }
+
+        foreach ($offers as $offer) {
+            $allOffers[] = [
+                'id'            => $offer->id,
+                'product_id'    => $offer->product_id,
+                'product_name'  => $offer->product->name,
+                'product_image' => url('images/products') . '/' . $offer->product->images()->first()->name,
+                'offers_count'  => offers_counter($offer->product_id),
+                'date'          => date('d/m/Y', strtotime($offer->created_at)),
+                'offer_type'    => offer_type($request['lang'], $offer->type)
+            ];
+        }
+
+        return returnResponse($allOffers, '', 200);
     }
 }

@@ -32,16 +32,16 @@ Route::post('set_fav'            , 'Apis\FavsController@set_fav');
 Route::post('get_fav'            , 'Apis\FavsController@get_fav');
 
 // about us
-Route::post('about-us'            , 'Apis\AppController@about_us');
+Route::post('about_us'            , 'Apis\AppController@about_us');
 
 // policy
 Route::post('policy'              , 'Apis\AppController@policy');
 
 // app info
-Route::post('app-info'              , 'Apis\AppController@app_info');
+Route::post('app_info'              , 'Apis\AppController@app_info');
 
 // contact us
-Route::post('contact-us'            , 'Apis\AppController@contact_us');
+Route::post('contact_us'            , 'Apis\AppController@contact_us');
 
 Route::group(['middleware' => ['jwt']], function (){
     // ads
@@ -71,11 +71,17 @@ Route::group(['middleware' => ['jwt']], function (){
     Route::post('set_offer'             , 'Apis\OffersController@set_offer');
     Route::post('offers'                , 'Apis\OffersController@offers');
     Route::post('product_offers'        , 'Apis\OffersController@product_offers');
+    Route::post('accepted_offers'       , 'Apis\OffersController@accepted_offers');
     Route::post('offer_action'          , 'Apis\OffersController@offer_action');
     Route::post('offer_details'         , 'Apis\OffersController@offer_details');
     Route::post('delete_offer'          , 'Apis\OffersController@delete_offer');
 
     // Notifications
     Route::post('notifications'         , 'Apis\NotifyController@notifications');
-    Route::post('stop-notifications'    , 'Apis\NotifyController@stop_notifications');
+    Route::post('stop_notifications'    , 'Apis\NotifyController@stop_notifications');
+    Route::post('delete_notification'   , 'Apis\NotifyController@delete_notification');
+
+    // User
+    Route::post('update_password'       , 'Apis\UserController@update_password');
+    Route::post('update_profile'        , 'Apis\UserController@update_profile');
 });
