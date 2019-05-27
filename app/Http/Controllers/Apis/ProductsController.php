@@ -12,6 +12,7 @@ use App\Models\Rates;
 use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use App\Models\AppReports;
+use Carbon\Carbon;
 
 class ProductsController extends Controller
 {
@@ -95,14 +96,15 @@ class ProductsController extends Controller
             return returnResponse(null, validateRequest($validator), 400);
         }
 
-        $view             = new Views();
-        $view->device_id  = $request['device_id'];
-        $view->product_id = $request['product_id'];
-
-        if ($view->save()){
-            $views = Views::where(['device_id' => $request['device_id'], 'product_id' => $request['product_id']])->count();
-            return returnResponse(['views' => $views], '', 200);
+        if (!(Views::where(['device_id' => $request['device_id'], 'product_id' => $request['product_id']])->whereDate('created_at', Carbon::today())->exists())){
+            $view             = new Views();
+            $view->device_id  = $request['device_id'];
+            $view->product_id = $request['product_id'];
+            $view->save();
         }
+
+        $views = Views::where(['device_id' => $request['device_id'], 'product_id' => $request['product_id']])->count();
+        return returnResponse(['views' => $views], '', 200);
     }
 
     public function best_products(Request $request){
@@ -118,10 +120,10 @@ class ProductsController extends Controller
             $device_id  = $request['device_id'];
 
         $productIds = Views::select('product_id')
-                            ->groupBy('product_id')
-                            ->orderByRaw('COUNT(*) DESC')
-                            ->distinct()
-                            ->get(['product_id']);
+            ->groupBy('product_id')
+            ->orderByRaw('COUNT(*) DESC')
+            ->distinct()
+            ->get(['product_id']);
 
         $products    = Products::whereIn('id', $productIds)->get();
         $allProducts = [];

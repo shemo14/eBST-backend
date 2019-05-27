@@ -9,6 +9,7 @@ Route::post('renew_password'     , 'Apis\AuthController@renew_password');
 
 // ads
 Route::get('ads'                 , 'Apis\AdsController@ads');
+Route::get('home_ads'            , 'Apis\AdsController@home_ads');
 Route::post('ad_images'          , 'Apis\AdsController@ad_images');
 
 // categories

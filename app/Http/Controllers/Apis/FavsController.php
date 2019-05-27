@@ -42,7 +42,7 @@ class FavsController extends Controller
                 $fav->save();
 
                 $user_id = Products::where('id', $request['product_id'])->first()->user_id;
-                set_notification($user_id, null,$request['product_id'], $fav->id, null, 3, $request['lang'], null, null);
+                set_notification($user_id, null,$request['product_id'], $fav->id, null, 4, $request['lang'], null, null);
 
                 return returnResponse(null, $like_msg, 200);
             }
@@ -58,7 +58,7 @@ class FavsController extends Controller
                 $fav->save();
 
                 $user_id = Products::where('id', $request['product_id'])->first()->user_id;
-                set_notification($user_id, null,$request['product_id'], $fav->id, null, 3, $request['lang'], null, null);
+                set_notification($user_id, null,$request['product_id'], $fav->id, null, 4, $request['lang'], null, null);
 
                 return returnResponse(null, $like_msg, 200);
             }

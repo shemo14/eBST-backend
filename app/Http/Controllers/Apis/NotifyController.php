@@ -22,7 +22,7 @@ class NotifyController extends Controller
         }
         App::setLocale($request['lang']);
         $user          = Auth::user();
-        $notifications = Notifications::where('user_id', $user->id)->select('title_' . $request['lang'] . ' as title', 'body_' . $request['lang'] . ' as body', 'user_id', 'offer_id', 'product_id', 'type', 'id', 'created_at')->get();
+        $notifications = Notifications::where('user_id', $user->id)->select('title_' . $request['lang'] . ' as title', 'body_' . $request['lang'] . ' as body', 'user_id', 'offer_id', 'product_id', 'type', 'id', 'created_at')->orderBy('id', 'desc')->get();
         $allNotify     = [];
 
         foreach ($notifications as $notification) {

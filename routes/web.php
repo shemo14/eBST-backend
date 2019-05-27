@@ -206,6 +206,49 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         ]);
 
 
+        // ======== Products
+        Route::get('/products', [
+            'uses'  => 'ProductController@index',
+            'as'    => 'products',
+            'title' => 'المنتجات',
+            'icon'  => '<i class="fa fa-th"></i>',
+            'child' => [
+                'addProduct',
+                'updateProduct',
+                'deleteProduct',
+                'deleteProducts',
+            ]
+        ]);
+
+        // Add Product
+        Route::post('/add-product', [
+            'uses'  => 'ProductController@addProduct',
+            'as'    => 'addProduct',
+            'title' => 'اضافة منتج'
+        ]);
+
+        // Update Product
+        Route::post('/update-product', [
+            'uses'  => 'ProductController@updateProduct',
+            'as'    => 'updateProduct',
+            'title' => 'تعديل منتج'
+        ]);
+
+        // Delete Product
+        Route::post('/delete-product', [
+            'uses'  => 'ProductController@deleteProduct',
+            'as'    => 'deleteProduct',
+            'title' => 'حذف منتج'
+        ]);
+
+        // Delete Products
+        Route::post('/delete-products', [
+            'uses'  => 'ProductController@deleteProducts',
+            'as'    => 'deleteProducts',
+            'title' => 'حذف اكتر من منتج'
+        ]);
+
+
         // ======== Ads
         Route::get('/all-ads', [
             'uses' => 'AdsController@index',

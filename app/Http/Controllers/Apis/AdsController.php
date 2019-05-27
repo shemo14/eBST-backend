@@ -23,6 +23,20 @@ class AdsController extends Controller
         return returnResponse($adsImage, '', 200);
 
     }
+    
+    public function home_ads(Request $request){
+        $ads        = Ads::get();
+        $adsImage   = [];
+        foreach ($ads as $ad) {
+            $adsImage[] = [
+                'id'    => $ad->id,
+                'image' => url('images/ads') . '/' . $ad->images()->first()->name
+            ];
+        }
+
+        return returnResponse($adsImage, '', 200);
+
+    }
 
 
     public function add_ads(Request $request){

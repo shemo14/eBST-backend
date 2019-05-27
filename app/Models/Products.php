@@ -18,11 +18,19 @@ class Products extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
+    public function category(){
+        return $this->belongsTo('App\Models\Categories', 'category_id', 'id');
+    }
+
     public function views(){
         return $this->hasMany('App\Models\Views', 'product_id', 'id');
     }
 
     public function comments(){
         return $this->hasMany('App\Models\Comments', 'product_id', 'id');
+    }
+
+    public function orders(){
+        return $this->hasMany('App\Models\Offers', 'product_id', 'id');
     }
 }
